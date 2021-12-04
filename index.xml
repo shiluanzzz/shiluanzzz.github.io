@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>风吹不停</title>
     <link>https://shiluanzzz.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 04 Dec 2021 11:02:58 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>Zh-CN</language>
+    <lastBuildDate>Sat, 04 Dec 2021 11:16:38 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go 传递切片入参的隐藏风险</title>
+      <link>https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Sat, 04 Dec 2021 11:16:38 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</guid>
+      <description>Go 切片数据结构 Go 中常用的切片（Slice）数据结构是一枚动态数组，提供方便的局部索引功能，切片长度并不固定，并且会在容量不足时自动扩容。
+切片实质上是对一个底层数组的抽象视图 ，由 Go 运行时维护。在运行时，切片由如下的SliceHeader结构体表示，其中Data字段是指向底层数组的指针，Len表示当前切片的长度，而Cap表示当前切片的容量，也就是Data数组的大小。
+type SliceHeader struct { Data uintptr Len int Cap int }  代码示例：Go 切片 Slice 数据结构
+ 切片作为函数入参 许多 Go 开发者对传递切片作为函数入参的习惯性认知是：**传递切片，等同于传递指针，函数内部对切片的修改，将会影响到函数外部的切片。**这一习惯性认知在大部分情况下都是正确的。如以下代码所示：在modify函数中修改切片，外部main函数中的切片受到了影响。
+package main import ( &amp;quot;fmt&amp;quot; ) func modify(s []string) { for i := 0; i &amp;lt; len(s); i++ { s[i] = &amp;quot;b&amp;quot; } fmt.Println(&amp;quot;Inner:&amp;quot;, s) } func main() { s := []string{&amp;quot;a1&amp;quot;, &amp;quot;a2&amp;quot;} fmt.Println(&amp;quot;Before:&amp;quot;, s) modify(s) fmt.Println(&amp;quot;After:&amp;quot;, s) }  代码示例：Go 切片作为函数入参</description>
+    </item>
+    
     <item>
       <title>随机森林调参</title>
       <link>https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</link>
@@ -52,6 +65,19 @@ X,y=read_data() random_grid={ &amp;#39;n_estimators&amp;#39;: [i for i in range(
 在云盘中接受同步请求
 两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
 其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份+同步都达到了。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://shiluanzzz.github.io/post/go-%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E5%85%A5%E5%8F%82%E7%9A%84%E9%9A%90%E8%97%8F%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/go-%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E5%85%A5%E5%8F%82%E7%9A%84%E9%9A%90%E8%97%8F%E9%A3%8E%E9%99%A9/</guid>
+      <description>Go 切片数据结构 Go 中常用的切片（Slice）数据结构是一枚动态数组，提供方便的局部索引功能，切片长度并不固定，并且会在容量不足时自动扩容。
+切片实质上是对一个底层数组的抽象视图 ，由 Go 运行时维护。在运行时，切片由如下的SliceHeader结构体表示，其中Data字段是指向底层数组的指针，Len表示当前切片的长度，而Cap表示当前切片的容量，也就是Data数组的大小。
+type SliceHeader struct { Data uintptr Len int Cap int }  代码示例：Go 切片 Slice 数据结构
+ 切片作为函数入参 许多 Go 开发者对传递切片作为函数入参的习惯性认知是：**传递切片，等同于传递指针，函数内部对切片的修改，将会影响到函数外部的切片。**这一习惯性认知在大部分情况下都是正确的。如以下代码所示：在modify函数中修改切片，外部main函数中的切片受到了影响。
+package main import ( &amp;quot;fmt&amp;quot; ) func modify(s []string) { for i := 0; i &amp;lt; len(s); i++ { s[i] = &amp;quot;b&amp;quot; } fmt.Println(&amp;quot;Inner:&amp;quot;, s) } func main() { s := []string{&amp;quot;a1&amp;quot;, &amp;quot;a2&amp;quot;} fmt.Println(&amp;quot;Before:&amp;quot;, s) modify(s) fmt.Println(&amp;quot;After:&amp;quot;, s) }  代码示例：Go 切片作为函数入参</description>
     </item>
     
   </channel>
