@@ -13,71 +13,25 @@
       <pubDate>Thu, 02 Dec 2021 11:16:38 +0800</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</guid>
-      <description>Go 切片数据结构 Go 中常用的切片（Slice）数据结构是一枚动态数组，提供方便的局部索引功能，切片长度并不固定，并且会在容量不足时自动扩容。
-切片实质上是对一个底层数组的抽象视图 ，由 Go 运行时维护。在运行时，切片由如下的SliceHeader结构体表示，其中Data字段是指向底层数组的指针，Len表示当前切片的长度，而Cap表示当前切片的容量，也就是Data数组的大小。
-type SliceHeader struct { Data uintptr Len int Cap int }  代码示例：Go 切片 Slice 数据结构
- 切片作为函数入参 许多 Go 开发者对传递切片作为函数入参的习惯性认知是：**传递切片，等同于传递指针，函数内部对切片的修改，将会影响到函数外部的切片。**这一习惯性认知在大部分情况下都是正确的。如以下代码所示：在modify函数中修改切片，外部main函数中的切片受到了影响。
-package main import ( &amp;quot;fmt&amp;quot; ) func modify(s []string) { for i := 0; i &amp;lt; len(s); i++ { s[i] = &amp;quot;b&amp;quot; } fmt.Println(&amp;quot;Inner:&amp;quot;, s) } func main() { s := []string{&amp;quot;a1&amp;quot;, &amp;quot;a2&amp;quot;} fmt.Println(&amp;quot;Before:&amp;quot;, s) modify(s) fmt.Println(&amp;quot;After:&amp;quot;, s) }  代码示例：Go 切片作为函数入参</description>
+      <description>随机森林调参记录</description>
     </item>
     
     <item>
       <title>Syncthing 数据网盘部署</title>
       <link>https://shiluanzzz.github.io/post/syncthing/</link>
-      <pubDate>Fri, 22 Oct 2021 10:37:30 +0800</pubDate>
+      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/syncthing/</guid>
-      <description>因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。
-下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份
- syncthing-linux-amd64-v1.18.2.tar.gz
- 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing
- 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing
- 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384
- 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！
-配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases
-在github下载图形界面安装包安装打开
-配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。
-照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动
-连接到服务器 添加后在云盘的管理界面接受即可
-添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘
-在云盘中接受同步请求
-两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
-其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份+同步都达到了。</description>
+      <description>数据同步盘部署记录</description>
     </item>
     
     <item>
       <title>随机森林调参</title>
       <link>https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</link>
-      <pubDate>Wed, 09 Dec 2020 11:02:58 +0800</pubDate>
+      <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</guid>
-      <description>参考链接 ： 知乎 博客
-RF框架参数意义    n_estimators:对原始数据集进行有放回抽样生成的子数据集个数，即决策树的个数。若n_estimators太小容易欠拟合，太大不能显著的提升模型，所以n_estimators选择适中的数值，版本0.20的默认值是10,版本0.22的默认值是100。
-  bootstrap:是否对样本集进行有放回抽样来构建树，True表示是,默认值True。
-  oob_score:是否采用袋外样本来评估模型的好坏
-   因为在有放回取样构建子模型的过程中，会有一部分数据没有取到，开启oob_score后可以使用这部分没有用到的数据在评估模型。
-RF决策树参数含义   max_features:构建决策树最优模型时考虑的最大特征数。   默认是&amp;quot;auto&amp;quot;，表示最大特征数是N的平方根;“log2&amp;quot;表示最大特征数是$log_{2}N$;&amp;ldquo;sqrt&amp;quot;表示最大特征数是$\sqrt{N}$。
- max_depth:决策树最大深度。   若等于None,表示决策树在构建最优模型的时候不会限制子树的深度。如果模型样本量多，特征也多的情况下，推荐限制最大深度 ；若样本量少或者特征少，则不限制最大深度。
- min_samples_leaf:叶子节点含有的最少样本。   若叶子节点样本数小于min_samples_leaf，则对该叶子节点和兄弟叶子节点进行剪枝，只留下该叶子节点的父节点。整数型表示个数，浮点型表示取大于等于（样本数 * min_samples_leaf)的最小整数。min_samples_leaf默认值是1。
- min_samples_split:节点可分的最小样本数，   默认值是2。整数型和浮点型的含义与min_samples_leaf类似。
- max_leaf_nodes:最大叶子节点数。   int设置节点数,None表示对叶子节点数没有限制。
- min_impurity_decrease:节点划分的最小不纯度。   假设不纯度用信息增益表示，若某节点划分时的信息增益大于等于min_impurity_decrease，那么该节点还可以再划分；反之，则不能划分。
- criterion:表示节点的划分标准。   不纯度标准参考Gini指数，信息增益标准参考&amp;quot;entrop&amp;quot;熵。
- min_samples_leaf:叶子节点最小的样本权重和。   叶子节点如果小于这个值，则会和兄弟节点一起被剪枝，只保留叶子节点的父节点。默认是0，则不考虑样本权重问题。一般来说，如果有较多样本的缺失值或偏差很大，则尝试设置该参数值。
-随机生成最佳参数 随机生成最佳参数，使用RandomizedSearchCV() 从数据表格中随机抽取参数配置，对比选择最好的。缩小范围后在进行进一步调参。
-X,y=read_data() random_grid={ &amp;#39;n_estimators&amp;#39;: [i for i in range(10,1000,10)], &amp;#39;bootstrap&amp;#39;: [True,False], &amp;#39;max_depth&amp;#39;: [i for i in range(1,20,1)], &amp;#39;max_features&amp;#39;: [&amp;#39;auto&amp;#39;], &amp;#39;min_samples_leaf&amp;#39;: [i for i in range(1,30,1)], &amp;#39;min_samples_split&amp;#39;: [i for i in range(10,200,10)], } rf=RandomForestRegressor() rf_search=RandomizedSearchCV(estimator=rf, param_distributions=random_grid, n_iter=50, scoring=&amp;#39;neg_mean_absolute_error&amp;#39;, cv=3,verbose=2,random_state=233, n_jobs=-1 ) rf_search.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://shiluanzzz.github.io/post/go-%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E5%85%A5%E5%8F%82%E7%9A%84%E9%9A%90%E8%97%8F%E9%A3%8E%E9%99%A9/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://shiluanzzz.github.io/post/go-%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E5%85%A5%E5%8F%82%E7%9A%84%E9%9A%90%E8%97%8F%E9%A3%8E%E9%99%A9/</guid>
-      <description>Go 切片数据结构 Go 中常用的切片（Slice）数据结构是一枚动态数组，提供方便的局部索引功能，切片长度并不固定，并且会在容量不足时自动扩容。
-切片实质上是对一个底层数组的抽象视图 ，由 Go 运行时维护。在运行时，切片由如下的SliceHeader结构体表示，其中Data字段是指向底层数组的指针，Len表示当前切片的长度，而Cap表示当前切片的容量，也就是Data数组的大小。
-type SliceHeader struct { Data uintptr Len int Cap int }  代码示例：Go 切片 Slice 数据结构
- 切片作为函数入参 许多 Go 开发者对传递切片作为函数入参的习惯性认知是：**传递切片，等同于传递指针，函数内部对切片的修改，将会影响到函数外部的切片。**这一习惯性认知在大部分情况下都是正确的。如以下代码所示：在modify函数中修改切片，外部main函数中的切片受到了影响。
-package main import ( &amp;quot;fmt&amp;quot; ) func modify(s []string) { for i := 0; i &amp;lt; len(s); i++ { s[i] = &amp;quot;b&amp;quot; } fmt.Println(&amp;quot;Inner:&amp;quot;, s) } func main() { s := []string{&amp;quot;a1&amp;quot;, &amp;quot;a2&amp;quot;} fmt.Println(&amp;quot;Before:&amp;quot;, s) modify(s) fmt.Println(&amp;quot;After:&amp;quot;, s) }  代码示例：Go 切片作为函数入参</description>
+      <description>随机森林调参记录</description>
     </item>
     
   </channel>

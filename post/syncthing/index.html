@@ -6,23 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Syncthing 数据网盘部署 | 风吹不停</title>
-<meta name="keywords" content="" />
-<meta name="description" content="因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。
-下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份
- syncthing-linux-amd64-v1.18.2.tar.gz
- 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing
- 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing
- 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384
- 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！
-配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases
-在github下载图形界面安装包安装打开
-配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。
-照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动
-连接到服务器 添加后在云盘的管理界面接受即可
-添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘
-在云盘中接受同步请求
-两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
-其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份&#43;同步都达到了。">
+<meta name="keywords" content="折腾" />
+<meta name="description" content="数据同步盘部署记录">
 <meta name="author" content="">
 <link rel="canonical" href="https://shiluanzzz.github.io/post/syncthing/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
@@ -73,45 +58,15 @@
 
     </style>
 </noscript><meta property="og:title" content="Syncthing 数据网盘部署" />
-<meta property="og:description" content="因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。
-下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份
- syncthing-linux-amd64-v1.18.2.tar.gz
- 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing
- 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing
- 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384
- 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！
-配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases
-在github下载图形界面安装包安装打开
-配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。
-照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动
-连接到服务器 添加后在云盘的管理界面接受即可
-添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘
-在云盘中接受同步请求
-两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
-其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份&#43;同步都达到了。" />
+<meta property="og:description" content="数据同步盘部署记录" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shiluanzzz.github.io/post/syncthing/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-10-22T10:37:30&#43;08:00" />
-<meta property="article:modified_time" content="2021-10-22T10:37:30&#43;08:00" />
+<meta property="article:published_time" content="2021-10-22T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-10-22T00:00:00&#43;00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Syncthing 数据网盘部署"/>
-<meta name="twitter:description" content="因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。
-下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份
- syncthing-linux-amd64-v1.18.2.tar.gz
- 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing
- 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing
- 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384
- 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！
-配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases
-在github下载图形界面安装包安装打开
-配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。
-照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动
-连接到服务器 添加后在云盘的管理界面接受即可
-添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘
-在云盘中接受同步请求
-两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
-其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份&#43;同步都达到了。"/>
+<meta name="twitter:description" content="数据同步盘部署记录"/>
 
 
 <script type="application/ld+json">
@@ -140,15 +95,15 @@
   "@type": "BlogPosting",
   "headline": "Syncthing 数据网盘部署",
   "name": "Syncthing 数据网盘部署",
-  "description": "因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。\n下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份\n syncthing-linux-amd64-v1.18.2.tar.gz\n 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing\n 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing\n 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384\n 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！\n配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases\n在github下载图形界面安装包安装打开\n配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。\n照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动\n连接到服务器 添加后在云盘的管理界面接受即可\n添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘\n在云盘中接受同步请求\n两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。\n其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份+同步都达到了。",
+  "description": "数据同步盘部署记录",
   "keywords": [
-    
+    "折腾"
   ],
   "articleBody": "因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。\n下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份\n syncthing-linux-amd64-v1.18.2.tar.gz\n 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing\n 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing\n 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384\n 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！\n配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases\n在github下载图形界面安装包安装打开\n配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。\n照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动\n连接到服务器 添加后在云盘的管理界面接受即可\n添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘\n在云盘中接受同步请求\n两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。\n其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份+同步都达到了。\n",
   "wordCount" : "38",
   "inLanguage": "en",
-  "datePublished": "2021-10-22T10:37:30+08:00",
-  "dateModified": "2021-10-22T10:37:30+08:00",
+  "datePublished": "2021-10-22T00:00:00Z",
+  "dateModified": "2021-10-22T00:00:00Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://shiluanzzz.github.io/post/syncthing/"
@@ -205,6 +160,11 @@
             </span>
         </div>
         <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -214,12 +174,44 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Syncthing 数据网盘部署<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+      Syncthing 数据网盘部署
     </h1>
-    <div class="post-meta"><span title='2021-10-22 10:37:30 +0800 CST'>October 22, 2021</span>
+    <div class="post-description">
+      数据同步盘部署记录
+    </div>
+    <div class="post-meta"><span title='2021-10-22 00:00:00 +0000 UTC'>October 22, 2021</span>
 
 </div>
-  </header> 
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%8b%e8%bd%bd%e9%83%a8%e7%bd%b2%e5%9c%a8linux%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%b8%8a" aria-label="下载部署在Linux服务器上">下载部署在Linux服务器上</a></li>
+                <li>
+                    <a href="#%e9%85%8d%e7%bd%ae%e5%ae%89%e8%a3%85" aria-label="配置安装">配置安装</a><ul>
+                        
+                <li>
+                    <a href="#windows%e5%b9%b3%e5%8f%b0%e5%ae%89%e8%a3%85" aria-label="windows平台安装">windows平台安装</a></li>
+                <li>
+                    <a href="#%e9%85%8d%e7%bd%ae" aria-label="配置">配置</a></li>
+                <li>
+                    <a href="#%e8%bf%9e%e6%8e%a5%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8" aria-label="连接到服务器">连接到服务器</a></li>
+                <li>
+                    <a href="#%e6%b7%bb%e5%8a%a0%e9%9c%80%e8%a6%81%e5%90%8c%e6%ad%a5%e7%9a%84%e6%96%87%e4%bb%b6%e5%a4%b9" aria-label="添加需要同步的文件夹">添加需要同步的文件夹</a></li>
+                <li>
+                    <a href="#%e4%b8%a4%e4%b8%aa%e7%ac%94%e8%ae%b0%e6%9c%ac%e4%b9%8b%e9%97%b4%e7%9a%84%e6%95%b0%e6%8d%ae%e5%90%8c%e6%ad%a5" aria-label="两个笔记本之间的数据同步">两个笔记本之间的数据同步</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
   <div class="post-content"><p>因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。</p>
 <h2 id="下载部署在linux服务器上">下载部署在Linux服务器上<a hidden class="anchor" aria-hidden="true" href="#下载部署在linux服务器上">#</a></h2>
 <ul>
@@ -279,6 +271,22 @@
   </div>
 
   <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://shiluanzzz.github.io/tags/%E6%8A%98%E8%85%BE/">折腾</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Go 传递切片入参的隐藏风险</span>
+  </a>
+  <a class="next" href="https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>随机森林调参</span>
+  </a>
+</nav>
+
   </footer>
 </article>
     </main>
@@ -289,6 +297,9 @@
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
         <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

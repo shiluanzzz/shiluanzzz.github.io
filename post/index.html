@@ -122,6 +122,11 @@
             </span>
         </div>
         <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -132,7 +137,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Go 传递切片入参的隐藏风险<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+    <h2>Go 传递切片入参的隐藏风险
     </h2>
   </header>
   <section class="entry-content">
@@ -148,7 +153,7 @@ package main import ( &#34;fmt&#34; ) func modify(s []string) { for i := 0; i &l
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Syncthing 数据网盘部署<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+    <h2>Syncthing 数据网盘部署
     </h2>
   </header>
   <section class="entry-content">
@@ -169,13 +174,13 @@ package main import ( &#34;fmt&#34; ) func modify(s []string) { for i := 0; i &l
 两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
 其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份&#43;同步都达到了。</p>
   </section>
-  <footer class="entry-footer"><span title='2021-10-22 10:37:30 +0800 CST'>October 22, 2021</span></footer>
+  <footer class="entry-footer"><span title='2021-10-22 00:00:00 +0000 UTC'>October 22, 2021</span></footer>
   <a class="entry-link" aria-label="post link to Syncthing 数据网盘部署" href="https://shiluanzzz.github.io/post/syncthing/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>随机森林调参<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+    <h2>随机森林调参
     </h2>
   </header>
   <section class="entry-content">
@@ -195,24 +200,8 @@ RF决策树参数含义   max_features:构建决策树最优模型时考虑的�
 随机生成最佳参数 随机生成最佳参数，使用RandomizedSearchCV() 从数据表格中随机抽取参数配置，对比选择最好的。缩小范围后在进行进一步调参。
 X,y=read_data() random_grid={ &#39;n_estimators&#39;: [i for i in range(10,1000,10)], &#39;bootstrap&#39;: [True,False], &#39;max_depth&#39;: [i for i in range(1,20,1)], &#39;max_features&#39;: [&#39;auto&#39;], &#39;min_samples_leaf&#39;: [i for i in range(1,30,1)], &#39;min_samples_split&#39;: [i for i in range(10,200,10)], } rf=RandomForestRegressor() rf_search=RandomizedSearchCV(estimator=rf, param_distributions=random_grid, n_iter=50, scoring=&#39;neg_mean_absolute_error&#39;, cv=3,verbose=2,random_state=233, n_jobs=-1 ) rf_search....</p>
   </section>
-  <footer class="entry-footer"><span title='2020-12-09 11:02:58 +0800 CST'>December 9, 2020</span></footer>
+  <footer class="entry-footer"><span title='2020-12-09 00:00:00 +0000 UTC'>December 9, 2020</span></footer>
   <a class="entry-link" aria-label="post link to 随机森林调参" href="https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Go 切片数据结构 Go 中常用的切片（Slice）数据结构是一枚动态数组，提供方便的局部索引功能，切片长度并不固定，并且会在容量不足时自动扩容。
-切片实质上是对一个底层数组的抽象视图 ，由 Go 运行时维护。在运行时，切片由如下的SliceHeader结构体表示，其中Data字段是指向底层数组的指针，Len表示当前切片的长度，而Cap表示当前切片的容量，也就是Data数组的大小。
-type SliceHeader struct { Data uintptr Len int Cap int }  代码示例：Go 切片 Slice 数据结构
- 切片作为函数入参 许多 Go 开发者对传递切片作为函数入参的习惯性认知是：**传递切片，等同于传递指针，函数内部对切片的修改，将会影响到函数外部的切片。**这一习惯性认知在大部分情况下都是正确的。如以下代码所示：在modify函数中修改切片，外部main函数中的切片受到了影响。
-package main import ( &#34;fmt&#34; ) func modify(s []string) { for i := 0; i &lt; len(s); i&#43;&#43; { s[i] = &#34;b&#34; } fmt.Println(&#34;Inner:&#34;, s) } func main() { s := []string{&#34;a1&#34;, &#34;a2&#34;} fmt.Println(&#34;Before:&#34;, s) modify(s) fmt.Println(&#34;After:&#34;, s) }  代码示例：Go 切片作为函数入参...</p>
-  </section>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to " href="https://shiluanzzz.github.io/post/go-%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E5%85%A5%E5%8F%82%E7%9A%84%E9%9A%90%E8%97%8F%E9%A3%8E%E9%99%A9/"></a>
 </article>
     </main>
     
@@ -222,6 +211,9 @@ package main import ( &#34;fmt&#34; ) func modify(s []string) { for i := 0; i &l
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
         <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
