@@ -6,7 +6,38 @@
     <description>Recent content on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 02 Dec 2021 11:16:38 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>windows 安装Chocolatey</title>
+      <link>https://shiluanzzz.github.io/post/20211208-2/</link>
+      <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/20211208-2/</guid>
+      <description>前言 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
+安装 使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
+使用 choco 常见命令 choco search &amp;lt;keyword&amp;gt; 搜索软件 choco list &amp;lt;keyword&amp;gt; 跟 search 命令功能类似 choco install &amp;lt;package1 package2 package3...&amp;gt; 安装软件 choco install &amp;lt;package&amp;gt; -version *** 安装指定版本 choco uninstall name 卸载软件 choco version &amp;lt;package&amp;gt; 查看安装包的版本情况 choco upgrade &amp;lt;package&amp;gt; 更新某个软件 choco list -localonly 查看一下所有安装在本地的包的列表 choco list -lo 功能同上 choco安装软件 choco官网可以查询可安装的软件包：https://community.chocolatey.org/packages
+常见软件：
+ 7-zip : choco install 7zip.</description>
+    </item>
+    
+    <item>
+      <title>windows下使用choco极速安装docker</title>
+      <link>https://shiluanzzz.github.io/post/20211208-1/</link>
+      <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/20211208-1/</guid>
+      <description>前言 之前在做一个计算机实训的时候，装docker环境报各种错误，今天尝试使用choco包管理工具，2行命令安装成功！
+choco安装 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
+使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
+docker 安装 在管理员cmd下输入如下命令
+choco install docker-cli docker-machine docker-compose docker-desktop docker-toolbox 输入后会提示是否执行脚本，输入a回车，即可。
+测试安装情况 安装上述五个软件包后，需要自行启动docker-desktop软件，如果没有报错则安装成功。
+或者新开一个cmd窗口，输入命令docker-info, 如果没有保存则表示安装成功！
+常见报错  如果报如下图所示提示WSL 2 installation is incomplete ，是因为电脑没有安装linux子系统，   - 同样建议使用choco安装，输入命令choco install wsl2 安装后重试。</description>
+    </item>
+    
     <item>
       <title>Go 传递切片入参的隐藏风险</title>
       <link>https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</link>

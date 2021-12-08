@@ -151,6 +151,43 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>windows 安装Chocolatey
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>前言 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
+安装 使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
+使用 choco 常见命令 choco search &lt;keyword&gt; 搜索软件 choco list &lt;keyword&gt; 跟 search 命令功能类似 choco install &lt;package1 package2 package3...&gt; 安装软件 choco install &lt;package&gt; -version *** 安装指定版本 choco uninstall name 卸载软件 choco version &lt;package&gt; 查看安装包的版本情况 choco upgrade &lt;package&gt; 更新某个软件 choco list -localonly 查看一下所有安装在本地的包的列表 choco list -lo 功能同上 choco安装软件 choco官网可以查询可安装的软件包：https://community.chocolatey.org/packages
+常见软件：
+ 7-zip : choco install 7zip....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-08 00:00:00 +0000 UTC'>2021-12-08</span></footer>
+  <a class="entry-link" aria-label="post link to windows 安装Chocolatey" href="https://shiluanzzz.github.io/post/20211208-2/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>windows下使用choco极速安装docker
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>前言 之前在做一个计算机实训的时候，装docker环境报各种错误，今天尝试使用choco包管理工具，2行命令安装成功！
+choco安装 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
+使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
+docker 安装 在管理员cmd下输入如下命令
+choco install docker-cli docker-machine docker-compose docker-desktop docker-toolbox 输入后会提示是否执行脚本，输入a回车，即可。
+测试安装情况 安装上述五个软件包后，需要自行启动docker-desktop软件，如果没有报错则安装成功。
+或者新开一个cmd窗口，输入命令docker-info, 如果没有保存则表示安装成功！
+常见报错  如果报如下图所示提示WSL 2 installation is incomplete ，是因为电脑没有安装linux子系统，   - 同样建议使用choco安装，输入命令choco install wsl2 安装后重试。</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-08 00:00:00 +0000 UTC'>2021-12-08</span></footer>
+  <a class="entry-link" aria-label="post link to windows下使用choco极速安装docker" href="https://shiluanzzz.github.io/post/20211208-1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Go 传递切片入参的隐藏风险
     </h2>
   </header>

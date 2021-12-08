@@ -2,28 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://shiluanzzz.github.io/post/</loc>
+    <lastmod>2021-12-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://shiluanzzz.github.io/tags/</loc>
+    <lastmod>2021-12-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://shiluanzzz.github.io/post/20211208-2/</loc>
+    <lastmod>2021-12-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://shiluanzzz.github.io/post/20211208-1/</loc>
+    <lastmod>2021-12-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://shiluanzzz.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2021-12-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://shiluanzzz.github.io/</loc>
+    <lastmod>2021-12-08T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</loc>
     <lastmod>2021-12-02T11:16:38+08:00</lastmod>
   </url><url>
     <loc>https://shiluanzzz.github.io/tags/golang/</loc>
     <lastmod>2021-12-02T11:16:38+08:00</lastmod>
   </url><url>
-    <loc>https://shiluanzzz.github.io/post/</loc>
-    <lastmod>2021-12-02T11:16:38+08:00</lastmod>
-  </url><url>
-    <loc>https://shiluanzzz.github.io/tags/</loc>
-    <lastmod>2021-12-02T11:16:38+08:00</lastmod>
-  </url><url>
-    <loc>https://shiluanzzz.github.io/</loc>
-    <lastmod>2021-12-02T11:16:38+08:00</lastmod>
-  </url><url>
     <loc>https://shiluanzzz.github.io/post/syncthing/</loc>
     <lastmod>2021-10-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://shiluanzzz.github.io/tags/%E6%8A%98%E8%85%BE/</loc>
-    <lastmod>2021-10-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://shiluanzzz.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2021-10-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://shiluanzzz.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
