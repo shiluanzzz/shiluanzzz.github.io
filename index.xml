@@ -48,6 +48,23 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
     </item>
     
     <item>
+      <title>后端密码存储方案</title>
+      <link>https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</guid>
+      <description>作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
+普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。
+Go语言对这三种加密算法的实现如下所示：
+//import &amp;#34;crypto/sha256&amp;#34; h := sha256.New() io.WriteString(h, &amp;#34;His money is twice tainted: &amp;#39;taint yours and &amp;#39;taint mine.&amp;#34;) fmt.Printf(&amp;#34;% x&amp;#34;, h.Sum(nil)) //import &amp;#34;crypto/sha1&amp;#34; h := sha1.New() io.WriteString(h, &amp;#34;His money is twice tainted: &amp;#39;taint yours and &amp;#39;taint mine.&amp;#34;) fmt.Printf(&amp;#34;% x&amp;#34;, h.Sum(nil)) //import &amp;#34;crypto/md5&amp;#34; h := md5.New() io.WriteString(h, &amp;#34;需要加密的密码&amp;#34;) fmt.Printf(&amp;#34;%x&amp;#34;, h.Sum(nil)) 单向哈希有两个特性：
+ 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。
+因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。
+进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。
+一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。
+但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。</description>
+    </item>
+    
+    <item>
       <title>Syncthing 数据网盘部署</title>
       <link>https://shiluanzzz.github.io/post/syncthing/</link>
       <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
@@ -57,12 +74,171 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
     </item>
     
     <item>
+      <title>局域网打印服务</title>
+      <link>https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/</guid>
+      <description>起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。
+python的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。
+win32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。
+def PrintFile(file_path): allPrinter=[printer[2] for printer in win32print.EnumPrinters(2)] # PrintNum = int(input(&amp;#34;选择打印机:\n&amp;#34;+&amp;#34;\n&amp;#34;.join([f&amp;#34;{n} {p}&amp;#34; for n,p in enumerate(allPrinter)]))) win32print.SetDefaultPrinter(allPrinter[4]) # pdf_path=&amp;#34;C:\\Users\Luke\Desktop\Doc1.docx&amp;#34; pdf_path=file_path win32api.ShellExecute(0, &amp;#34;print&amp;#34;, pdf_path, &amp;#39;/d:&amp;#34;%s&amp;#34;&amp;#39; % win32print.GetDefaultPrinter (), &amp;#34;.&amp;#34;, 0) 如果出现pywintypes.error: (31, &amp;lsquo;ShellExecute&amp;rsquo;, &amp;lsquo;连到系统上的设备没有发挥作用。&#39;) 错误，需要为你的pdf或者其他文件指定一个默认打开应用。
+Web服务 使用flask写了个小demo, 接受局域网的文件后调用打印机打印。
+slash = &amp;#39;\\&amp;#39; UPLOAD_FOLDER = &amp;#39;upload&amp;#39; ALLOW_EXTENSIONS = {&amp;#39;doc&amp;#39;, &amp;#39;docx&amp;#39;, &amp;#39;pdf&amp;#39;} app = Flask(__name__) app.config[&amp;#39;UPLOAD_FOLDER&amp;#39;] = UPLOAD_FOLDER #判断文件夹是否存在，如果不存在则创建 if not os.path.exists(UPLOAD_FOLDER): os.makedirs(UPLOAD_FOLDER) else: pass # 判断文件后缀是否在列表中 def allowed_file(filename): return &amp;#39;.</description>
+    </item>
+    
+    <item>
+      <title>Python处理excel文件</title>
+      <link>https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</guid>
+      <description>安装 pip install openpyxl
+**英文文档链接 ： **点击这里
+ 1，定位excel 新建excel和打开现有的excel
+import openpyxl wb1 = openpyxl.load_workbook(&amp;#39;text.xlsx&amp;#39;) #定位到现有的excle  wb2= openpyxl.Workbook() #创建一个新的excle表 （其中没有任何工作簿！！！） 定位到具体的工作表（因为一个excle中可能存在多个工作表）
+bo1=wb1.active #定位到 wb1 指向的excle 的第一个工作簿  bo2=wb1.get_sheet_by_name(&amp;#34;name&amp;#34;) #定位到 名为 name 的工作簿  bo3=wb1[&amp;#34;new title&amp;#34;] #定位到名为 new title 的工作簿 2，读取excle中的内容 使用openpyxl.wordsheet.Worksheet.cell方法从单元格中读取内容
+#读取内容  #利用openpyxl读取内容主要是从每个单元格中 读取  #定位到单元格的方法  #使用value属性获取当前单元格的值  content=bo1[&amp;#39;A4&amp;#39;].value content3=bo1.cell(row=4,column=2).value #也可以使用迭代 多个单元格在使用value方法，类似于list的切片  content4=bo1[&amp;#39;A1&amp;#39;:&amp;#39;C2&amp;#39;] #使用  3，写入,修改内容 3.1 针对单个单元格写入 参考代码
+import openpyxl work=openpyxl.load_workbook(&amp;#34;dat.xlsx&amp;#34;) book=work.active print(&amp;#34;before:&amp;#34;,book.cell(1,1).value) book[&amp;#39;A1&amp;#39;].value=&amp;#34;1&amp;#34; #book.cell(1,1).value=&amp;#34;1&amp;#34; 效果等同于上调语句  print(&amp;#34;after:&amp;#34;,book.</description>
+    </item>
+    
+    <item>
+      <title>jupyter notebook 安装、配置、优化</title>
+      <link>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</guid>
+      <description>安装 安装： pip install jupyter
+启动命令：jupyter notebook
+配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
+notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
+  安装 pip install ipykernel
+  将当前虚拟环境加入IPykernel
+  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图
+启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = &amp;#34;all&amp;#34; 自动补全   安装 pip install jupyter_contrib_nbextensions</description>
+    </item>
+    
+    <item>
+      <title>Python异步编程</title>
+      <link>https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</guid>
+      <description>1.异步编程介绍： 在并发执行的异步模型中，许多任务被穿插在同一时间线上，所有的任务都由一个控制流执行（单一线程）。任务的执行可能被暂停或恢复，中间的这段时间线程将会去执行其他任务。
+与多线程的区别 ：多线程由操作系统决定在时间线上什么时候挂起某个活动或恢复某个活动，而在异步并发模型中，程序员必须假设线程可能在任何时间被挂起和替换。
+2.使用Python的 concurrent.futures 模块 https://docs.python.org/zh-cn/3/library/concurrent.futures.html
+这个模块具有线程池和进程池、管理并行编程任务、处理非确定性的执行流程、进程/线程同步等功能
+ 该模块由以下部分组成：   - concurrent.futures.Executor: 这是一个虚拟基类，提供了异步执行的方法。
+ current.Futures 模块提供了两种 Executor 的子类，各自独立操作一个线程池和一个进程池。
+ - concurrent.futures.ThreadPoolExecutor(max_workers)
+ - concurrent.futures.ProcessPoolExecutor(max_workers)
+ - submit(function, argument): 调度函数（可调用的对象）的执行，将 argument 作为参数传入。
+ - map(function, argument): 将 argument 作为参数执行函数，以 异步 的方式。
+ - shutdown(Wait=True): 发出让执行者释放所有资源的信号。
+ - concurrent.futures.Future: 其中包括函数的异步执行。Future对象是submit任务（即带有参数的functions）到executor的实例。
+线程池和进程池 用池可以来简化线程/进程的使用。
+池包括两部分，一部分是内部的队列，存放着待执行的任务；另一部分是一系列的进程或线程，用于执行这些任务。
+池的概念主要目的是为了重用 ：让线程或进程在生命周期内可以多次使用。它减少了创建创建线程和进程的开销，提高了程序性能。
+Talk is cheap 定义了两个函数，做单纯的加减计算
+def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_item = count(x) # 打印输入和输出结果 return result_item def count(number) : i=0 for i in range(0, 10000000): i=i+1 return i * number 通过三种方式执行对比运行时间，顺序执行和多线程执行的时间基本是一样的，而多进程的执行时间明显缩短。</description>
+    </item>
+    
+    <item>
+      <title>Python自动截图拼接工具</title>
+      <link>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</guid>
+      <description>需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
+实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
+本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
+  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print(&amp;#39;{0}at {1}&amp;#39;.format(&amp;#39;Pressed&amp;#39; if pressed else &amp;#39;Released&amp;#39;, (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]&amp;gt;30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener.</description>
+    </item>
+    
+    <item>
       <title>随机森林调参</title>
       <link>https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</guid>
       <description>随机森林调参记录</description>
+    </item>
+    
+    <item>
+      <title>Python字符串格式化总结</title>
+      <link>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
+      <description>zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+&amp;gt;&amp;gt;&amp;gt; &amp;#34;{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{}{}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{1}{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;world hello world&amp;#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
+&amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(name=&amp;#34;huoty&amp;#34;, age=18) &amp;#39;I am huoty, age is 18&amp;#39; &amp;gt;&amp;gt;&amp;gt; user = {&amp;#34;name&amp;#34;: &amp;#34;huoty&amp;#34;, &amp;#34;age&amp;#34;: 18} &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(**user) &amp;#39;I am huoty, age is 18&amp;#39; 通过对象属性 str.format() 可以直接读取用户属性:
+&amp;gt;&amp;gt;&amp;gt; class User(object): ... def __init__(self, name, age): ... self.</description>
+    </item>
+    
+    <item>
+      <title>Flask部署</title>
+      <link>https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/</guid>
+      <description>常用命令：   导出win虚拟环境中的第三方库 pip freeze &amp;gt; requirements.txt 
+  Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3
+  后台运行程序 nohup python -u wechat_tixing.py &amp;gt; nohup.out 2&amp;gt;&amp;amp;1 &amp;amp;c
+  gunicorn -w 1 -b 127.0.0.1:1234 app:app
+  获取gunicorn的进程树，然后kill掉顶层任务 pstree -ap|grep gunicorn
+  部署  编辑配置文件 /etc/nginx/conf.d/shitou.conf  新端口的话记得去控制台开放端口
+ Nginx重启 ：  nginx -s reload service nginx restart  后端重启、停止  编辑配置文件 gunicorn.conf
+# 并行工作线程数 workers = 4 # 监听内网端口5000【按需要更改】 bind = &amp;#39;127.</description>
+    </item>
+    
+    <item>
+      <title>Python Tqdm进度条使用</title>
+      <link>https://shiluanzzz.github.io/post/tqdm/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/tqdm/</guid>
+      <description>tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
+基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&amp;#39;进度条&amp;#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&amp;lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&amp;#34;第{i}轮&amp;#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm.</description>
+    </item>
+    
+    <item>
+      <title>Pandas学习笔记</title>
+      <link>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</guid>
+      <description>Pandas笔记 最佳阅读体验请阅读笔记原文
+什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
+  高性能
+  容易使用的数据结构
+  容易使用的数据分析工具
+  很方便和其它类库一起使用
+  numpy：用于数学计算
+  scikit- learn：用于机器学习
+  Pandas 读取数据 Pandas 需要先读取表格类型的数据
+读取文件   读取csv文件 ratings = pd.read_csv(fpath)
+  读取txt文件 pvuv = pd.read_csv()
+  pvuv = pd.read_csv( fpath, sep=&amp;#34;\t&amp;#34;, header=None, names=[&amp;#39;pdate&amp;#39;, &amp;#39;pv&amp;#39;, &amp;#39;uv&amp;#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
+  读取 sql文件 mysql_page = pd.read_sql(&amp;quot;select * from crazyant_pvuv&amp;quot;, con=conn)</description>
+    </item>
+    
+    <item>
+      <title>Paddle实战手写数字识别</title>
+      <link>https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
+      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
+      <description>paddle 手写数字识别 参考链接： 1 2
+任务介绍   手写识别属于典型的图像多分类问题
+  输入 &amp;amp;&amp;amp; 输出
+  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本
+数据准备  数据提供器   &amp;gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。
+ - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱
+ - paddle.batch()表示每BATCH_SIZE组成一个batch
+BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图
+ &amp;gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
+def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.</description>
     </item>
     
     

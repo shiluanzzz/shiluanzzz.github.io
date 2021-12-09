@@ -47,5 +47,21 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
       <description>数据同步盘部署记录</description>
     </item>
     
+    <item>
+      <title>jupyter notebook 安装、配置、优化</title>
+      <link>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</guid>
+      <description>安装 安装： pip install jupyter
+启动命令：jupyter notebook
+配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
+notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
+  安装 pip install ipykernel
+  将当前虚拟环境加入IPykernel
+  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图
+启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = &amp;#34;all&amp;#34; 自动补全   安装 pip install jupyter_contrib_nbextensions</description>
+    </item>
+    
   </channel>
 </rss>

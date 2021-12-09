@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>pandas on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/tags/pandas/</link>
+    <description>Recent content in pandas on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 30 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/pandas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pandas学习笔记</title>
+      <link>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</guid>
+      <description>Pandas笔记 最佳阅读体验请阅读笔记原文
+什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
+  高性能
+  容易使用的数据结构
+  容易使用的数据分析工具
+  很方便和其它类库一起使用
+  numpy：用于数学计算
+  scikit- learn：用于机器学习
+  Pandas 读取数据 Pandas 需要先读取表格类型的数据
+读取文件   读取csv文件 ratings = pd.read_csv(fpath)
+  读取txt文件 pvuv = pd.read_csv()
+  pvuv = pd.read_csv( fpath, sep=&amp;#34;\t&amp;#34;, header=None, names=[&amp;#39;pdate&amp;#39;, &amp;#39;pv&amp;#39;, &amp;#39;uv&amp;#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
+  读取 sql文件 mysql_page = pd.read_sql(&amp;quot;select * from crazyant_pvuv&amp;quot;, con=conn)</description>
+    </item>
+    
+  </channel>
+</rss>

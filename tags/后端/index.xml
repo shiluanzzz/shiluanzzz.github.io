@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>后端 on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/tags/%E5%90%8E%E7%AB%AF/</link>
+    <description>Recent content in 后端 on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 27 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/%E5%90%8E%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>后端密码存储方案</title>
+      <link>https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</guid>
+      <description>作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
+普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。
+Go语言对这三种加密算法的实现如下所示：
+//import &amp;#34;crypto/sha256&amp;#34; h := sha256.New() io.WriteString(h, &amp;#34;His money is twice tainted: &amp;#39;taint yours and &amp;#39;taint mine.&amp;#34;) fmt.Printf(&amp;#34;% x&amp;#34;, h.Sum(nil)) //import &amp;#34;crypto/sha1&amp;#34; h := sha1.New() io.WriteString(h, &amp;#34;His money is twice tainted: &amp;#39;taint yours and &amp;#39;taint mine.&amp;#34;) fmt.Printf(&amp;#34;% x&amp;#34;, h.Sum(nil)) //import &amp;#34;crypto/md5&amp;#34; h := md5.New() io.WriteString(h, &amp;#34;需要加密的密码&amp;#34;) fmt.Printf(&amp;#34;%x&amp;#34;, h.Sum(nil)) 单向哈希有两个特性：
+ 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。
+因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。
+进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。
+一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。
+但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。</description>
+    </item>
+    
+  </channel>
+</rss>

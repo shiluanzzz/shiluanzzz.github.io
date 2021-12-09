@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Python on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/tags/python/</link>
+    <description>Recent content in Python on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 22 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python处理excel文件</title>
+      <link>https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</guid>
+      <description>安装 pip install openpyxl
+**英文文档链接 ： **点击这里
+ 1，定位excel 新建excel和打开现有的excel
+import openpyxl wb1 = openpyxl.load_workbook(&amp;#39;text.xlsx&amp;#39;) #定位到现有的excle  wb2= openpyxl.Workbook() #创建一个新的excle表 （其中没有任何工作簿！！！） 定位到具体的工作表（因为一个excle中可能存在多个工作表）
+bo1=wb1.active #定位到 wb1 指向的excle 的第一个工作簿  bo2=wb1.get_sheet_by_name(&amp;#34;name&amp;#34;) #定位到 名为 name 的工作簿  bo3=wb1[&amp;#34;new title&amp;#34;] #定位到名为 new title 的工作簿 2，读取excle中的内容 使用openpyxl.wordsheet.Worksheet.cell方法从单元格中读取内容
+#读取内容  #利用openpyxl读取内容主要是从每个单元格中 读取  #定位到单元格的方法  #使用value属性获取当前单元格的值  content=bo1[&amp;#39;A4&amp;#39;].value content3=bo1.cell(row=4,column=2).value #也可以使用迭代 多个单元格在使用value方法，类似于list的切片  content4=bo1[&amp;#39;A1&amp;#39;:&amp;#39;C2&amp;#39;] #使用  3，写入,修改内容 3.1 针对单个单元格写入 参考代码
+import openpyxl work=openpyxl.load_workbook(&amp;#34;dat.xlsx&amp;#34;) book=work.active print(&amp;#34;before:&amp;#34;,book.cell(1,1).value) book[&amp;#39;A1&amp;#39;].value=&amp;#34;1&amp;#34; #book.cell(1,1).value=&amp;#34;1&amp;#34; 效果等同于上调语句  print(&amp;#34;after:&amp;#34;,book.</description>
+    </item>
+    
+    <item>
+      <title>Python异步编程</title>
+      <link>https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</guid>
+      <description>1.异步编程介绍： 在并发执行的异步模型中，许多任务被穿插在同一时间线上，所有的任务都由一个控制流执行（单一线程）。任务的执行可能被暂停或恢复，中间的这段时间线程将会去执行其他任务。
+与多线程的区别 ：多线程由操作系统决定在时间线上什么时候挂起某个活动或恢复某个活动，而在异步并发模型中，程序员必须假设线程可能在任何时间被挂起和替换。
+2.使用Python的 concurrent.futures 模块 https://docs.python.org/zh-cn/3/library/concurrent.futures.html
+这个模块具有线程池和进程池、管理并行编程任务、处理非确定性的执行流程、进程/线程同步等功能
+ 该模块由以下部分组成：   - concurrent.futures.Executor: 这是一个虚拟基类，提供了异步执行的方法。
+ current.Futures 模块提供了两种 Executor 的子类，各自独立操作一个线程池和一个进程池。
+ - concurrent.futures.ThreadPoolExecutor(max_workers)
+ - concurrent.futures.ProcessPoolExecutor(max_workers)
+ - submit(function, argument): 调度函数（可调用的对象）的执行，将 argument 作为参数传入。
+ - map(function, argument): 将 argument 作为参数执行函数，以 异步 的方式。
+ - shutdown(Wait=True): 发出让执行者释放所有资源的信号。
+ - concurrent.futures.Future: 其中包括函数的异步执行。Future对象是submit任务（即带有参数的functions）到executor的实例。
+线程池和进程池 用池可以来简化线程/进程的使用。
+池包括两部分，一部分是内部的队列，存放着待执行的任务；另一部分是一系列的进程或线程，用于执行这些任务。
+池的概念主要目的是为了重用 ：让线程或进程在生命周期内可以多次使用。它减少了创建创建线程和进程的开销，提高了程序性能。
+Talk is cheap 定义了两个函数，做单纯的加减计算
+def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_item = count(x) # 打印输入和输出结果 return result_item def count(number) : i=0 for i in range(0, 10000000): i=i+1 return i * number 通过三种方式执行对比运行时间，顺序执行和多线程执行的时间基本是一样的，而多进程的执行时间明显缩短。</description>
+    </item>
+    
+    <item>
+      <title>Python自动截图拼接工具</title>
+      <link>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</guid>
+      <description>需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
+实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
+本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
+  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print(&amp;#39;{0}at {1}&amp;#39;.format(&amp;#39;Pressed&amp;#39; if pressed else &amp;#39;Released&amp;#39;, (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]&amp;gt;30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener.</description>
+    </item>
+    
+    <item>
+      <title>Python字符串格式化总结</title>
+      <link>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
+      <description>zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+&amp;gt;&amp;gt;&amp;gt; &amp;#34;{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{}{}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{1}{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;world hello world&amp;#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
+&amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(name=&amp;#34;huoty&amp;#34;, age=18) &amp;#39;I am huoty, age is 18&amp;#39; &amp;gt;&amp;gt;&amp;gt; user = {&amp;#34;name&amp;#34;: &amp;#34;huoty&amp;#34;, &amp;#34;age&amp;#34;: 18} &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(**user) &amp;#39;I am huoty, age is 18&amp;#39; 通过对象属性 str.format() 可以直接读取用户属性:
+&amp;gt;&amp;gt;&amp;gt; class User(object): ... def __init__(self, name, age): ... self.</description>
+    </item>
+    
+    <item>
+      <title>Flask部署</title>
+      <link>https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/</guid>
+      <description>常用命令：   导出win虚拟环境中的第三方库 pip freeze &amp;gt; requirements.txt 
+  Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3
+  后台运行程序 nohup python -u wechat_tixing.py &amp;gt; nohup.out 2&amp;gt;&amp;amp;1 &amp;amp;c
+  gunicorn -w 1 -b 127.0.0.1:1234 app:app
+  获取gunicorn的进程树，然后kill掉顶层任务 pstree -ap|grep gunicorn
+  部署  编辑配置文件 /etc/nginx/conf.d/shitou.conf  新端口的话记得去控制台开放端口
+ Nginx重启 ：  nginx -s reload service nginx restart  后端重启、停止  编辑配置文件 gunicorn.conf
+# 并行工作线程数 workers = 4 # 监听内网端口5000【按需要更改】 bind = &amp;#39;127.</description>
+    </item>
+    
+    <item>
+      <title>Python Tqdm进度条使用</title>
+      <link>https://shiluanzzz.github.io/post/tqdm/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/tqdm/</guid>
+      <description>tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
+基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&amp;#39;进度条&amp;#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&amp;lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&amp;#34;第{i}轮&amp;#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm.</description>
+    </item>
+    
+    <item>
+      <title>Pandas学习笔记</title>
+      <link>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</guid>
+      <description>Pandas笔记 最佳阅读体验请阅读笔记原文
+什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
+  高性能
+  容易使用的数据结构
+  容易使用的数据分析工具
+  很方便和其它类库一起使用
+  numpy：用于数学计算
+  scikit- learn：用于机器学习
+  Pandas 读取数据 Pandas 需要先读取表格类型的数据
+读取文件   读取csv文件 ratings = pd.read_csv(fpath)
+  读取txt文件 pvuv = pd.read_csv()
+  pvuv = pd.read_csv( fpath, sep=&amp;#34;\t&amp;#34;, header=None, names=[&amp;#39;pdate&amp;#39;, &amp;#39;pv&amp;#39;, &amp;#39;uv&amp;#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
+  读取 sql文件 mysql_page = pd.read_sql(&amp;quot;select * from crazyant_pvuv&amp;quot;, con=conn)</description>
+    </item>
+    
+  </channel>
+</rss>

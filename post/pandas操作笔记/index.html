@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Pandas学习笔记 | 风吹不停</title>
+<meta name="keywords" content="pandas, Python" />
+<meta name="description" content="Pandas笔记 最佳阅读体验请阅读笔记原文
+什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
+  高性能
+  容易使用的数据结构
+  容易使用的数据分析工具
+  很方便和其它类库一起使用
+  numpy：用于数学计算
+  scikit- learn：用于机器学习
+  Pandas 读取数据 Pandas 需要先读取表格类型的数据
+读取文件   读取csv文件 ratings = pd.read_csv(fpath)
+  读取txt文件 pvuv = pd.read_csv()
+  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
+  读取 sql文件 mysql_page = pd.read_sql(&quot;select * from crazyant_pvuv&quot;, con=conn)">
+<meta name="author" content="">
+<link rel="canonical" href="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.89.4" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Pandas学习笔记" />
+<meta property="og:description" content="Pandas笔记 最佳阅读体验请阅读笔记原文
+什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
+  高性能
+  容易使用的数据结构
+  容易使用的数据分析工具
+  很方便和其它类库一起使用
+  numpy：用于数学计算
+  scikit- learn：用于机器学习
+  Pandas 读取数据 Pandas 需要先读取表格类型的数据
+读取文件   读取csv文件 ratings = pd.read_csv(fpath)
+  读取txt文件 pvuv = pd.read_csv()
+  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
+  读取 sql文件 mysql_page = pd.read_sql(&quot;select * from crazyant_pvuv&quot;, con=conn)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-07-30T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-07-30T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pandas学习笔记"/>
+<meta name="twitter:description" content="Pandas笔记 最佳阅读体验请阅读笔记原文
+什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
+  高性能
+  容易使用的数据结构
+  容易使用的数据分析工具
+  很方便和其它类库一起使用
+  numpy：用于数学计算
+  scikit- learn：用于机器学习
+  Pandas 读取数据 Pandas 需要先读取表格类型的数据
+读取文件   读取csv文件 ratings = pd.read_csv(fpath)
+  读取txt文件 pvuv = pd.read_csv()
+  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
+  读取 sql文件 mysql_page = pd.read_sql(&quot;select * from crazyant_pvuv&quot;, con=conn)"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Pandas学习笔记",
+      "item": "https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Pandas学习笔记",
+  "name": "Pandas学习笔记",
+  "description": "Pandas笔记 最佳阅读体验请阅读笔记原文\n什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化\n  高性能\n  容易使用的数据结构\n  容易使用的数据分析工具\n  很方便和其它类库一起使用\n  numpy：用于数学计算\n  scikit- learn：用于机器学习\n  Pandas 读取数据 Pandas 需要先读取表格类型的数据\n读取文件   读取csv文件 ratings = pd.read_csv(fpath)\n  读取txt文件 pvuv = pd.read_csv()\n  pvuv = pd.read_csv( fpath, sep=\u0026#34;\\t\u0026#34;, header=None, names=[\u0026#39;pdate\u0026#39;, \u0026#39;pv\u0026#39;, \u0026#39;uv\u0026#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)\n  读取 sql文件 mysql_page = pd.read_sql(\u0026quot;select * from crazyant_pvuv\u0026quot;, con=conn)",
+  "keywords": [
+    "pandas", "Python"
+  ],
+  "articleBody": "Pandas笔记 最佳阅读体验请阅读笔记原文\n什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化\n  高性能\n  容易使用的数据结构\n  容易使用的数据分析工具\n  很方便和其它类库一起使用\n  numpy：用于数学计算\n  scikit- learn：用于机器学习\n  Pandas 读取数据 Pandas 需要先读取表格类型的数据\n读取文件   读取csv文件 ratings = pd.read_csv(fpath)\n  读取txt文件 pvuv = pd.read_csv()\n  pvuv = pd.read_csv( fpath, sep=\"\\t\", header=None, names=['pdate', 'pv', 'uv'] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)\n  读取 sql文件 mysql_page = pd.read_sql(\"select * from crazyant_pvuv\", con=conn)\n  import pymysql conn = pymysql.connect( 参数省略 ) #创建链接 mysql_page = pd.read_sql(\"select * from crazyant_pvuv\", con=conn) 查看数据  查看前几行数据 ratings.head()   查看数据的形状，返回(行数、列数) ratings.shape   查看列名列表 ratings.columns   查看索引列 ratings.index   查看每列的数据类型 ratings.dtypes  Pandas数据结构 Series Series是一种类似于一维数组的对象，它由一组数据（不同数据类型）以及一组与之相关的数据标签（即索引）组成。\n创建默认Series  创建 s1 = pd.Series([1,'a',5.2,7])   创建的数据没有传入索引，则为默认索引0,1,2,3\n 获取数据 s1.values  # output: array([1, 'a', 5.2, 7], dtype=object) 创建具有标签的Series   创建带索引的Series\n  s2.index\n  #output Index(['d', 'b', 'a', 'c'], dtype='object') 使用字典创建Series 将字典传入即可\nsdata={'Ohio':35000,'Texas':72000,'Oregon':16000,'Utah':5000} s3=pd.Series(sdata) s3 # output  Ohio 35000 Texas 72000 Oregon 16000 Utah 5000 dtype: int64 通过便签索引数据 DataFrame DataFrame是一个表格型的数据结构\n  每列可以是不同的值类型（数值、字符串、布尔值等）\n  既有行索引index,也有列索引columns\n  可以被看做由Series组成的字典\n  创建dataframe最常用的方法，使用pd.read_XXX读取纯文本文件、excel、mysql数据库\n使用字典创建dataframe data={ 'state':['Ohio','Ohio','Ohio','Nevada','Nevada'], 'year':[2000,2001,2002,2001,2002], 'pop':[1.5,1.7,3.6,2.4,2.9] } df = pd.DataFrame(data) 从DataFrame中查询数据   如果只查询一行、一列，返回的是pd.Series\n  如果查询多行、多列，返回的是pd.DataFrame\n  查询一列，结果是一个pd.Series df['year'] # outout 0 2000 1 2001 2 2002 3 2001 4 2002 Name: year, dtype: int64 type(df['year'])# outputpandas.core.series.Series  \u0026ensp\n3.2 查询多列，结果是一个pd.DataFrame df[['year', 'pop']] type(df.loc[1:3]) #output pandas.core.frame.DataFrame Pandas 查询数据 后面的数据查询示例为一个天气数据，其中将日期作为索引 df.set_index('ymd', inplace=True)\n使用单个label值查询数 # 得到单个值df.loc['2018-01-03', 'bWendu']#output2 # 得到一个Seriesdf.loc['2018-01-03', ['bWendu', 'yWendu']]#outputbWendu 2yWendu -5Name: 2018-01-03, dtype: object 因为查询的是单个数据，所以返回的是series。第二个字段指定需要返回的字段，若不指定，使用：代替，则返回所有字段。\n使用值列表批量查询 # 得到Seriesdf.loc[['2018-01-03','2018-01-04','2018-01-05'], 'bWendu']#outputymd2018-01-03 22018-01-04 02018-01-05 3Name: bWendu, dtype: int32 使用数值区间进行范围查询 # 行index按区间，前面设置了日期作为索引。df.loc['2018-01-03':'2018-01-05', :] # 行和列都按区间查询df.loc['2018-01-03':'2018-01-05', 'bWendu':'fengxiang'] 使用条件表达式查询   最低温度低于-10度的列表 df.loc[df[\"yWendu\"]  使用组合条件查询最高温度小于30度，并且最低温度大于15度，并且是晴天，并且天气为优的数据\n  df.loc[(df[\"bWendu\"]30) \u0026 (df[\"yWendu\"]=15) \u0026 (df[\"tianqi\"]=='晴') \u0026 (df[\"aqiLevel\"]==1), :]  使用函数查询   - 直接写lambda表达式 df.loc[lambda df : (df[\"bWendu\"]=15), :]\n - 编写函数查询\n# 编写自己的函数，查询9月份，空气质量好的数据def query_my_data(df): return df.index.str.startswith(\"2018-09\") \u0026 (df[\"aqiLevel\"]==1) df.loc[query_my_data, :] 查询空值\u0026\u0026删除含有空值的列 match_data=match_data[match_data['home_player_1'].notnull()] Pandas 新增数据列   直接赋值\n  df.apply方法\n  df.assign方法\n  按条件选择分组分别赋值f\n  直接赋值 字符串替换\n# 替换掉温度的后缀℃df.loc[:, \"bWendu\"] = df[\"bWendu\"].str.replace(\"℃\", \"\").astype('int32')df.loc[:, \"yWendu\"] = df[\"yWendu\"].str.replace(\"℃\", \"\").astype('int32') 数据加减\n# 注意，df[\"bWendu\"]其实是一个Series，后面的减法返回的是Seriesdf.loc[:, \"wencha\"] = df[\"bWendu\"] - df[\"yWendu\"] df.apply() DataFrame.apply(func, axis=0, broadcast=False, raw=False, reduce=None, args=(), **kwds)\n函数需要自己实现，函数的传入参数根据axis来定，比如axis = 1，就会把一行数据作为Series的数据结构传入给自己实现的函数中，我们在函数中实现对Series不同属性之间的计算，返回一个结果，则apply函数会自动遍历每一行DataFrame的数据，最后将所有结果组合成一个Series数据结构并返回。\ndef get_wendu_type(x): if x[\"bWendu\"]  33: return '高温' if x[\"yWendu\"]  -10: return '低温' return '常温'# 注意需要设置axis==1，这是series的index是columnsdf.loc[:, \"wendu_type\"] = df.apply(get_wendu_type, axis=1) df.assign() # 可以同时添加多个新的列df.assign( yWendu_huashi = lambda x : x[\"yWendu\"] * 9 / 5 + 32, # 摄氏度转华氏度 bWendu_huashi = lambda x : x[\"bWendu\"] * 9 / 5 + 32) 按条件选择分组分别赋值 按条件先选择数据，然后对这部分数据赋值新列\n实例：高低温差大于10度，则认为温差大\n# 先创建空列（这是第一种创建新列的方法）df['wencha_type'] = ''df.loc[df[\"bWendu\"]-df[\"yWendu\"]10, \"wencha_type\"] = \"温差大\"df.loc[df[\"bWendu\"]-df[\"yWendu\"]Pandas 数据统计函数   汇总类统计\n  唯一去重和按值计数\n  相关系数和协方差\n  汇总统计类   统计所有结果 df.describe()\n  单个数据的平均值df[\"bWendu\"].mean()\n  单个数据的最大值，最小值 df[\"bWendu\"].max()  df[\"bWendu\"].min()\n  唯一去重 一般用于枚举，分类列\ndf[\"fengxiang\"].unique()#outputarray(['东北风', '北风', '西北风', '西南风', '南风', '东南风', '东风', '西风'], dtype=object)df[\"fengli\"].unique()#outputarray(['1-2级', '4-5级', '3-4级', '2级', '1级', '3级'], dtype=object) 按值计数 df[\"fengxiang\"].value_counts()\n相关系数和协方差 用途：\n  两只股票，是不是同涨同跌？程度多大？正相关还是负相关？\n  产品销量的波动，跟哪些因素正相关、负相关，程度有多大？\n  来自知乎，对于两个变量X、Y：\n  协方差：衡量同向反向程度 ，如果协方差为正，说明X，Y同向变化，协方差越大说明同向程度越高；如果协方差为负，说明X，Y反向运动，协方差越小说明反向程度越高。\n  相关系数：衡量相似度程度 ，当他们的相关系数为1时，说明两个变量变化时的正向相似度最大，当相关系数为－1时，说明两个变量变化的反向相似度最大\n  编码\n 协方差矩阵： df.cov()   相关系数矩阵 df.corr()    单独查看两个指标的相关系数 df[\"aqi\"].corr(df[\"bWendu\"])\n  空气质量和温差的相关系数 df[\"aqi\"].corr(df[\"bWendu\"]-df[\"yWendu\"])\n  ",
+  "wordCount" : "388",
+  "inLanguage": "en",
+  "datePublished": "2020-07-30T00:00:00Z",
+  "dateModified": "2020-07-30T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Pandas学习笔记
+    </h1>
+    <div class="post-meta"><span title='2020-07-30 00:00:00 +0000 UTC'>2020-07-30</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#pandas%e7%ac%94%e8%ae%b0" aria-label="Pandas笔记">Pandas笔记</a></li>
+                <li>
+                    <a href="#%e4%bb%80%e4%b9%88%e6%98%afpandas" aria-label="什么是Pandas？">什么是Pandas？</a></li>
+                <li>
+                    <a href="#pandas-%e8%af%bb%e5%8f%96%e6%95%b0%e6%8d%ae" aria-label="Pandas 读取数据">Pandas 读取数据</a><ul>
+                        
+                <li>
+                    <a href="#%e8%af%bb%e5%8f%96%e6%96%87%e4%bb%b6" aria-label="读取文件">读取文件</a></li>
+                <li>
+                    <a href="#%e6%9f%a5%e7%9c%8b%e6%95%b0%e6%8d%ae" aria-label="查看数据">查看数据</a></li></ul>
+                </li>
+                <li>
+                    <a href="#pandas%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" aria-label="Pandas数据结构">Pandas数据结构</a><ul>
+                        
+                <li>
+                    <a href="#series" aria-label="Series">Series</a><ul>
+                        
+                <li>
+                    <a href="#%e5%88%9b%e5%bb%ba%e9%bb%98%e8%ae%a4series" aria-label="创建默认Series"><strong>创建默认Series</strong></a></li>
+                <li>
+                    <a href="#%e5%88%9b%e5%bb%ba%e5%85%b7%e6%9c%89%e6%a0%87%e7%ad%be%e7%9a%84series" aria-label="创建具有标签的Series"><strong>创建具有标签的Series</strong></a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e5%ad%97%e5%85%b8%e5%88%9b%e5%bb%baseries" aria-label="使用字典创建Series"><strong>使用字典创建Series</strong></a></li>
+                <li>
+                    <a href="#%e9%80%9a%e8%bf%87%e4%be%bf%e7%ad%be%e7%b4%a2%e5%bc%95%e6%95%b0%e6%8d%ae" aria-label="通过便签索引数据">通过便签索引数据</a></li></ul>
+                </li>
+                <li>
+                    <a href="#dataframe" aria-label="DataFrame">DataFrame</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e5%ad%97%e5%85%b8%e5%88%9b%e5%bb%badataframe" aria-label="使用字典创建dataframe">使用字典创建dataframe</a></li>
+                <li>
+                    <a href="#%e4%bb%8edataframe%e4%b8%ad%e6%9f%a5%e8%af%a2%e6%95%b0%e6%8d%ae" aria-label="从DataFrame中查询数据">从DataFrame中查询数据</a><ul>
+                        
+                <li>
+                    <a href="#%e6%9f%a5%e8%af%a2%e4%b8%80%e5%88%97%e7%bb%93%e6%9e%9c%e6%98%af%e4%b8%80%e4%b8%aapdseries" aria-label="查询一列，结果是一个pd.Series">查询一列，结果是一个pd.Series</a></li>
+                <li>
+                    <a href="#32-%e6%9f%a5%e8%af%a2%e5%a4%9a%e5%88%97%e7%bb%93%e6%9e%9c%e6%98%af%e4%b8%80%e4%b8%aapddataframe" aria-label="3.2 查询多列，结果是一个pd.DataFrame">3.2 查询多列，结果是一个pd.DataFrame</a></li></ul>
+                </li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#pandas-%e6%9f%a5%e8%af%a2%e6%95%b0%e6%8d%ae" aria-label="Pandas 查询数据">Pandas 查询数据</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e5%8d%95%e4%b8%aalabel%e5%80%bc%e6%9f%a5%e8%af%a2%e6%95%b0" aria-label="使用单个label值查询数">使用单个label值查询数</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e5%80%bc%e5%88%97%e8%a1%a8%e6%89%b9%e9%87%8f%e6%9f%a5%e8%af%a2" aria-label="使用值列表批量查询">使用值列表批量查询</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e6%95%b0%e5%80%bc%e5%8c%ba%e9%97%b4%e8%bf%9b%e8%a1%8c%e8%8c%83%e5%9b%b4%e6%9f%a5%e8%af%a2" aria-label="使用数值区间进行范围查询">使用数值区间进行范围查询</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e6%9d%a1%e4%bb%b6%e8%a1%a8%e8%be%be%e5%bc%8f%e6%9f%a5%e8%af%a2" aria-label="使用条件表达式查询">使用条件表达式查询</a></li>
+                <li>
+                    <a href="#%e6%9f%a5%e8%af%a2%e7%a9%ba%e5%80%bc%e5%88%a0%e9%99%a4%e5%90%ab%e6%9c%89%e7%a9%ba%e5%80%bc%e7%9a%84%e5%88%97" aria-label="查询空值&amp;amp;&amp;amp;删除含有空值的列">查询空值&amp;&amp;删除含有空值的列</a></li></ul>
+                </li>
+                <li>
+                    <a href="#pandas-%e6%96%b0%e5%a2%9e%e6%95%b0%e6%8d%ae%e5%88%97" aria-label="Pandas 新增数据列">Pandas 新增数据列</a><ul>
+                        
+                <li>
+                    <a href="#%e7%9b%b4%e6%8e%a5%e8%b5%8b%e5%80%bc" aria-label="直接赋值">直接赋值</a></li>
+                <li>
+                    <a href="#dfapply" aria-label="df.apply()">df.apply()</a></li>
+                <li>
+                    <a href="#dfassign" aria-label="df.assign()">df.assign()</a></li>
+                <li>
+                    <a href="#%e6%8c%89%e6%9d%a1%e4%bb%b6%e9%80%89%e6%8b%a9%e5%88%86%e7%bb%84%e5%88%86%e5%88%ab%e8%b5%8b%e5%80%bc" aria-label="按条件选择分组分别赋值">按条件选择分组分别赋值</a></li></ul>
+                </li>
+                <li>
+                    <a href="#pandas-%e6%95%b0%e6%8d%ae%e7%bb%9f%e8%ae%a1%e5%87%bd%e6%95%b0" aria-label="Pandas 数据统计函数">Pandas 数据统计函数</a><ul>
+                        
+                <li>
+                    <a href="#%e6%b1%87%e6%80%bb%e7%bb%9f%e8%ae%a1%e7%b1%bb" aria-label="汇总统计类">汇总统计类</a></li>
+                <li>
+                    <a href="#%e5%94%af%e4%b8%80%e5%8e%bb%e9%87%8d" aria-label="唯一去重">唯一去重</a></li>
+                <li>
+                    <a href="#%e6%8c%89%e5%80%bc%e8%ae%a1%e6%95%b0" aria-label="按值计数">按值计数</a></li>
+                <li>
+                    <a href="#%e7%9b%b8%e5%85%b3%e7%b3%bb%e6%95%b0%e5%92%8c%e5%8d%8f%e6%96%b9%e5%b7%ae" aria-label="相关系数和协方差">相关系数和协方差</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="pandas笔记">Pandas笔记<a hidden class="anchor" aria-hidden="true" href="#pandas笔记">#</a></h1>
+<p>最佳阅读体验请阅读<a href="https://www.wolai.com/enjoy/9UcxiCaCPxToz8CJLR2uCP?theme=light">笔记原文</a></p>
+<h1 id="什么是pandas">什么是Pandas？<a hidden class="anchor" aria-hidden="true" href="#什么是pandas">#</a></h1>
+<p>一个开源的 Python类库：用于数据分析、数据处理、数据可视化</p>
+<ul>
+<li>
+<p>高性能</p>
+</li>
+<li>
+<p>容易使用的数据结构</p>
+</li>
+<li>
+<p>容易使用的数据分析工具</p>
+</li>
+</ul>
+<p>很方便和其它类库一起使用</p>
+<ul>
+<li>
+<p>numpy：用于数学计算</p>
+</li>
+<li>
+<p>scikit- learn：用于机器学习</p>
+</li>
+</ul>
+<h1 id="pandas-读取数据">Pandas 读取数据<a hidden class="anchor" aria-hidden="true" href="#pandas-读取数据">#</a></h1>
+<p>Pandas 需要先读取表格类型的数据</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054660.png" alt=""  />
+</p>
+<h2 id="读取文件">读取文件<a hidden class="anchor" aria-hidden="true" href="#读取文件">#</a></h2>
+<ul>
+<li>
+<p>读取csv文件 <code>ratings = pd.read_csv(fpath)</code></p>
+</li>
+<li>
+<p>读取txt文件 <code>pvuv = pd.read_csv()</code></p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">pvuv <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(
+    fpath,
+    sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>,
+    header<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>,
+    names<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;pdate&#39;</span>, <span style="color:#e6db74">&#39;pv&#39;</span>, <span style="color:#e6db74">&#39;uv&#39;</span>] <span style="color:#75715e"># 指定列名</span>
+)
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054662.png" alt="数据间隔为tab"  />
+</p>
+<ul>
+<li>
+<p>读取excel文件 <code>pvuv = pd.read_excel(fpath)</code></p>
+</li>
+<li>
+<p>读取 sql文件 <code>mysql_page = pd.read_sql(&quot;select * from crazyant_pvuv&quot;, con=conn)</code></p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#f92672">import</span> pymysql
+conn <span style="color:#f92672">=</span> pymysql<span style="color:#f92672">.</span>connect( 参数省略 ) <span style="color:#75715e">#创建链接</span>
+mysql_page <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_sql(<span style="color:#e6db74">&#34;select * from crazyant_pvuv&#34;</span>, con<span style="color:#f92672">=</span>conn)
+
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054663.png" alt=""  />
+</p>
+<h2 id="查看数据">查看数据<a hidden class="anchor" aria-hidden="true" href="#查看数据">#</a></h2>
+<ul>
+<li>查看前几行数据 <code>ratings.head()</code></li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054664.png" alt=""  />
+</p>
+<ul>
+<li>查看数据的形状，返回(行数、列数) <code>ratings.shape</code></li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054665.png" alt=""  />
+</p>
+<ul>
+<li>查看列名列表 <code>ratings.columns</code></li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054666.png" alt=""  />
+</p>
+<ul>
+<li>查看索引列 <code>ratings.index</code></li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054667.png" alt=""  />
+</p>
+<ul>
+<li>查看每列的数据类型 <code>ratings.dtypes</code></li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054668.png" alt=""  />
+</p>
+<h1 id="pandas数据结构">Pandas数据结构<a hidden class="anchor" aria-hidden="true" href="#pandas数据结构">#</a></h1>
+<h2 id="series">Series<a hidden class="anchor" aria-hidden="true" href="#series">#</a></h2>
+<p>Series是一种类似于一维数组的对象，它由一组数据（不同数据类型）以及一组与之相关的数据标签（即索引）组成。</p>
+<h3 id="创建默认series"><strong>创建默认Series</strong><a hidden class="anchor" aria-hidden="true" href="#创建默认series">#</a></h3>
+<ul>
+<li>创建 <code>s1 = pd.Series([1,'a',5.2,7])</code></li>
+</ul>
+<p>    创建的数据没有传入索引，则为默认索引0,1,2,3</p>
+<ul>
+<li><code>获取数据 s1.values</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># output: array([1, &#39;a&#39;, 5.2, 7], dtype=object)</span>
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054669.png" alt=""  />
+</p>
+<h3 id="创建具有标签的series"><strong>创建具有标签的Series</strong><a hidden class="anchor" aria-hidden="true" href="#创建具有标签的series">#</a></h3>
+<ul>
+<li>
+<p>创建带索引的<code>Series</code></p>
+</li>
+<li>
+<p><code>s2.index</code></p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e">#output Index([&#39;d&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;], dtype=&#39;object&#39;)</span>
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054670.png" alt=""  />
+</p>
+<h3 id="使用字典创建series"><strong>使用字典创建Series</strong><a hidden class="anchor" aria-hidden="true" href="#使用字典创建series">#</a></h3>
+<p>将字典传入即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">sdata<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Ohio&#39;</span>:<span style="color:#ae81ff">35000</span>,<span style="color:#e6db74">&#39;Texas&#39;</span>:<span style="color:#ae81ff">72000</span>,<span style="color:#e6db74">&#39;Oregon&#39;</span>:<span style="color:#ae81ff">16000</span>,<span style="color:#e6db74">&#39;Utah&#39;</span>:<span style="color:#ae81ff">5000</span>}
+s3<span style="color:#f92672">=</span>pd<span style="color:#f92672">.</span>Series(sdata)
+
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">s3
+<span style="color:#75715e"># output </span>
+Ohio      <span style="color:#ae81ff">35000</span>
+Texas     <span style="color:#ae81ff">72000</span>
+Oregon    <span style="color:#ae81ff">16000</span>
+Utah       <span style="color:#ae81ff">5000</span>
+dtype: int64
+
+</code></pre></div><h3 id="通过便签索引数据">通过便签索引数据<a hidden class="anchor" aria-hidden="true" href="#通过便签索引数据">#</a></h3>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054671.png" alt=""  />
+</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054672.png" alt=""  />
+</p>
+<h2 id="dataframe">DataFrame<a hidden class="anchor" aria-hidden="true" href="#dataframe">#</a></h2>
+<p>DataFrame是一个表格型的数据结构</p>
+<ul>
+<li>
+<p>每列可以是不同的值类型（数值、字符串、布尔值等）</p>
+</li>
+<li>
+<p>既有行索引index,也有列索引columns</p>
+</li>
+<li>
+<p>可以被看做由Series组成的字典</p>
+</li>
+</ul>
+<p>创建dataframe最常用的方法，使用<code>pd.read_XXX</code>读取纯文本文件、excel、mysql数据库</p>
+<h3 id="使用字典创建dataframe">使用字典创建dataframe<a hidden class="anchor" aria-hidden="true" href="#使用字典创建dataframe">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">data<span style="color:#f92672">=</span>{
+        <span style="color:#e6db74">&#39;state&#39;</span>:[<span style="color:#e6db74">&#39;Ohio&#39;</span>,<span style="color:#e6db74">&#39;Ohio&#39;</span>,<span style="color:#e6db74">&#39;Ohio&#39;</span>,<span style="color:#e6db74">&#39;Nevada&#39;</span>,<span style="color:#e6db74">&#39;Nevada&#39;</span>],
+        <span style="color:#e6db74">&#39;year&#39;</span>:[<span style="color:#ae81ff">2000</span>,<span style="color:#ae81ff">2001</span>,<span style="color:#ae81ff">2002</span>,<span style="color:#ae81ff">2001</span>,<span style="color:#ae81ff">2002</span>],
+        <span style="color:#e6db74">&#39;pop&#39;</span>:[<span style="color:#ae81ff">1.5</span>,<span style="color:#ae81ff">1.7</span>,<span style="color:#ae81ff">3.6</span>,<span style="color:#ae81ff">2.4</span>,<span style="color:#ae81ff">2.9</span>]
+    }
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data)
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054673.png" alt=""  />
+</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054674.png" alt=""  />
+</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054675.png" alt=""  />
+</p>
+<h3 id="从dataframe中查询数据">从DataFrame中查询数据<a hidden class="anchor" aria-hidden="true" href="#从dataframe中查询数据">#</a></h3>
+<ul>
+<li>
+<p>如果只查询一行、一列，返回的是pd.Series</p>
+</li>
+<li>
+<p>如果查询多行、多列，返回的是pd.DataFrame</p>
+</li>
+</ul>
+<h4 id="查询一列结果是一个pdseries">查询一列，结果是一个pd.Series<a hidden class="anchor" aria-hidden="true" href="#查询一列结果是一个pdseries">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df[<span style="color:#e6db74">&#39;year&#39;</span>]
+<span style="color:#75715e"># outout</span>
+<span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">2000</span>
+<span style="color:#ae81ff">1</span>    <span style="color:#ae81ff">2001</span>
+<span style="color:#ae81ff">2</span>    <span style="color:#ae81ff">2002</span>
+<span style="color:#ae81ff">3</span>    <span style="color:#ae81ff">2001</span>
+<span style="color:#ae81ff">4</span>    <span style="color:#ae81ff">2002</span>
+Name: year, dtype: int64
+
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">type(df[<span style="color:#e6db74">&#39;year&#39;</span>])<span style="color:#75715e"># outputpandas.core.series.Series</span>
+</code></pre></div><p>   &amp;ensp</p>
+<h4 id="32-查询多列结果是一个pddataframe">3.2 查询多列，结果是一个pd.DataFrame<a hidden class="anchor" aria-hidden="true" href="#32-查询多列结果是一个pddataframe">#</a></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df[[<span style="color:#e6db74">&#39;year&#39;</span>, <span style="color:#e6db74">&#39;pop&#39;</span>]]
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054676.png" alt=""  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">type(df<span style="color:#f92672">.</span>loc[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">3</span>]) <span style="color:#75715e">#output pandas.core.frame.DataFrame</span>
+</code></pre></div><h1 id="pandas-查询数据">Pandas 查询数据<a hidden class="anchor" aria-hidden="true" href="#pandas-查询数据">#</a></h1>
+<p>后面的数据查询示例为一个天气数据，其中将日期作为索引 <code>df.set_index('ymd', inplace=True)</code></p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054677.png" alt=""  />
+</p>
+<h2 id="使用单个label值查询数">使用单个label值查询数<a hidden class="anchor" aria-hidden="true" href="#使用单个label值查询数">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 得到单个值df.loc[&#39;2018-01-03&#39;, &#39;bWendu&#39;]#output2</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 得到一个Seriesdf.loc[&#39;2018-01-03&#39;, [&#39;bWendu&#39;, &#39;yWendu&#39;]]#outputbWendu     2yWendu    -5Name: 2018-01-03, dtype: object</span>
+</code></pre></div><p>因为查询的是单个数据，所以返回的是series。第二个字段指定需要返回的字段，若不指定，使用<code>：</code>代替，则返回所有字段。</p>
+<h2 id="使用值列表批量查询">使用值列表批量查询<a hidden class="anchor" aria-hidden="true" href="#使用值列表批量查询">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 得到Seriesdf.loc[[&#39;2018-01-03&#39;,&#39;2018-01-04&#39;,&#39;2018-01-05&#39;], &#39;bWendu&#39;]#outputymd2018-01-03    22018-01-04    02018-01-05    3Name: bWendu, dtype: int32</span>
+</code></pre></div><h2 id="使用数值区间进行范围查询">使用数值区间进行范围查询<a hidden class="anchor" aria-hidden="true" href="#使用数值区间进行范围查询">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 行index按区间，前面设置了日期作为索引。df.loc[&#39;2018-01-03&#39;:&#39;2018-01-05&#39;, :]</span>
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054678.png" alt=""  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 行和列都按区间查询df.loc[&#39;2018-01-03&#39;:&#39;2018-01-05&#39;, &#39;bWendu&#39;:&#39;fengxiang&#39;]</span>
+</code></pre></div><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054679.png" alt=""  />
+</p>
+<h2 id="使用条件表达式查询">使用条件表达式查询<a hidden class="anchor" aria-hidden="true" href="#使用条件表达式查询">#</a></h2>
+<ul>
+<li>
+<p>最低温度低于-10度的列表 <code>df.loc[df[&quot;yWendu&quot;]&lt;-10, :]</code></p>
+</li>
+<li>
+<p>使用组合条件查询最高温度小于30度，并且最低温度大于15度，并且是晴天，并且天气为优的数据</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df<span style="color:#f92672">.</span>loc[(df[<span style="color:#e6db74">&#34;bWendu&#34;</span>]<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">30</span>) <span style="color:#f92672">&amp;</span> (df[<span style="color:#e6db74">&#34;yWendu&#34;</span>]<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">15</span>) <span style="color:#f92672">&amp;</span> (df[<span style="color:#e6db74">&#34;tianqi&#34;</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;晴&#39;</span>) <span style="color:#f92672">&amp;</span> (df[<span style="color:#e6db74">&#34;aqiLevel&#34;</span>]<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>), :]
+</code></pre></div><ul>
+<li>使用函数查询</li>
+</ul>
+<p>    - 直接写lambda表达式  <code>df.loc[lambda df : (df[&quot;bWendu&quot;]&lt;=30) &amp; (df[&quot;yWendu&quot;]&gt;=15), :]</code></p>
+<p>    - 编写函数查询</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 编写自己的函数，查询9月份，空气质量好的数据def query_my_data(df):    return df.index.str.startswith(&#34;2018-09&#34;) &amp; (df[&#34;aqiLevel&#34;]==1)    df.loc[query_my_data, :]</span>
+</code></pre></div><h2 id="查询空值删除含有空值的列">查询空值&amp;&amp;删除含有空值的列<a hidden class="anchor" aria-hidden="true" href="#查询空值删除含有空值的列">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">match_data<span style="color:#f92672">=</span>match_data[match_data[<span style="color:#e6db74">&#39;home_player_1&#39;</span>]<span style="color:#f92672">.</span>notnull()]
+</code></pre></div><h1 id="pandas-新增数据列">Pandas 新增数据列<a hidden class="anchor" aria-hidden="true" href="#pandas-新增数据列">#</a></h1>
+<ol>
+<li>
+<p>直接赋值</p>
+</li>
+<li>
+<p>df.apply方法</p>
+</li>
+<li>
+<p>df.assign方法</p>
+</li>
+<li>
+<p>按条件选择分组分别赋值f</p>
+</li>
+</ol>
+<h2 id="直接赋值">直接赋值<a hidden class="anchor" aria-hidden="true" href="#直接赋值">#</a></h2>
+<p>字符串替换</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 替换掉温度的后缀℃df.loc[:, &#34;bWendu&#34;] = df[&#34;bWendu&#34;].str.replace(&#34;℃&#34;, &#34;&#34;).astype(&#39;int32&#39;)df.loc[:, &#34;yWendu&#34;] = df[&#34;yWendu&#34;].str.replace(&#34;℃&#34;, &#34;&#34;).astype(&#39;int32&#39;)</span>
+</code></pre></div><p>数据加减</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 注意，df[&#34;bWendu&#34;]其实是一个Series，后面的减法返回的是Seriesdf.loc[:, &#34;wencha&#34;] = df[&#34;bWendu&#34;] - df[&#34;yWendu&#34;]</span>
+</code></pre></div><h2 id="dfapply">df.apply()<a hidden class="anchor" aria-hidden="true" href="#dfapply">#</a></h2>
+<p><code>DataFrame.apply(func, axis=0, broadcast=False, raw=False, reduce=None, args=(), **kwds)</code></p>
+<p>函数需要自己实现，函数的传入参数根据<code>axis</code>来定，比如<code>axis = 1</code>，就会把一行数据作为<code>Series</code>的数据结构传入给自己实现的函数中，我们在函数中实现对<code>Series</code>不同属性之间的计算，返回一个结果，则<code>apply</code>函数会自动遍历每一行<code>DataFrame</code>的数据，最后将所有结果组合成一个<code>Series</code>数据结构并返回。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_wendu_type</span>(x):    <span style="color:#66d9ef">if</span> x[<span style="color:#e6db74">&#34;bWendu&#34;</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">33</span>:        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;高温&#39;</span>    <span style="color:#66d9ef">if</span> x[<span style="color:#e6db74">&#34;yWendu&#34;</span>] <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>:        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;低温&#39;</span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;常温&#39;</span><span style="color:#75715e"># 注意需要设置axis==1，这是series的index是columnsdf.loc[:, &#34;wendu_type&#34;] = df.apply(get_wendu_type, axis=1)</span>
+</code></pre></div><h2 id="dfassign">df.assign()<a hidden class="anchor" aria-hidden="true" href="#dfassign">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 可以同时添加多个新的列df.assign(    yWendu_huashi = lambda x : x[&#34;yWendu&#34;] * 9 / 5 + 32,    # 摄氏度转华氏度    bWendu_huashi = lambda x : x[&#34;bWendu&#34;] * 9 / 5 + 32)</span>
+</code></pre></div><h2 id="按条件选择分组分别赋值">按条件选择分组分别赋值<a hidden class="anchor" aria-hidden="true" href="#按条件选择分组分别赋值">#</a></h2>
+<p>按条件先选择数据，然后对这部分数据赋值新列</p>
+<p>实例：高低温差大于10度，则认为温差大</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 先创建空列（这是第一种创建新列的方法）df[&#39;wencha_type&#39;] = &#39;&#39;df.loc[df[&#34;bWendu&#34;]-df[&#34;yWendu&#34;]&gt;10, &#34;wencha_type&#34;] = &#34;温差大&#34;df.loc[df[&#34;bWendu&#34;]-df[&#34;yWendu&#34;]&lt;=10, &#34;wencha_type&#34;] = &#34;温差正常&#34;</span>
+</code></pre></div><h1 id="pandas-数据统计函数">Pandas 数据统计函数<a hidden class="anchor" aria-hidden="true" href="#pandas-数据统计函数">#</a></h1>
+<ol>
+<li>
+<p>汇总类统计</p>
+</li>
+<li>
+<p>唯一去重和按值计数</p>
+</li>
+<li>
+<p>相关系数和协方差</p>
+</li>
+</ol>
+<h2 id="汇总统计类">汇总统计类<a hidden class="anchor" aria-hidden="true" href="#汇总统计类">#</a></h2>
+<ul>
+<li>
+<p>统计所有结果 <code>df.describe()</code></p>
+</li>
+<li>
+<p>单个数据的平均值<code>df[&quot;bWendu&quot;].mean()</code></p>
+</li>
+<li>
+<p>单个数据的最大值，最小值  <code>df[&quot;bWendu&quot;].max() </code> <code>df[&quot;bWendu&quot;].min()</code></p>
+</li>
+</ul>
+<h2 id="唯一去重">唯一去重<a hidden class="anchor" aria-hidden="true" href="#唯一去重">#</a></h2>
+<p>一般用于枚举，分类列</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df[<span style="color:#e6db74">&#34;fengxiang&#34;</span>]<span style="color:#f92672">.</span>unique()<span style="color:#75715e">#outputarray([&#39;东北风&#39;, &#39;北风&#39;, &#39;西北风&#39;, &#39;西南风&#39;, &#39;南风&#39;, &#39;东南风&#39;, &#39;东风&#39;, &#39;西风&#39;], dtype=object)df[&#34;fengli&#34;].unique()#outputarray([&#39;1-2级&#39;, &#39;4-5级&#39;, &#39;3-4级&#39;, &#39;2级&#39;, &#39;1级&#39;, &#39;3级&#39;], dtype=object)</span>
+</code></pre></div><h2 id="按值计数">按值计数<a hidden class="anchor" aria-hidden="true" href="#按值计数">#</a></h2>
+<p><code>df[&quot;fengxiang&quot;].value_counts()</code></p>
+<h2 id="相关系数和协方差">相关系数和协方差<a hidden class="anchor" aria-hidden="true" href="#相关系数和协方差">#</a></h2>
+<p>用途：</p>
+<ol>
+<li>
+<p>两只股票，是不是同涨同跌？程度多大？正相关还是负相关？</p>
+</li>
+<li>
+<p>产品销量的波动，跟哪些因素正相关、负相关，程度有多大？</p>
+</li>
+</ol>
+<p>来自知乎，对于两个变量X、Y：</p>
+<ol>
+<li>
+<p>协方差：<em>衡量同向反向程度</em> ，如果协方差为正，说明X，Y同向变化，协方差越大说明同向程度越高；如果协方差为负，说明X，Y反向运动，协方差越小说明反向程度越高。</p>
+</li>
+<li>
+<p>相关系数：<em>衡量相似度程度</em> ，当他们的相关系数为1时，说明两个变量变化时的正向相似度最大，当相关系数为－1时，说明两个变量变化的反向相似度最大</p>
+</li>
+</ol>
+<p>编码</p>
+<ul>
+<li>协方差矩阵：<code> df.cov()</code></li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054680.png" alt="协方差矩阵"  />
+</p>
+<ul>
+<li>相关系数矩阵 <code>df.corr()</code></li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092054681.png" alt="相关系数矩阵"  />
+</p>
+<ul>
+<li>
+<p>单独查看两个指标的相关系数 <code>df[&quot;aqi&quot;].corr(df[&quot;bWendu&quot;])</code></p>
+</li>
+<li>
+<p>空气质量和温差的相关系数  <code>df[&quot;aqi&quot;].corr(df[&quot;bWendu&quot;]-df[&quot;yWendu&quot;])</code></p>
+</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://shiluanzzz.github.io/tags/pandas/">pandas</a></li>
+      <li><a href="https://shiluanzzz.github.io/tags/python/">Python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://shiluanzzz.github.io/post/tqdm/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Python Tqdm进度条使用</span>
+  </a>
+  <a class="next" href="https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Paddle实战手写数字识别</span>
+  </a>
+</nav>
+
+  </footer><script src="https://utteranc.es/client.js"
+repo="shiluanzzz/hugo-comments"
+issue-term="pathname"
+label="Comment"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2021 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Paddle实战手写数字识别 | 风吹不停</title>
+<meta name="keywords" content="人工智能, paddlepaddle" />
+<meta name="description" content="paddle 手写数字识别 参考链接： 1 2
+任务介绍   手写识别属于典型的图像多分类问题
+  输入 &amp;&amp; 输出
+  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本
+数据准备  数据提供器   &gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。
+ - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱
+ - paddle.batch()表示每BATCH_SIZE组成一个batch
+BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图
+ &gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
+def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.">
+<meta name="author" content="">
+<link rel="canonical" href="https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.89.4" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Paddle实战手写数字识别" />
+<meta property="og:description" content="paddle 手写数字识别 参考链接： 1 2
+任务介绍   手写识别属于典型的图像多分类问题
+  输入 &amp;&amp; 输出
+  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本
+数据准备  数据提供器   &gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。
+ - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱
+ - paddle.batch()表示每BATCH_SIZE组成一个batch
+BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图
+ &gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
+def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-07-05T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-07-05T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Paddle实战手写数字识别"/>
+<meta name="twitter:description" content="paddle 手写数字识别 参考链接： 1 2
+任务介绍   手写识别属于典型的图像多分类问题
+  输入 &amp;&amp; 输出
+  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本
+数据准备  数据提供器   &gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。
+ - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱
+ - paddle.batch()表示每BATCH_SIZE组成一个batch
+BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图
+ &gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
+def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Paddle实战手写数字识别",
+      "item": "https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Paddle实战手写数字识别",
+  "name": "Paddle实战手写数字识别",
+  "description": "paddle 手写数字识别 参考链接： 1 2\n任务介绍   手写识别属于典型的图像多分类问题\n  输入 \u0026amp;\u0026amp; 输出\n  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本\n数据准备  数据提供器   \u0026gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。\n - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱\n - paddle.batch()表示每BATCH_SIZE组成一个batch\nBUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图\n \u0026gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。\ndef multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.",
+  "keywords": [
+    "人工智能", "paddlepaddle"
+  ],
+  "articleBody": "paddle 手写数字识别 参考链接： 1 2\n任务介绍   手写识别属于典型的图像多分类问题\n  输入 \u0026\u0026 输出\n  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本\n数据准备  数据提供器    batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。\n - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱\n - paddle.batch()表示每BATCH_SIZE组成一个batch\nBUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图\n  fluid.layers.fc 该OP将在神经网络中构建一个全连接层。\ndef multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.layers.fc(input=input,size=100,act='relu') hiddle2=fluid.layers.fc(input=hiddle1,size=100,act='relu') # 输出层，使用softmax激活 prediction=fluid.layers.fc(input=hiddle2,size=10,act='softmax') return prediction 损失函数   - fluid.layers.cross_entropy 该OP计算输入input和标签label间的交叉熵\ncost=fluid.layers.cross_entropy(input=predict,label=label) avg_cost=fluid.layers.mean(cost) # 对损失函数求平均值，方便后面反向传播使用 ## 准确率 acc=fluid.layers.accuracy(input=predict,label='label') 优化函数   使用内置的Adam方法，并指定学习率\noptimizer=fluid.optimizer.AdamOptimizer(learning_rate=0.001) opts=optimizer.minimize(avg_cost) 模型训练、评估 # 创建executor usr_cuda=False # 使用CPU训练 place=fluid.CUDAPlace(0) if usr_cuda else fluid.CPUPlace() test_program=fluid.default_main_program().clone(for_test=True) exe=fluid.Executor(place) exe.run(fluid.default_startup_program()) # 数据提供器： 转成一种特殊的数据结构，使其可以输入到Executor中。 feeder=fluid.DataFeeder(place=place,feed_list=[image,label]) 训练 %time EPOCH_NUM=2 model_save_dir=\"Handwriting_recognition_V1.0\" for pass_id in range(EPOCH_NUM): for betch_id,data in enumerate(train_reader()): train_cost,train_acc=exe.run( program=fluid.default_main_program(), feed=feeder.feed(data), fetch_list=[avg_cost,acc] ) all_train_iter+=BATCH_SIZE all_train_iters.append(all_train_iter) all_train_costs.append(train_cost[0]) all_train_accs.append(train_acc[0]) if betch_id % 200 == 0: print('Pass:%d, Batch:%d, Cost:%0.5f, Accuracy:%0.5f' % (pass_id, betch_id, train_cost[0], train_acc[0])) # test test_accs=[] test_costs=[] for betch_id,data in enumerate(test_reader()): test_cost,test_acc=exe.run( program=test_program, feed=feeder.feed(data), fetch_list=[avg_cost,acc] ) test_accs.append(test_acc) test_costs.append(test_cost) test_cost=(sum(test_costs))/len(test_costs) test_acc=(sum(test_accs))/len(test_accs) print(\"test:%d, cost:%0.5f,accuracy:%0.5f\"%(pass_id,test_cost,test_acc)) #保存模型 # 如果保存路径不存在就创建 if not os.path.exists(model_save_dir): os.makedirs(model_save_dir) print ('save models to %s' % (model_save_dir)) fluid.io.save_inference_model(model_save_dir, #保存推理model的路径 ['image'], #推理（inference）需要 feed 的数据 [predict], #保存推理（inference）结果的 Variables exe) #executor 保存 inference model print('训练模型保存完成！') draw_train_process(\"training\", all_train_iters, all_train_costs, all_train_accs, \"trainning cost\", \"trainning acc\") ",
+  "wordCount" : "193",
+  "inLanguage": "en",
+  "datePublished": "2020-07-05T00:00:00Z",
+  "dateModified": "2020-07-05T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Paddle实战手写数字识别
+    </h1>
+    <div class="post-meta"><span title='2020-07-05 00:00:00 +0000 UTC'>2020-07-05</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#paddle-%e6%89%8b%e5%86%99%e6%95%b0%e5%ad%97%e8%af%86%e5%88%ab" aria-label="paddle 手写数字识别">paddle 手写数字识别</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bb%bb%e5%8a%a1%e4%bb%8b%e7%bb%8d" aria-label="任务介绍">任务介绍</a><ul>
+                        
+                <li>
+                    <a href="#mnist%e6%95%b0%e6%8d%ae%e9%9b%86" aria-label="MNIST数据集">MNIST数据集</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%95%b0%e6%8d%ae%e5%87%86%e5%a4%87" aria-label="数据准备">数据准备</a></li>
+                <li>
+                    <a href="#%e7%bd%91%e7%bb%9c%e9%85%8d%e7%bd%ae" aria-label="网络配置">网络配置</a></li>
+                <li>
+                    <a href="#%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83%e8%af%84%e4%bc%b0" aria-label="模型训练、评估">模型训练、评估</a><ul>
+                        
+                <li>
+                    <a href="#%e8%ae%ad%e7%bb%83" aria-label="训练">训练</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="paddle-手写数字识别">paddle 手写数字识别<a hidden class="anchor" aria-hidden="true" href="#paddle-手写数字识别">#</a></h1>
+<p>参考链接： <a href="https://www.paddlepaddle.org.cn/documentation/docs/zh/faq/install_cn.html">1</a> <a href="https://aistudio.baidu.com/aistudio/projectdetail/650949">2</a></p>
+<h2 id="任务介绍">任务介绍<a hidden class="anchor" aria-hidden="true" href="#任务介绍">#</a></h2>
+<ul>
+<li>
+<p>手写识别属于典型的图像多分类问题</p>
+</li>
+<li>
+<p>输入 &amp;&amp; 输出</p>
+</li>
+</ul>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092041415.png" alt=""  />
+</p>
+<h3 id="mnist数据集">MNIST数据集<a hidden class="anchor" aria-hidden="true" href="#mnist数据集">#</a></h3>
+<p>美国国家标准与技术研究所
+10个互斥类别，28 * 28的灰度图
+250 个人的手写数字， 50% 来自人口普查局的
+工作人员，50%来自高中学生
+训练集：60000个样本
+测试集：10000个样本</p>
+<h2 id="数据准备">数据准备<a hidden class="anchor" aria-hidden="true" href="#数据准备">#</a></h2>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092041197.png" alt=""  />
+</p>
+<ol>
+<li>数据提供器</li>
+</ol>
+<p>    &gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。</p>
+<p>    - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱</p>
+<p>    - paddle.batch()表示每BATCH_SIZE组成一个batch</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">BUF_SIZE<span style="color:#f92672">=</span><span style="color:#ae81ff">512</span> <span style="color:#75715e"># 每次提取的数据量</span>
+BATCH_SIZE<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span> <span style="color:#75715e"># </span>
+train_reader<span style="color:#f92672">=</span>paddle<span style="color:#f92672">.</span>batch(
+    paddle<span style="color:#f92672">.</span>reader<span style="color:#f92672">.</span>shuffle(paddle<span style="color:#f92672">.</span>dataset<span style="color:#f92672">.</span>mnist<span style="color:#f92672">.</span>train(),buf_size<span style="color:#f92672">=</span>BUF_SIZE),
+    batch_size<span style="color:#f92672">=</span>BATCH_SIZE
+)
+test_reader<span style="color:#f92672">=</span>paddle<span style="color:#f92672">.</span>batch(
+    paddle<span style="color:#f92672">.</span>reader<span style="color:#f92672">.</span>shuffle(paddle<span style="color:#f92672">.</span>dataset<span style="color:#f92672">.</span>mnist<span style="color:#f92672">.</span>test(),buf_size<span style="color:#f92672">=</span>BUF_SIZE),
+    batch_size<span style="color:#f92672">=</span>BATCH_SIZE
+)
+train_data<span style="color:#f92672">=</span>paddle<span style="color:#f92672">.</span>dataset<span style="color:#f92672">.</span>mnist<span style="color:#f92672">.</span>train()
+</code></pre></div><h2 id="网络配置">网络配置<a hidden class="anchor" aria-hidden="true" href="#网络配置">#</a></h2>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092040440.png" alt=""  />
+</p>
+<ol>
+<li>网络模型</li>
+</ol>
+<p>    - 网络模型图</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092041420.png" alt=""  />
+</p>
+<p>    &gt; <a href="https://www.paddlepaddle.org.cn/documentation/docs/zh/api_cn/layers_cn/fc_cn.html">fluid.layers.fc</a> 该OP将在神经网络中构建一个全连接层。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">multilayer_percetron</span>(input):  <span style="color:#75715e"># multilayer-多层的 percetron-感知器</span>
+    <span style="color:#75715e"># 两个影藏层  激活函数为relu</span>
+    hiddle1<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>fc(input<span style="color:#f92672">=</span>input,size<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>,act<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>)
+    hiddle2<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>fc(input<span style="color:#f92672">=</span>hiddle1,size<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>,act<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>)
+    
+    <span style="color:#75715e"># 输出层，使用softmax激活</span>
+    prediction<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>fc(input<span style="color:#f92672">=</span>hiddle2,size<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>,act<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>)
+    <span style="color:#66d9ef">return</span> prediction
+</code></pre></div><ol start="2">
+<li>损失函数</li>
+</ol>
+<p>    - fluid.layers.cross_entropy 该OP计算输入input和标签label间的交叉熵</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">cost<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>cross_entropy(input<span style="color:#f92672">=</span>predict,label<span style="color:#f92672">=</span>label)
+avg_cost<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>mean(cost) 
+<span style="color:#75715e"># 对损失函数求平均值，方便后面反向传播使用</span>
+<span style="color:#75715e">## 准确率</span>
+acc<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>accuracy(input<span style="color:#f92672">=</span>predict,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;label&#39;</span>)
+</code></pre></div><ol start="3">
+<li>优化函数</li>
+</ol>
+<p>    使用内置的Adam方法，并指定学习率</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">optimizer<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>optimizer<span style="color:#f92672">.</span>AdamOptimizer(learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>)
+opts<span style="color:#f92672">=</span>optimizer<span style="color:#f92672">.</span>minimize(avg_cost) 
+</code></pre></div><h2 id="模型训练评估">模型训练、评估<a hidden class="anchor" aria-hidden="true" href="#模型训练评估">#</a></h2>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092041429.png" alt=""  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#75715e"># 创建executor</span>
+usr_cuda<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span> <span style="color:#75715e"># 使用CPU训练</span>
+place<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>CUDAPlace(<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">if</span> usr_cuda <span style="color:#66d9ef">else</span> fluid<span style="color:#f92672">.</span>CPUPlace()
+
+test_program<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>default_main_program()<span style="color:#f92672">.</span>clone(for_test<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+
+exe<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>Executor(place)
+exe<span style="color:#f92672">.</span>run(fluid<span style="color:#f92672">.</span>default_startup_program())
+
+<span style="color:#75715e"># 数据提供器： 转成一种特殊的数据结构，使其可以输入到Executor中。</span>
+feeder<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>DataFeeder(place<span style="color:#f92672">=</span>place,feed_list<span style="color:#f92672">=</span>[image,label])
+
+</code></pre></div><h3 id="训练">训练<a hidden class="anchor" aria-hidden="true" href="#训练">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#f92672">%</span>time 
+EPOCH_NUM<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+model_save_dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Handwriting_recognition_V1.0&#34;</span>
+
+<span style="color:#66d9ef">for</span> pass_id <span style="color:#f92672">in</span> range(EPOCH_NUM):
+    <span style="color:#66d9ef">for</span> betch_id,data <span style="color:#f92672">in</span> enumerate(train_reader()):
+        train_cost,train_acc<span style="color:#f92672">=</span>exe<span style="color:#f92672">.</span>run(
+            program<span style="color:#f92672">=</span>fluid<span style="color:#f92672">.</span>default_main_program(),
+            feed<span style="color:#f92672">=</span>feeder<span style="color:#f92672">.</span>feed(data),
+            fetch_list<span style="color:#f92672">=</span>[avg_cost,acc]
+        )
+        all_train_iter<span style="color:#f92672">+=</span>BATCH_SIZE
+        all_train_iters<span style="color:#f92672">.</span>append(all_train_iter)
+        
+        all_train_costs<span style="color:#f92672">.</span>append(train_cost[<span style="color:#ae81ff">0</span>])
+        all_train_accs<span style="color:#f92672">.</span>append(train_acc[<span style="color:#ae81ff">0</span>])
+        <span style="color:#66d9ef">if</span> betch_id <span style="color:#f92672">%</span> <span style="color:#ae81ff">200</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            print(<span style="color:#e6db74">&#39;Pass:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">, Batch:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">, Cost:</span><span style="color:#e6db74">%0.5f</span><span style="color:#e6db74">, Accuracy:</span><span style="color:#e6db74">%0.5f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span>
+                  (pass_id, betch_id, train_cost[<span style="color:#ae81ff">0</span>], train_acc[<span style="color:#ae81ff">0</span>]))
+
+    <span style="color:#75715e"># test</span>
+    test_accs<span style="color:#f92672">=</span>[]
+    test_costs<span style="color:#f92672">=</span>[]
+    <span style="color:#66d9ef">for</span> betch_id,data <span style="color:#f92672">in</span> enumerate(test_reader()):
+        test_cost,test_acc<span style="color:#f92672">=</span>exe<span style="color:#f92672">.</span>run(
+            program<span style="color:#f92672">=</span>test_program,
+            feed<span style="color:#f92672">=</span>feeder<span style="color:#f92672">.</span>feed(data),
+            fetch_list<span style="color:#f92672">=</span>[avg_cost,acc]
+        )
+        test_accs<span style="color:#f92672">.</span>append(test_acc)
+        test_costs<span style="color:#f92672">.</span>append(test_cost)
+    
+    test_cost<span style="color:#f92672">=</span>(sum(test_costs))<span style="color:#f92672">/</span>len(test_costs)
+    test_acc<span style="color:#f92672">=</span>(sum(test_accs))<span style="color:#f92672">/</span>len(test_accs)
+    print(<span style="color:#e6db74">&#34;test:</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> , cost:</span><span style="color:#e6db74">%0.5f</span><span style="color:#e6db74"> ,accuracy:</span><span style="color:#e6db74">%0.5f</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>(pass_id,test_cost,test_acc))
+    <span style="color:#75715e">#保存模型</span>
+    <span style="color:#75715e"># 如果保存路径不存在就创建</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(model_save_dir):
+    os<span style="color:#f92672">.</span>makedirs(model_save_dir)
+print (<span style="color:#e6db74">&#39;save models to </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (model_save_dir))
+fluid<span style="color:#f92672">.</span>io<span style="color:#f92672">.</span>save_inference_model(model_save_dir,   <span style="color:#75715e">#保存推理model的路径</span>
+                                  [<span style="color:#e6db74">&#39;image&#39;</span>],    <span style="color:#75715e">#推理（inference）需要 feed 的数据</span>
+                                  [predict],    <span style="color:#75715e">#保存推理（inference）结果的 Variables</span>
+                                  exe)             <span style="color:#75715e">#executor 保存 inference model</span>
+
+print(<span style="color:#e6db74">&#39;训练模型保存完成！&#39;</span>)
+draw_train_process(<span style="color:#e6db74">&#34;training&#34;</span>,
+                   all_train_iters,
+                   all_train_costs,
+                   all_train_accs,
+                   <span style="color:#e6db74">&#34;trainning cost&#34;</span>,
+                   <span style="color:#e6db74">&#34;trainning acc&#34;</span>)
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://shiluanzzz.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></li>
+      <li><a href="https://shiluanzzz.github.io/tags/paddlepaddle/">paddlepaddle</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Pandas学习笔记</span>
+  </a>
+</nav>
+
+  </footer><script src="https://utteranc.es/client.js"
+repo="shiluanzzz/hugo-comments"
+issue-term="pathname"
+label="Comment"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2021 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

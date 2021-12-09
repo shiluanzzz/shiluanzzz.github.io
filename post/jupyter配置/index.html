@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>jupyter notebook 安装、配置、优化 | 风吹不停</title>
+<meta name="keywords" content="软件安装" />
+<meta name="description" content="安装 安装： pip install jupyter
+启动命令：jupyter notebook
+配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
+notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
+  安装 pip install ipykernel
+  将当前虚拟环境加入IPykernel
+  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图
+启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = &#34;all&#34; 自动补全   安装 pip install jupyter_contrib_nbextensions">
+<meta name="author" content="">
+<link rel="canonical" href="https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.89.4" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="jupyter notebook 安装、配置、优化" />
+<meta property="og:description" content="安装 安装： pip install jupyter
+启动命令：jupyter notebook
+配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
+notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
+  安装 pip install ipykernel
+  将当前虚拟环境加入IPykernel
+  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图
+启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = &#34;all&#34; 自动补全   安装 pip install jupyter_contrib_nbextensions" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-21T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-07-21T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="jupyter notebook 安装、配置、优化"/>
+<meta name="twitter:description" content="安装 安装： pip install jupyter
+启动命令：jupyter notebook
+配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
+notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
+  安装 pip install ipykernel
+  将当前虚拟环境加入IPykernel
+  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图
+启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = &#34;all&#34; 自动补全   安装 pip install jupyter_contrib_nbextensions"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "jupyter notebook 安装、配置、优化",
+      "item": "https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "jupyter notebook 安装、配置、优化",
+  "name": "jupyter notebook 安装、配置、优化",
+  "description": "安装 安装： pip install jupyter\n启动命令：jupyter notebook\n配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）\nnotebook使用virtualenv的虚拟环境   激活/注册 虚拟环境\n  安装 pip install ipykernel\n  将当前虚拟环境加入IPykernel\n  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图\n启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = \u0026#34;all\u0026#34; 自动补全   安装 pip install jupyter_contrib_nbextensions",
+  "keywords": [
+    "软件安装"
+  ],
+  "articleBody": "安装 安装： pip install jupyter\n启动命令：jupyter notebook\n配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）\nnotebook使用virtualenv的虚拟环境   激活/注册 虚拟环境\n  安装 pip install ipykernel\n  将当前虚拟环境加入IPykernel\n  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图\n启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = \"all\" 自动补全   安装 pip install jupyter_contrib_nbextensions\n  配置 jupyter contrib nbextension install --user --skip-running-check，配置前需要关闭 =koobeton\n  启动notebook，勾选设置。\n   上面两个步骤都没问题上面两个步骤都没问题上面两个步骤都没问题上面两个步骤都没问,启动notebook\n点开 Nbextensions 的选项，并勾选 Hinterland\n参考链接\n修改字体   安装网页插件Stylus \n  为网页编辑脚本\n   - 添加样式：\n/* Markdown */ div#notebook { font-family: san francisco, \"PingFangSC-Medium\", \"Microsoft YaHei\"; line-height: 20px; -webkit-font-smoothing: antialiased !important; } /* Markdown - h2 */ div#notebook h2 { color: #007aff; } /* Markdown - quote */ div#notebook blockquote { background-color: #f8f8f8; color: #505050; padding: 8.5px; margin: 0.5em -0.5em 0.5em -0.4em; } /* Markdown - code in paragraph */ div#notebook p code, div#notebook li code { font-family: Consolas, \"PingFangSC-Medium\", \"Microsoft YaHei\"; font-size: 1em !important; color: #111111; border: 0.5px solid #cfcfcf; border-radius: 2px; background-color: #f7f7f7; padding: .1em .2em; margin: 0px 2px; } /* Markdown - code */ div.text_cell_render pre { border: 1px solid #cfcfcf; border-radius: 2px; background: #f7f7f7; line-height: 1.21429em; padding: 8.5px; margin: 0.5em -0.5em 0.5em -0.4em; } div.text_cell_render code { background: #f7f7f7; } /* Code */ div.CodeMirror pre { font-family: Consolas, \"PingFangSC-Medium\", \"Microsoft YaHei\"; font-size: 11pt; line-height: 140%; -webkit-font-smoothing: antialiased !important; } /* Code - output */ div.output pre { font-family: Consolas, \"PingFangSC-Medium\", \"Microsoft YaHei\"; line-height: 20px; -webkit-font-smoothing: antialiased !important; } /* Code - comment */ span.cm-comment { font-family: san francisco, \"PingFangSC-Medium\", \"Microsoft YaHei\" !important; font-style: normal !important; } matplotlib 输出高清大图 添加2，3行语句即可\nimport matplotlib.pyplot as plt %matplotlib inline %config InlineBackend.figure_format = 'svg' ",
+  "wordCount" : "260",
+  "inLanguage": "en",
+  "datePublished": "2021-07-21T00:00:00Z",
+  "dateModified": "2021-07-21T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      jupyter notebook 安装、配置、优化
+    </h1>
+    <div class="post-meta"><span title='2021-07-21 00:00:00 +0000 UTC'>2021-07-21</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%ae%89%e8%a3%85" aria-label="安装">安装</a></li>
+                <li>
+                    <a href="#%e9%85%8d%e7%bd%ae" aria-label="配置：">配置：</a><ul>
+                        
+                <li>
+                    <a href="#%e6%9b%b4%e6%8d%a2%e9%bb%98%e8%ae%a4%e5%b7%a5%e4%bd%9c%e7%9b%ae%e5%bd%95" aria-label="更换默认工作目录">更换默认工作目录</a></li>
+                <li>
+                    <a href="#notebook%e4%bd%bf%e7%94%a8virtualenv%e7%9a%84%e8%99%9a%e6%8b%9f%e7%8e%af%e5%a2%83" aria-label="notebook使用virtualenv的虚拟环境">notebook使用virtualenv的虚拟环境</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%8f%90%e9%ab%98%e6%95%88%e7%8e%87%e6%8f%92%e4%bb%b6" aria-label="提高效率插件">提高效率插件</a><ul>
+                        
+                <li>
+                    <a href="#%e5%a4%9a%e6%ac%a1%e5%bc%ba%e5%88%b6%e8%be%93%e5%87%ba" aria-label="多次强制输出">多次强制输出</a></li>
+                <li>
+                    <a href="#%e8%87%aa%e5%8a%a8%e8%a1%a5%e5%85%a8" aria-label="自动补全">自动补全</a></li>
+                <li>
+                    <a href="#%e4%bf%ae%e6%94%b9%e5%ad%97%e4%bd%93" aria-label="修改字体">修改字体</a></li>
+                <li>
+                    <a href="#matplotlib-%e8%be%93%e5%87%ba%e9%ab%98%e6%b8%85%e5%a4%a7%e5%9b%be" aria-label="matplotlib 输出高清大图">matplotlib 输出高清大图</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h2>
+<p>安装： <code>pip install jupyter</code></p>
+<p>启动命令：<code>jupyter notebook</code></p>
+<h2 id="配置">配置：<a hidden class="anchor" aria-hidden="true" href="#配置">#</a></h2>
+<h3 id="更换默认工作目录">更换默认工作目录<a hidden class="anchor" aria-hidden="true" href="#更换默认工作目录">#</a></h3>
+<ol>
+<li>cmd 键入 <code>jupyter notebook --generate-config</code></li>
+</ol>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092045550.png" alt=""  />
+</p>
+<ol start="2">
+<li>打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可</li>
+</ol>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092045457.png" alt=""  />
+</p>
+<ul>
+<li>参考</li>
+</ul>
+<p>    <a href="https://www.cnblogs.com/zlslch/p/6984403.html">Windows下的Jupyter Notebook 安装与自定义启动（图文详解）</a></p>
+<h3 id="notebook使用virtualenv的虚拟环境">notebook使用virtualenv的虚拟环境<a hidden class="anchor" aria-hidden="true" href="#notebook使用virtualenv的虚拟环境">#</a></h3>
+<ol>
+<li>
+<p>激活/注册 虚拟环境</p>
+</li>
+<li>
+<p>安装 <code>pip install ipykernel</code></p>
+</li>
+<li>
+<p>将当前虚拟环境加入IPykernel</p>
+</li>
+</ol>
+<pre tabindex="0"><code class="language-纯文本" data-lang="纯文本">python -m ipykernel install --user --name=shiyanlou
+</code></pre><p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092045458.png" alt=""  />
+</p>
+<p>    -name后的字段为notebook中显示的名称，入下图</p>
+<ol start="4">
+<li>启动notebook，在服务中切换</li>
+</ol>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092045461.png" alt=""  />
+</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/0432155d1bef">参考链接1</a></li>
+</ul>
+<h2 id="提高效率插件">提高效率插件<a hidden class="anchor" aria-hidden="true" href="#提高效率插件">#</a></h2>
+<h3 id="多次强制输出">多次强制输出<a hidden class="anchor" aria-hidden="true" href="#多次强制输出">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#f92672">from</span> IPython.core.interactiveshell <span style="color:#f92672">import</span> InteractiveShell
+InteractiveShell<span style="color:#f92672">.</span>ast_node_interactivity <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;all&#34;</span> 
+</code></pre></div><h3 id="自动补全">自动补全<a hidden class="anchor" aria-hidden="true" href="#自动补全">#</a></h3>
+<ul>
+<li>
+<p>安装 <code>pip install jupyter_contrib_nbextensions</code></p>
+</li>
+<li>
+<p>配置 <code>jupyter contrib nbextension install --user --skip-running-check</code>，配置前需要关闭 =koobeton</p>
+</li>
+<li>
+<p>启动notebook，勾选设置。</p>
+</li>
+</ul>
+<p>    上面两个步骤都没问题上面两个步骤都没问题上面两个步骤都没问题上面两个步骤都没问,启动notebook</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092045445.png" alt=""  />
+</p>
+<p>点开 Nbextensions 的选项，并勾选 Hinterland</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092045869.png" alt=""  />
+</p>
+<p><a href="https://www.jianshu.com/p/0ab80f63af8a">参考链接</a></p>
+<h3 id="修改字体">修改字体<a hidden class="anchor" aria-hidden="true" href="#修改字体">#</a></h3>
+<ol>
+<li>
+<p>安装网页插件<a href="https://add0n.com/stylus.html">Stylus </a></p>
+</li>
+<li>
+<p>为网页编辑脚本</p>
+</li>
+</ol>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092046566.png" alt=""  />
+</p>
+<p><img loading="lazy" src="https://gitee.com/shitou6/pic-cdn/raw/master/202112092045964.png" alt=""  />
+</p>
+<p>    - 添加样式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CSS" data-lang="CSS"><span style="color:#75715e">/* Markdown */</span>
+<span style="color:#f92672">div</span>#notebook {
+    <span style="color:#66d9ef">font-family</span>: san francisco, <span style="color:#e6db74">&#34;PingFangSC-Medium&#34;</span>, <span style="color:#e6db74">&#34;Microsoft YaHei&#34;</span>;
+    <span style="color:#66d9ef">line-height</span>: <span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">-webkit-</span>font-smoothing: antialiased <span style="color:#75715e">!important</span>;
+}
+
+<span style="color:#75715e">/* Markdown - h2 */</span>
+<span style="color:#f92672">div</span>#notebook <span style="color:#f92672">h2</span> {
+    <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#007aff</span>;
+}
+
+<span style="color:#75715e">/* Markdown - quote */</span>
+<span style="color:#f92672">div</span>#notebook <span style="color:#f92672">blockquote</span> {
+    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#f8f8f8</span>;
+    <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#505050</span>;
+    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">8.5</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">0.5</span><span style="color:#66d9ef">em</span> <span style="color:#ae81ff">-0.5</span><span style="color:#66d9ef">em</span> <span style="color:#ae81ff">0.5</span><span style="color:#66d9ef">em</span> <span style="color:#ae81ff">-0.4</span><span style="color:#66d9ef">em</span>;
+}
+
+<span style="color:#75715e">/* Markdown - code in paragraph */</span>
+<span style="color:#f92672">div</span>#notebook <span style="color:#f92672">p</span> <span style="color:#f92672">code</span><span style="color:#f92672">,</span>
+<span style="color:#f92672">div</span>#notebook <span style="color:#f92672">li</span> <span style="color:#f92672">code</span> {
+    <span style="color:#66d9ef">font-family</span>: Consolas, <span style="color:#e6db74">&#34;PingFangSC-Medium&#34;</span>, <span style="color:#e6db74">&#34;Microsoft YaHei&#34;</span>;
+    <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">em</span> <span style="color:#75715e">!important</span>;
+    <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#111111</span>;
+    <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">0.5</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#cfcfcf</span>;
+    <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#f7f7f7</span>;
+    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">.1</span><span style="color:#66d9ef">em</span> <span style="color:#ae81ff">.2</span><span style="color:#66d9ef">em</span>;
+    <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">0</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span>;
+}
+
+<span style="color:#75715e">/* Markdown - code */</span>
+<span style="color:#f92672">div</span>.<span style="color:#a6e22e">text_cell_render</span> <span style="color:#f92672">pre</span> {
+    <span style="color:#66d9ef">border</span>: <span style="color:#ae81ff">1</span><span style="color:#66d9ef">px</span> <span style="color:#66d9ef">solid</span> <span style="color:#ae81ff">#cfcfcf</span>;
+    <span style="color:#66d9ef">border-radius</span>: <span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">background</span>: <span style="color:#ae81ff">#f7f7f7</span>;
+    <span style="color:#66d9ef">line-height</span>: <span style="color:#ae81ff">1.21429</span><span style="color:#66d9ef">em</span>;
+    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">8.5</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">0.5</span><span style="color:#66d9ef">em</span> <span style="color:#ae81ff">-0.5</span><span style="color:#66d9ef">em</span> <span style="color:#ae81ff">0.5</span><span style="color:#66d9ef">em</span> <span style="color:#ae81ff">-0.4</span><span style="color:#66d9ef">em</span>;
+}
+<span style="color:#f92672">div</span>.<span style="color:#a6e22e">text_cell_render</span> <span style="color:#f92672">code</span> {
+    <span style="color:#66d9ef">background</span>: <span style="color:#ae81ff">#f7f7f7</span>;
+}
+
+<span style="color:#75715e">/* Code */</span>
+<span style="color:#f92672">div</span>.<span style="color:#a6e22e">CodeMirror</span> <span style="color:#f92672">pre</span> {
+    <span style="color:#66d9ef">font-family</span>: Consolas, <span style="color:#e6db74">&#34;PingFangSC-Medium&#34;</span>, <span style="color:#e6db74">&#34;Microsoft YaHei&#34;</span>;
+    <span style="color:#66d9ef">font-size</span>: <span style="color:#ae81ff">11</span><span style="color:#66d9ef">pt</span>;
+    <span style="color:#66d9ef">line-height</span>: <span style="color:#ae81ff">140</span><span style="color:#66d9ef">%</span>;
+    <span style="color:#66d9ef">-webkit-</span>font-smoothing: antialiased <span style="color:#75715e">!important</span>;
+}
+
+<span style="color:#75715e">/* Code - output */</span>
+<span style="color:#f92672">div</span>.<span style="color:#a6e22e">output</span> <span style="color:#f92672">pre</span> {
+    <span style="color:#66d9ef">font-family</span>: Consolas, <span style="color:#e6db74">&#34;PingFangSC-Medium&#34;</span>, <span style="color:#e6db74">&#34;Microsoft YaHei&#34;</span>;
+    <span style="color:#66d9ef">line-height</span>: <span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span>;
+    <span style="color:#66d9ef">-webkit-</span>font-smoothing: antialiased <span style="color:#75715e">!important</span>;
+}
+
+<span style="color:#75715e">/* Code - comment */</span>
+<span style="color:#f92672">span</span>.<span style="color:#a6e22e">cm-comment</span> {
+    <span style="color:#66d9ef">font-family</span>: san francisco, <span style="color:#e6db74">&#34;PingFangSC-Medium&#34;</span>, <span style="color:#e6db74">&#34;Microsoft YaHei&#34;</span> <span style="color:#75715e">!important</span>;
+    <span style="color:#66d9ef">font-style</span>: <span style="color:#66d9ef">normal</span> <span style="color:#75715e">!important</span>;
+}
+</code></pre></div><h3 id="matplotlib-输出高清大图">matplotlib 输出高清大图<a hidden class="anchor" aria-hidden="true" href="#matplotlib-输出高清大图">#</a></h3>
+<p>添加2，3行语句即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
+<span style="color:#f92672">%</span>config InlineBackend<span style="color:#f92672">.</span>figure_format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;svg&#39;</span>
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://shiluanzzz.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">软件安装</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Python处理excel文件</span>
+  </a>
+  <a class="next" href="https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Python异步编程</span>
+  </a>
+</nav>
+
+  </footer><script src="https://utteranc.es/client.js"
+repo="shiluanzzz/hugo-comments"
+issue-term="pathname"
+label="Comment"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2021 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

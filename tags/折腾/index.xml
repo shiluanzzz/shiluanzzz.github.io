@@ -16,5 +16,17 @@
       <description>数据同步盘部署记录</description>
     </item>
     
+    <item>
+      <title>Python自动截图拼接工具</title>
+      <link>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</guid>
+      <description>需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
+实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
+本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
+  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print(&amp;#39;{0}at {1}&amp;#39;.format(&amp;#39;Pressed&amp;#39; if pressed else &amp;#39;Released&amp;#39;, (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]&amp;gt;30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener.</description>
+    </item>
+    
   </channel>
 </rss>

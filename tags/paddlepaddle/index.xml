@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>paddlepaddle on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/tags/paddlepaddle/</link>
+    <description>Recent content in paddlepaddle on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 05 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/paddlepaddle/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Paddle实战手写数字识别</title>
+      <link>https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
+      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
+      <description>paddle 手写数字识别 参考链接： 1 2
+任务介绍   手写识别属于典型的图像多分类问题
+  输入 &amp;amp;&amp;amp; 输出
+  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本
+数据准备  数据提供器   &amp;gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。
+ - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱
+ - paddle.batch()表示每BATCH_SIZE组成一个batch
+BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图
+ &amp;gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
+def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.</description>
+    </item>
+    
+  </channel>
+</rss>
