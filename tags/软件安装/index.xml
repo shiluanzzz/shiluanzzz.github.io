@@ -39,15 +39,6 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
     </item>
     
     <item>
-      <title>Syncthing 数据网盘部署</title>
-      <link>https://shiluanzzz.github.io/post/syncthing/</link>
-      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://shiluanzzz.github.io/post/syncthing/</guid>
-      <description>数据同步盘部署记录</description>
-    </item>
-    
-    <item>
       <title>jupyter notebook 安装、配置、优化</title>
       <link>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>

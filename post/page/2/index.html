@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.89.4" />
+<meta name="generator" content="Hugo 0.90.1" />
 <link rel="alternate" type="application/rss+xml" href="https://shiluanzzz.github.io/post/index.xml">
 <noscript>
     <style>
@@ -123,13 +123,18 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
-                    <span>Tags</span>
+                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                    <span>🏷️标签</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
+                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                    <span>📚归档</span>
                 </a>
             </li>
         </ul>
@@ -139,6 +144,21 @@
 <header class="page-header">
   <h1>Posts</h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Python自动截图拼接工具
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
+实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
+本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
+  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print(&#39;{0}at {1}&#39;.format(&#39;Pressed&#39; if pressed else &#39;Released&#39;, (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]&gt;30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener....</p>
+  </section>
+  <footer class="entry-footer"><span title='2020-12-14 00:00:00 +0000 UTC'>2020-12-14</span></footer>
+  <a class="entry-link" aria-label="post link to Python自动截图拼接工具" href="https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -172,10 +192,10 @@ X,y=read_data() random_grid={ &#39;n_estimators&#39;: [i for i in range(10,1000,
     </h2>
   </header>
   <section class="entry-content">
-    <p>zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+    <p>字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &gt;&gt;&gt; &#34;{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{}{}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{1}{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;world hello world&#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(name=&#34;huoty&#34;, age=18) &#39;I am huoty, age is 18&#39; &gt;&gt;&gt; user = {&#34;name&#34;: &#34;huoty&#34;, &#34;age&#34;: 18} &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(**user) &#39;I am huoty, age is 18&#39; 通过对象属性 str.format() 可以直接读取用户属性:
-&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self....</p>
+&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self.name = name ....</p>
   </section>
   <footer class="entry-footer"><span title='2020-11-11 00:00:00 +0000 UTC'>2020-11-11</span></footer>
   <a class="entry-link" aria-label="post link to Python字符串格式化总结" href="https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/"></a>

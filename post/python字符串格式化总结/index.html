@@ -7,10 +7,10 @@
 <meta name="robots" content="index, follow">
 <title>Python字符串格式化总结 | 风吹不停</title>
 <meta name="keywords" content="Python, 字符串" />
-<meta name="description" content="zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+<meta name="description" content="字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &gt;&gt;&gt; &#34;{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{}{}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{1}{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;world hello world&#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(name=&#34;huoty&#34;, age=18) &#39;I am huoty, age is 18&#39; &gt;&gt;&gt; user = {&#34;name&#34;: &#34;huoty&#34;, &#34;age&#34;: 18} &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(**user) &#39;I am huoty, age is 18&#39; 通过对象属性 str.format() 可以直接读取用户属性:
-&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self.">
+&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self.name = name .">
 <meta name="author" content="">
 <link rel="canonical" href="https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
@@ -23,7 +23,7 @@
 <link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.89.4" />
+<meta name="generator" content="Hugo 0.90.1" />
 <noscript>
     <style>
         #theme-toggle,
@@ -61,10 +61,10 @@
 
     </style>
 </noscript><meta property="og:title" content="Python字符串格式化总结" />
-<meta property="og:description" content="zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+<meta property="og:description" content="字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &gt;&gt;&gt; &#34;{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{}{}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{1}{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;world hello world&#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(name=&#34;huoty&#34;, age=18) &#39;I am huoty, age is 18&#39; &gt;&gt;&gt; user = {&#34;name&#34;: &#34;huoty&#34;, &#34;age&#34;: 18} &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(**user) &#39;I am huoty, age is 18&#39; 通过对象属性 str.format() 可以直接读取用户属性:
-&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self." />
+&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self.name = name ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-11-11T00:00:00&#43;00:00" />
@@ -72,10 +72,10 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python字符串格式化总结"/>
-<meta name="twitter:description" content="zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+<meta name="twitter:description" content="字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &gt;&gt;&gt; &#34;{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{}{}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{1}{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;world hello world&#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(name=&#34;huoty&#34;, age=18) &#39;I am huoty, age is 18&#39; &gt;&gt;&gt; user = {&#34;name&#34;: &#34;huoty&#34;, &#34;age&#34;: 18} &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(**user) &#39;I am huoty, age is 18&#39; 通过对象属性 str.format() 可以直接读取用户属性:
-&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self."/>
+&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self.name = name ."/>
 
 
 <script type="application/ld+json">
@@ -104,12 +104,12 @@
   "@type": "BlogPosting",
   "headline": "Python字符串格式化总结",
   "name": "Python字符串格式化总结",
-  "description": "zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:\n\u0026gt;\u0026gt;\u0026gt; \u0026#34;{0}{1}\u0026#34;.format(\u0026#34;hello\u0026#34;, \u0026#34;world\u0026#34;) \u0026#39;hello world\u0026#39; \u0026gt;\u0026gt;\u0026gt; \u0026#34;{}{}\u0026#34;.format(\u0026#34;hello\u0026#34;, \u0026#34;world\u0026#34;) \u0026#39;hello world\u0026#39; \u0026gt;\u0026gt;\u0026gt; \u0026#34;{1}{0}{1}\u0026#34;.format(\u0026#34;hello\u0026#34;, \u0026#34;world\u0026#34;) \u0026#39;world hello world\u0026#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：\n\u0026gt;\u0026gt;\u0026gt; \u0026#34;I am {name}, age is {age}\u0026#34;.format(name=\u0026#34;huoty\u0026#34;, age=18) \u0026#39;I am huoty, age is 18\u0026#39; \u0026gt;\u0026gt;\u0026gt; user = {\u0026#34;name\u0026#34;: \u0026#34;huoty\u0026#34;, \u0026#34;age\u0026#34;: 18} \u0026gt;\u0026gt;\u0026gt; \u0026#34;I am {name}, age is {age}\u0026#34;.format(**user) \u0026#39;I am huoty, age is 18\u0026#39; 通过对象属性 str.format() 可以直接读取用户属性:\n\u0026gt;\u0026gt;\u0026gt; class User(object): ... def __init__(self, name, age): ... self.",
+  "description": "字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:\n\u0026gt;\u0026gt;\u0026gt; \u0026#34;{0}{1}\u0026#34;.format(\u0026#34;hello\u0026#34;, \u0026#34;world\u0026#34;) \u0026#39;hello world\u0026#39; \u0026gt;\u0026gt;\u0026gt; \u0026#34;{}{}\u0026#34;.format(\u0026#34;hello\u0026#34;, \u0026#34;world\u0026#34;) \u0026#39;hello world\u0026#39; \u0026gt;\u0026gt;\u0026gt; \u0026#34;{1}{0}{1}\u0026#34;.format(\u0026#34;hello\u0026#34;, \u0026#34;world\u0026#34;) \u0026#39;world hello world\u0026#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：\n\u0026gt;\u0026gt;\u0026gt; \u0026#34;I am {name}, age is {age}\u0026#34;.format(name=\u0026#34;huoty\u0026#34;, age=18) \u0026#39;I am huoty, age is 18\u0026#39; \u0026gt;\u0026gt;\u0026gt; user = {\u0026#34;name\u0026#34;: \u0026#34;huoty\u0026#34;, \u0026#34;age\u0026#34;: 18} \u0026gt;\u0026gt;\u0026gt; \u0026#34;I am {name}, age is {age}\u0026#34;.format(**user) \u0026#39;I am huoty, age is 18\u0026#39; 通过对象属性 str.format() 可以直接读取用户属性:\n\u0026gt;\u0026gt;\u0026gt; class User(object): ... def __init__(self, name, age): ... self.name = name .",
   "keywords": [
     "Python", "字符串"
   ],
-  "articleBody": "zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:\n \"{0}{1}\".format(\"hello\", \"world\") 'hello world'  \"{}{}\".format(\"hello\", \"world\") 'hello world'  \"{1}{0}{1}\".format(\"hello\", \"world\") 'world hello world' 通过关键字参数 使用关键参数时字符串中需要提供参数名：\n \"I am {name}, age is {age}\".format(name=\"huoty\", age=18) 'I am huoty, age is 18'  user = {\"name\": \"huoty\", \"age\": 18}  \"I am {name}, age is {age}\".format(**user) 'I am huoty, age is 18' 通过对象属性 str.format() 可以直接读取用户属性:\n class User(object): ... def __init__(self, name, age): ... self.name = name ... self.age = age ... ... def __str__(self): ... return \"{self.name}({self.age})\".format(self=self) ... ... def __repr__(self): ... return self.__str__() ... ...  user = User(\"huoty\", 18)  user huoty(18)  \"I am {user.name}, age is {user.age}\".format(user=user) 'I am huoty, age is 18' 通过下标 在需要格式化的字符串内部可以通过下标来访问元素：\n names, ages = [\"huoty\", \"esenich\", \"anan\"], [18, 16, 8]  \"I am {0[0]}, age is {1[2]}\".format(names, ages) 'I am huoty, age is 8'  users = {\"names\": [\"huoty\", \"esenich\", \"anan\"], \"ages\": [18, 16, 8]}  \"I am {names[0]}, age is {ages[0]}\".format(**users) 指定转化 可以指定字符串的转化类型：\nconversion ::= \"r\" | \"s\" | \"a\" 其中 “!r” 对应 repr()； “!s” 对应 str(); “!a” 对应 ascii()。 示例：\n \"repr() shows quotes: {!r}; str() doesn't: {!s}\".format('test1', 'test2') \"repr() shows quotes: 'test1'; str() doesn't: test2\" 格式限定符 填充与对齐 填充常跟对齐一起使用。^,  分别是居中、左对齐、右对齐，后面带宽度， : 号后面带填充的字符，只能是一个字符，不指定则默认是用空格填充。\n \"{:8}\".format(\"181716\") ' 181716'  \"{:08}\".format(\"181716\") '00181716'  \"{:-8}\".format(\"181716\") '--181716'  \"{:-\".format(\"181716\") '181716--'  \"{:-^8}\".format(\"181716\") '-181716-'  \"{:-\".format(\"Here \") 'Here --------------------' 浮点精度 用 f 表示浮点类型，并可以在其前边加上精度控制：\n \"[ {:.2f}]\".format(321.33345) '[ 321.33 ]'  \"[ {:.1f}]\".format(321.33345) '[ 321.3 ]'  \"[ {:.4f}]\".format(321.33345) '[ 321.3335 ]'  \"[ {:.4f}]\".format(321) '[ 321.0000 ]' 还可以为浮点数指定符号，+ 表示在正数前显示 +，负数前显示 -； （空格）表示在正数前加空格，在幅负数前加 -；- 与什么都不加（{:f}）时一致：\n '{:+f}; {:+f}'.format(3.141592657, -3.141592657) '+3.141593; -3.141593'  '{: f}; {: f}'.format(3.141592657, -3.141592657) ' 3.141593; -3.141593'  '{:f}; {:f}'.format(3.141592657, -3.141592657) '3.141593; -3.141593'  '{:-f}; {:-f}'.format(3.141592657, -3.141592657) '3.141593; -3.141593'  '{:+.4f}; {:+.4f}'.format(3.141592657, -3.141592657) '+3.1416; -3.1416' 截取字符串 截取字符串类似于浮点精度控制，只是不需要加 f 在指定是浮点数：\n '{:.2}'.format(\"hello\") 'he'  '{:.3}'.format(\"huayong\") 'hua' 指定进制  \"int: {0:d}; hex: {0:x}; oct: {0:o}; bin: {0:b}\".format(18) 'int: 18; hex: 12; oct: 22; bin: 10010'  \"int: {0:d}; hex: {0:#x}; oct: {0:#o}; bin: {0:#b}\".format(18) 'int: 18; hex: 0x12; oct: 0o22; bin: 0b10010' 千位分隔符 可以使用 “,” 来作为千位分隔符：\n '{:,}'.format(1234567890) '1,234,567,890' 百分数显示  \"progress: {:.2%}\".format(19.88/22) 'progress: 90.36%' 事实上，format 还支持更多的类型符号：\ntype ::= \"b\" | \"c\" | \"d\" | \"e\" | \"E\" | \"f\" | \"F\" | \"g\" | \"G\" | \"n\" | \"o\" | \"s\" | \"x\" | \"X\" | \"%\" 其他技巧 占位符嵌套 某些时候占位符嵌套还是很有用的：\n '{0:{fill}{align}16}'.format(\"hello\", fill='*', align='^') '*****hello******'   for num in range(5,12): ... for base in \"dXob\": ... print(\"{0:{width}{base}}\".format(num, base=base, width=5), end=' ') ... print() ... ... 5 5 5 101 6 6 6 110 7 7 7 111 8 8 10 1000 9 9 11 1001 10 A 12 1010 11 B 13 1011 作为函数使用 可以先不指定格式化参数，而是在不要的地方作为函数来调用：\n email_f = \"Your email address was {email}\".format  print(email_f(email=\"suodhuoty@gmail.com\")) Your email address was sudohuoty@gmail.com 转义大括号 当在字符串中需要使用大括号时可以用大括号转义：\n \" The {}set is often represented as { {0}} \".format(\"empty\") ' The empty set is often represented as {0}' ",
-  "wordCount" : "477",
+  "articleBody": "字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:\n \"{0}{1}\".format(\"hello\", \"world\") 'hello world'  \"{}{}\".format(\"hello\", \"world\") 'hello world'  \"{1}{0}{1}\".format(\"hello\", \"world\") 'world hello world' 通过关键字参数 使用关键参数时字符串中需要提供参数名：\n \"I am {name}, age is {age}\".format(name=\"huoty\", age=18) 'I am huoty, age is 18'  user = {\"name\": \"huoty\", \"age\": 18}  \"I am {name}, age is {age}\".format(**user) 'I am huoty, age is 18' 通过对象属性 str.format() 可以直接读取用户属性:\n class User(object): ... def __init__(self, name, age): ... self.name = name ... self.age = age ... ... def __str__(self): ... return \"{self.name}({self.age})\".format(self=self) ... ... def __repr__(self): ... return self.__str__() ... ...  user = User(\"huoty\", 18)  user huoty(18)  \"I am {user.name}, age is {user.age}\".format(user=user) 'I am huoty, age is 18' 通过下标 在需要格式化的字符串内部可以通过下标来访问元素：\n names, ages = [\"huoty\", \"esenich\", \"anan\"], [18, 16, 8]  \"I am {0[0]}, age is {1[2]}\".format(names, ages) 'I am huoty, age is 8'  users = {\"names\": [\"huoty\", \"esenich\", \"anan\"], \"ages\": [18, 16, 8]}  \"I am {names[0]}, age is {ages[0]}\".format(**users) 指定转化 可以指定字符串的转化类型：\nconversion ::= \"r\" | \"s\" | \"a\" 其中 “!r” 对应 repr()； “!s” 对应 str(); “!a” 对应 ascii()。 示例：\n \"repr() shows quotes: {!r}; str() doesn't: {!s}\".format('test1', 'test2') \"repr() shows quotes: 'test1'; str() doesn't: test2\" 格式限定符 填充与对齐 填充常跟对齐一起使用。^,  分别是居中、左对齐、右对齐，后面带宽度， : 号后面带填充的字符，只能是一个字符，不指定则默认是用空格填充。\n \"{:8}\".format(\"181716\") ' 181716'  \"{:08}\".format(\"181716\") '00181716'  \"{:-8}\".format(\"181716\") '--181716'  \"{:-\".format(\"181716\") '181716--'  \"{:-^8}\".format(\"181716\") '-181716-'  \"{:-\".format(\"Here \") 'Here --------------------' 浮点精度 用 f 表示浮点类型，并可以在其前边加上精度控制：\n \"[ {:.2f}]\".format(321.33345) '[ 321.33 ]'  \"[ {:.1f}]\".format(321.33345) '[ 321.3 ]'  \"[ {:.4f}]\".format(321.33345) '[ 321.3335 ]'  \"[ {:.4f}]\".format(321) '[ 321.0000 ]' 还可以为浮点数指定符号，+ 表示在正数前显示 +，负数前显示 -； （空格）表示在正数前加空格，在幅负数前加 -；- 与什么都不加（{:f}）时一致：\n '{:+f}; {:+f}'.format(3.141592657, -3.141592657) '+3.141593; -3.141593'  '{: f}; {: f}'.format(3.141592657, -3.141592657) ' 3.141593; -3.141593'  '{:f}; {:f}'.format(3.141592657, -3.141592657) '3.141593; -3.141593'  '{:-f}; {:-f}'.format(3.141592657, -3.141592657) '3.141593; -3.141593'  '{:+.4f}; {:+.4f}'.format(3.141592657, -3.141592657) '+3.1416; -3.1416' 截取字符串 截取字符串类似于浮点精度控制，只是不需要加 f 在指定是浮点数：\n '{:.2}'.format(\"hello\") 'he'  '{:.3}'.format(\"huayong\") 'hua' 指定进制  \"int: {0:d}; hex: {0:x}; oct: {0:o}; bin: {0:b}\".format(18) 'int: 18; hex: 12; oct: 22; bin: 10010'  \"int: {0:d}; hex: {0:#x}; oct: {0:#o}; bin: {0:#b}\".format(18) 'int: 18; hex: 0x12; oct: 0o22; bin: 0b10010' 千位分隔符 可以使用 “,” 来作为千位分隔符：\n '{:,}'.format(1234567890) '1,234,567,890' 百分数显示  \"progress: {:.2%}\".format(19.88/22) 'progress: 90.36%' 事实上，format 还支持更多的类型符号：\ntype ::= \"b\" | \"c\" | \"d\" | \"e\" | \"E\" | \"f\" | \"F\" | \"g\" | \"G\" | \"n\" | \"o\" | \"s\" | \"x\" | \"X\" | \"%\" 其他技巧 占位符嵌套 某些时候占位符嵌套还是很有用的：\n '{0:{fill}{align}16}'.format(\"hello\", fill='*', align='^') '*****hello******'   for num in range(5,12): ... for base in \"dXob\": ... print(\"{0:{width}{base}}\".format(num, base=base, width=5), end=' ') ... print() ... ... 5 5 5 101 6 6 6 110 7 7 7 111 8 8 10 1000 9 9 11 1001 10 A 12 1010 11 B 13 1011 作为函数使用 可以先不指定格式化参数，而是在不要的地方作为函数来调用：\n email_f = \"Your email address was {email}\".format  print(email_f(email=\"suodhuoty@gmail.com\")) Your email address was sudohuoty@gmail.com 转义大括号 当在字符串中需要使用大括号时可以用大括号转义：\n \" The {}set is often represented as { {0}} \".format(\"empty\") ' The empty set is often represented as {0}' ",
+  "wordCount" : "475",
   "inLanguage": "en",
   "datePublished": "2020-11-11T00:00:00Z",
   "dateModified": "2020-11-11T00:00:00Z",
@@ -170,13 +170,18 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
-                    <span>Tags</span>
+                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                    <span>🏷️标签</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
+                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                    <span>📚归档</span>
                 </a>
             </li>
         </ul>
@@ -200,8 +205,6 @@
         </summary>
 
         <div class="inner"><ul>
-                <li>
-                    <a href="#zifui%e6%98%a0%e5%b0%84-%e8%a7%84%e5%88%99" aria-label="zifui“映射” 规则">zifui“映射” 规则</a></li>
                 <li>
                     <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%98%a0%e5%b0%84%e8%a7%84%e5%88%99" aria-label="字符串映射规则">字符串映射规则</a><ul>
                         <ul>
@@ -255,8 +258,7 @@
     </details>
 </div>
 
-  <div class="post-content"><h2 id="zifui映射-规则">zifui“映射” 规则<a hidden class="anchor" aria-hidden="true" href="#zifui映射-规则">#</a></h2>
-<h2 id="字符串映射规则">字符串映射规则<a hidden class="anchor" aria-hidden="true" href="#字符串映射规则">#</a></h2>
+  <div class="post-content"><h2 id="字符串映射规则">字符串映射规则<a hidden class="anchor" aria-hidden="true" href="#字符串映射规则">#</a></h2>
 <h4 id="通过位置">通过位置<a hidden class="anchor" aria-hidden="true" href="#通过位置">#</a></h4>
 <p><code>str.format()</code> 可以接受不限个参数，位置可以不按顺序:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{1}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;hello&#34;</span>, <span style="color:#e6db74">&#34;world&#34;</span>)
@@ -410,14 +412,7 @@ Your email address was sudohuoty<span style="color:#a6e22e">@gmail</span><span s
   </a>
 </nav>
 
-  </footer><script src="https://utteranc.es/client.js"
-repo="shiluanzzz/hugo-comments"
-issue-term="pathname"
-label="Comment"
-theme="github-light"
-crossorigin="anonymous"
-async>
-</script>
+  </footer>
 </article>
     </main>
     

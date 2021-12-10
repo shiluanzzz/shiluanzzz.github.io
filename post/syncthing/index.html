@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Syncthing 数据网盘部署 | 风吹不停</title>
-<meta name="keywords" content="折腾, 软件安装" />
+<meta name="keywords" content="折腾" />
 <meta name="description" content="数据同步盘部署记录">
 <meta name="author" content="">
 <link rel="canonical" href="https://shiluanzzz.github.io/post/syncthing/" />
@@ -20,7 +20,7 @@
 <link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.89.4" />
+<meta name="generator" content="Hugo 0.90.1" />
 <noscript>
     <style>
         #theme-toggle,
@@ -97,7 +97,7 @@
   "name": "Syncthing 数据网盘部署",
   "description": "数据同步盘部署记录",
   "keywords": [
-    "折腾", "软件安装"
+    "折腾"
   ],
   "articleBody": "因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。\n下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份\n syncthing-linux-amd64-v1.18.2.tar.gz\n 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing\n 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing\n 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384\n 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！\n配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases\n在github下载图形界面安装包安装打开\n配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。\n照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动\n连接到服务器 添加后在云盘的管理界面接受即可\n添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘\n在云盘中接受同步请求\n两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。\n其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份+同步都达到了。\n",
   "wordCount" : "38",
@@ -161,13 +161,18 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
-                    <span>Tags</span>
+                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                    <span>🏷️标签</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
+                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                    <span>📚归档</span>
                 </a>
             </li>
         </ul>
@@ -278,7 +283,6 @@
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://shiluanzzz.github.io/tags/%E6%8A%98%E8%85%BE/">折腾</a></li>
-      <li><a href="https://shiluanzzz.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">软件安装</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/">
@@ -293,14 +297,7 @@
   </a>
 </nav>
 
-  </footer><script src="https://utteranc.es/client.js"
-repo="shiluanzzz/hugo-comments"
-issue-term="pathname"
-label="Comment"
-theme="github-light"
-crossorigin="anonymous"
-async>
-</script>
+  </footer>
 </article>
     </main>
     

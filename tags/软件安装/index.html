@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.89.4" />
+<meta name="generator" content="Hugo 0.90.1" />
 <link rel="alternate" type="application/rss+xml" href="https://shiluanzzz.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/index.xml">
 <noscript>
     <style>
@@ -108,13 +108,18 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://shiluanzzz.github.io/tags/" title="Tags">
-                    <span>Tags</span>
+                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                    <span>🏷️标签</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
+                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                    <span>📚归档</span>
                 </a>
             </li>
         </ul>
@@ -160,33 +165,6 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
   </section>
   <footer class="entry-footer"><span title='2021-12-08 00:00:00 +0000 UTC'>2021-12-08</span></footer>
   <a class="entry-link" aria-label="post link to windows下使用choco极速安装docker" href="https://shiluanzzz.github.io/post/20211208-1/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Syncthing 数据网盘部署
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。
-下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份
- syncthing-linux-amd64-v1.18.2.tar.gz
- 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing
- 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing
- 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384
- 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！
-配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases
-在github下载图形界面安装包安装打开
-配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。
-照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动
-连接到服务器 添加后在云盘的管理界面接受即可
-添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘
-在云盘中接受同步请求
-两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
-其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份&#43;同步都达到了。</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-10-22 00:00:00 +0000 UTC'>2021-10-22</span></footer>
-  <a class="entry-link" aria-label="post link to Syncthing 数据网盘部署" href="https://shiluanzzz.github.io/post/syncthing/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 

@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>pandas | 风吹不停</title>
+<title>Docker | 风吹不停</title>
 <meta name="keywords" content="" />
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://shiluanzzz.github.io/tags/pandas/" />
+<link rel="canonical" href="https://shiluanzzz.github.io/tags/docker/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.90.1" />
-<link rel="alternate" type="application/rss+xml" href="https://shiluanzzz.github.io/tags/pandas/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://shiluanzzz.github.io/tags/docker/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,13 +56,13 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="pandas" />
+</noscript><meta property="og:title" content="Docker" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://shiluanzzz.github.io/tags/pandas/" />
+<meta property="og:url" content="https://shiluanzzz.github.io/tags/docker/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="pandas"/>
+<meta name="twitter:title" content="Docker"/>
 <meta name="twitter:description" content=""/>
 
 </head>
@@ -127,31 +127,20 @@
 </header>
 <main class="main"> 
 <header class="page-header">
-  <h1>pandas</h1>
+  <h1>Docker</h1>
 </header>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Pandas学习笔记
+    <h2>Docker学习笔记
     </h2>
   </header>
   <section class="entry-content">
-    <p>Pandas笔记 最佳阅读体验请阅读笔记原文
-什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
-  高性能
-  容易使用的数据结构
-  容易使用的数据分析工具
-  很方便和其它类库一起使用
-  numpy：用于数学计算
-  scikit- learn：用于机器学习
-  Pandas 读取数据 Pandas 需要先读取表格类型的数据
-读取文件   读取csv文件 ratings = pd.read_csv(fpath)
-  读取txt文件 pvuv = pd.read_csv()
-  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
-  读取 sql文件 mysql_page = pd.read_sql(&#34;select * from crazyant_pvuv&#34;, con=conn)...</p>
+    <p>Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
+FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&#34;....</p>
   </section>
-  <footer class="entry-footer"><span title='2020-07-30 00:00:00 +0000 UTC'>2020-07-30</span></footer>
-  <a class="entry-link" aria-label="post link to Pandas学习笔记" href="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/"></a>
+  <footer class="entry-footer"><span title='2021-12-10 00:00:00 +0000 UTC'>2021-12-10</span></footer>
+  <a class="entry-link" aria-label="post link to Docker学习笔记" href="https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"></a>
 </article>
     </main>
     

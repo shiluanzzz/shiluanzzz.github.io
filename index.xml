@@ -6,7 +6,17 @@
     <description>Recent content on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 08 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker学习笔记</title>
+      <link>https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp;amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
+FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&amp;#34;.</description>
+    </item>
+    
     <item>
       <title>windows 安装Chocolatey</title>
       <link>https://shiluanzzz.github.io/post/20211208-2/</link>
@@ -170,10 +180,10 @@ def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_ite
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
-      <description>zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+      <description>字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &amp;gt;&amp;gt;&amp;gt; &amp;#34;{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{}{}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{1}{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;world hello world&amp;#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(name=&amp;#34;huoty&amp;#34;, age=18) &amp;#39;I am huoty, age is 18&amp;#39; &amp;gt;&amp;gt;&amp;gt; user = {&amp;#34;name&amp;#34;: &amp;#34;huoty&amp;#34;, &amp;#34;age&amp;#34;: 18} &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(**user) &amp;#39;I am huoty, age is 18&amp;#39; 通过对象属性 str.format() 可以直接读取用户属性:
-&amp;gt;&amp;gt;&amp;gt; class User(object): ... def __init__(self, name, age): ... self.</description>
+&amp;gt;&amp;gt;&amp;gt; class User(object): ... def __init__(self, name, age): ... self.name = name .</description>
     </item>
     
     <item>
@@ -240,6 +250,7 @@ BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.ba
  &amp;gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
 def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.</description>
     </item>
+    
     
     
   </channel>

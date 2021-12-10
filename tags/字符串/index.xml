@@ -13,10 +13,10 @@
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
-      <description>zifui“映射” 规则 字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
+      <description>字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &amp;gt;&amp;gt;&amp;gt; &amp;#34;{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{}{}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{1}{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;world hello world&amp;#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(name=&amp;#34;huoty&amp;#34;, age=18) &amp;#39;I am huoty, age is 18&amp;#39; &amp;gt;&amp;gt;&amp;gt; user = {&amp;#34;name&amp;#34;: &amp;#34;huoty&amp;#34;, &amp;#34;age&amp;#34;: 18} &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(**user) &amp;#39;I am huoty, age is 18&amp;#39; 通过对象属性 str.format() 可以直接读取用户属性:
-&amp;gt;&amp;gt;&amp;gt; class User(object): ... def __init__(self, name, age): ... self.</description>
+&amp;gt;&amp;gt;&amp;gt; class User(object): ... def __init__(self, name, age): ... self.name = name .</description>
     </item>
     
   </channel>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Docker学习笔记 | 风吹不停</title>
+<meta name="keywords" content="Docker" />
+<meta name="description" content="Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
+FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&#34;.">
+<meta name="author" content="">
+<link rel="canonical" href="https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.90.1" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Docker学习笔记" />
+<meta property="og:description" content="Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
+FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&#34;." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-10T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-12-10T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker学习笔记"/>
+<meta name="twitter:description" content="Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
+FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&#34;."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Docker学习笔记",
+      "item": "https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Docker学习笔记",
+  "name": "Docker学习笔记",
+  "description": "Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) \u0026amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考\nFROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [\u0026#34;.",
+  "keywords": [
+    "Docker"
+  ],
+  "articleBody": "Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) \u0026 docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考\nFROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [\"./go-gin-example\"] 其他 相关教程网站 更换docker镜像源   打开配置文件\nlinux路径：/etc/docker/daemon.json\nwindows路径：C:\\Users\\shilu\\.docker\\daemon.json\n  添加配置文件\n  { \"registry-mirrors\": [\"https://almtd3fa.mirror.aliyuncs.com\"] }  重启docker服务  docker 构建go应用速度慢  解决git安装慢的问题：给 Git 指定代理，在 Dockerfile 中添加以下内容  RUN git config --global https.proxy http://127.0.0.1:1080 RUN git config --global https.proxy https://127.0.0.1:1080   解决 golang.org 依赖下载失败的问题\n修改Dockerfile中的编译命令\nRUN GOPROXY=\"https://goproxy.io\" go build -o main endgame/main.go\n  Docker push上传镜像失败 Docker hub被墙，不稳定，所以容易出现超时，解决方案如下\n 使用国内阿里云docker或者DaoCloud(目前创建docker仓库是收费的) 多次重试  Docker Login账号密码正确仍然登陆不上  在后台配置一个访问密钥 使用密钥登陆即可。  Docker Login登陆报证书错误 docker login 出现错误，提示：Error saving credentials: error storing credentials - err: exit status 1, out: Cannot autolaunch D-Bus without X11 $DISPLAY\n解决办法：\n 首先安装 gnupg2 和 pass 包，并生成 gpg2 key （我没有用到生成步骤一样可行）  sudo apt install gnupg2 pass gpg2 --full-generate-key  查看生成的 key ，使用 pass 加载验证  gpg2 -k pass init \"whatever key id you have\" 这里引号中 要填写前面给出的密钥\n做完上述操作后，再使用 docker login 就没有问题了。\nLinux中的注意事项 Docker 需要用户具有 sudo 权限，为了避免每次命令都输入sudo，可以把用户加入 Docker 用户组。sudo usermod -aG docker $USER\n",
+  "wordCount" : "192",
+  "inLanguage": "en",
+  "datePublished": "2021-12-10T00:00:00Z",
+  "dateModified": "2021-12-10T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                    <span>🏷️标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                    <span>📚归档</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Docker学习笔记
+    </h1>
+    <div class="post-meta"><span title='2021-12-10 00:00:00 +0000 UTC'>2021-12-10</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#docker%e5%b8%b8%e8%a7%81%e5%91%bd%e4%bb%a4" aria-label="Docker常见命令">Docker常见命令</a></li>
+                <li>
+                    <a href="#docker%e5%ba%94%e7%94%a8%e9%83%a8%e7%bd%b2" aria-label="Docker应用部署">Docker应用部署</a><ul>
+                        
+                <li>
+                    <a href="#%e9%83%a8%e7%bd%b2golang%e9%a1%b9%e7%9b%ae" aria-label="部署golang项目">部署golang项目</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%85%b6%e4%bb%96" aria-label="其他">其他</a><ul>
+                        
+                <li>
+                    <a href="#%e7%9b%b8%e5%85%b3%e6%95%99%e7%a8%8b%e7%bd%91%e7%ab%99" aria-label="相关教程网站">相关教程网站</a></li>
+                <li>
+                    <a href="#%e6%9b%b4%e6%8d%a2docker%e9%95%9c%e5%83%8f%e6%ba%90" aria-label="更换docker镜像源">更换docker镜像源</a></li>
+                <li>
+                    <a href="#docker-%e6%9e%84%e5%bb%bago%e5%ba%94%e7%94%a8%e9%80%9f%e5%ba%a6%e6%85%a2" aria-label="docker 构建go应用速度慢">docker 构建go应用速度慢</a></li>
+                <li>
+                    <a href="#docker-push%e4%b8%8a%e4%bc%a0%e9%95%9c%e5%83%8f%e5%a4%b1%e8%b4%a5" aria-label="Docker push上传镜像失败">Docker push上传镜像失败</a></li>
+                <li>
+                    <a href="#docker-login%e8%b4%a6%e5%8f%b7%e5%af%86%e7%a0%81%e6%ad%a3%e7%a1%ae%e4%bb%8d%e7%84%b6%e7%99%bb%e9%99%86%e4%b8%8d%e4%b8%8a" aria-label="Docker Login账号密码正确仍然登陆不上">Docker Login账号密码正确仍然登陆不上</a></li>
+                <li>
+                    <a href="#docker-login%e7%99%bb%e9%99%86%e6%8a%a5%e8%af%81%e4%b9%a6%e9%94%99%e8%af%af" aria-label="Docker Login登陆报证书错误">Docker Login登陆报证书错误</a></li>
+                <li>
+                    <a href="#linux%e4%b8%ad%e7%9a%84%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="Linux中的注意事项">Linux中的注意事项</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="docker常见命令">Docker常见命令<a hidden class="anchor" aria-hidden="true" href="#docker常见命令">#</a></h2>
+<ul>
+<li>查看运行容器 <code>docker ps</code></li>
+<li>查看所有容器 <code>docker ps -a</code></li>
+<li>进入ID为 XXXX 的容器 <code>docker exec -it XXXX /bin/bash</code></li>
+<li>停用运行中的全部容器 <code>docker stop $(docker ps -q)</code></li>
+<li>删除全部容器 <code>docker rm $(docker ps -aq)</code></li>
+<li>停用并删除全部容器 <code>docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa)</code></li>
+<li>使用Dockerfile构建镜像：<code>docker build -t name .</code></li>
+<li>查看所有镜像 <code>docker images</code></li>
+<li>docker 删除现存的镜像 <code>docker rmi XXX</code></li>
+</ul>
+<h2 id="docker应用部署">Docker应用部署<a hidden class="anchor" aria-hidden="true" href="#docker应用部署">#</a></h2>
+<h3 id="部署golang项目">部署golang项目<a hidden class="anchor" aria-hidden="true" href="#部署golang项目">#</a></h3>
+<p>Dockerfile参考</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">FROM golang:latest
+
+WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example
+COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example
+RUN go build .
+
+EXPOSE <span style="color:#ae81ff">8000</span>
+ENTRYPOINT <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;./go-gin-example&#34;</span><span style="color:#f92672">]</span>
+</code></pre></div><h2 id="其他">其他<a hidden class="anchor" aria-hidden="true" href="#其他">#</a></h2>
+<h3 id="相关教程网站">相关教程网站<a hidden class="anchor" aria-hidden="true" href="#相关教程网站">#</a></h3>
+<h3 id="更换docker镜像源">更换docker镜像源<a hidden class="anchor" aria-hidden="true" href="#更换docker镜像源">#</a></h3>
+<ul>
+<li>
+<p>打开配置文件</p>
+<p>linux路径：<code>/etc/docker/daemon.json</code></p>
+<p>windows路径：<code>C:\Users\shilu\.docker\daemon.json</code></p>
+</li>
+<li>
+<p>添加配置文件</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#f92672">{</span>
+  <span style="color:#e6db74">&#34;registry-mirrors&#34;</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;https://almtd3fa.mirror.aliyuncs.com&#34;</span><span style="color:#f92672">]</span> 
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>重启docker服务</li>
+</ul>
+<h3 id="docker-构建go应用速度慢">docker 构建go应用速度慢<a hidden class="anchor" aria-hidden="true" href="#docker-构建go应用速度慢">#</a></h3>
+<ul>
+<li>解决git安装慢的问题：给 Git 指定代理，在 Dockerfile 中添加以下内容</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">RUN git config --global https.proxy http://127.0.0.1:1080
+RUN git config --global https.proxy https://127.0.0.1:1080
+</code></pre></div><ul>
+<li>
+<p>解决 <a href="http://golang.org">golang.org</a> 依赖下载失败的问题</p>
+<p>修改Dockerfile中的编译命令</p>
+<p><code>RUN GOPROXY=&quot;https://goproxy.io&quot; go build -o main endgame/main.go</code></p>
+</li>
+</ul>
+<h3 id="docker-push上传镜像失败">Docker push上传镜像失败<a hidden class="anchor" aria-hidden="true" href="#docker-push上传镜像失败">#</a></h3>
+<p>Docker hub被墙，不稳定，所以容易出现超时，解决方案如下</p>
+<ul>
+<li>使用国内阿里云docker或者DaoCloud(目前创建docker仓库是收费的)</li>
+<li>多次重试</li>
+</ul>
+<h3 id="docker-login账号密码正确仍然登陆不上">Docker Login账号密码正确仍然登陆不上<a hidden class="anchor" aria-hidden="true" href="#docker-login账号密码正确仍然登陆不上">#</a></h3>
+<ul>
+<li>在后台配置一个访问密钥</li>
+<li>使用密钥登陆即可。</li>
+</ul>
+<h3 id="docker-login登陆报证书错误">Docker Login登陆报证书错误<a hidden class="anchor" aria-hidden="true" href="#docker-login登陆报证书错误">#</a></h3>
+<p>docker login 出现错误，提示：<code>Error saving credentials: error storing credentials - err: exit status 1, out: Cannot autolaunch D-Bus without X11 $DISPLAY</code></p>
+<p>解决办法：</p>
+<ol>
+<li>首先安装 gnupg2 和 pass 包，并生成 gpg2 key （我没有用到生成步骤一样可行）</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo apt install gnupg2 pass
+gpg2 --full-generate-key
+</code></pre></div><ol>
+<li>查看生成的 key ，使用 <code>pass</code> 加载验证</li>
+</ol>
+<pre tabindex="0"><code>gpg2 -k
+pass init &quot;whatever key id you have&quot;
+</code></pre><p>这里引号中 要填写前面给出的密钥</p>
+<p>做完上述操作后，再使用 <code>docker login</code> 就没有问题了。</p>
+<h3 id="linux中的注意事项">Linux中的注意事项<a hidden class="anchor" aria-hidden="true" href="#linux中的注意事项">#</a></h3>
+<p>Docker 需要用户具有 sudo 权限，为了避免每次命令都输入<code>sudo</code>，可以把用户加入 Docker 用户组。<code>sudo usermod -aG docker $USER</code></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://shiluanzzz.github.io/tags/docker/">Docker</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://shiluanzzz.github.io/post/20211208-2/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>windows 安装Chocolatey</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2021 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
