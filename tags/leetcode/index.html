@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>pandas | 风吹不停</title>
+<title>leetcode | 风吹不停</title>
 <meta name="keywords" content="" />
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://shiluanzzz.github.io/tags/pandas/" />
+<link rel="canonical" href="https://shiluanzzz.github.io/tags/leetcode/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.90.1" />
-<link rel="alternate" type="application/rss+xml" href="https://shiluanzzz.github.io/tags/pandas/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://shiluanzzz.github.io/tags/leetcode/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,13 +56,13 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="pandas" />
+</noscript><meta property="og:title" content="leetcode" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://shiluanzzz.github.io/tags/pandas/" />
+<meta property="og:url" content="https://shiluanzzz.github.io/tags/leetcode/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="pandas"/>
+<meta name="twitter:title" content="leetcode"/>
 <meta name="twitter:description" content=""/>
 
 </head>
@@ -127,31 +127,30 @@
 </header>
 <main class="main"> 
 <header class="page-header">
-  <h1>pandas</h1>
+  <h1>leetcode</h1>
 </header>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Pandas学习笔记
+    <h2>Python小顶堆总结
     </h2>
   </header>
   <section class="entry-content">
-    <p>Pandas笔记 最佳阅读体验请阅读笔记原文
-什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
-  高性能
-  容易使用的数据结构
-  容易使用的数据分析工具
-  很方便和其它类库一起使用
-  numpy：用于数学计算
-  scikit- learn：用于机器学习
-  Pandas 读取数据 Pandas 需要先读取表格类型的数据
-读取文件   读取csv文件 ratings = pd.read_csv(fpath)
-  读取txt文件 pvuv = pd.read_csv()
-  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
-  读取 sql文件 mysql_page = pd.read_sql(&#34;select * from crazyant_pvuv&#34;, con=conn)...</p>
+    <p>当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
+使用方法    入堆 heapq.heappush(heap, item)
+将 item 的值加入 heap 中，保持堆的不变性。
+  出堆heapq.heappop(heap)
+弹出并返回 heap 的最小的元素，保持堆的不变性。如果堆为空，抛出 IndexError 。使用 heap[0] ，可以只访问最小的元素而不弹出它。
+  有出有入heapq.heappushpop(heap, item)
+将 item 放入堆中，然后弹出并返回 heap 的最小元素。该组合操作比先调用 heappush() 再调用 heappop() 运行起来更有效率。
+  转化为listheapq.heapify(x)
+将list x 转换成堆，原地，线性时间内。
+  替换heapq.heapreplace(heap, item)
+弹出并返回 heap 中最小的一项，同时推入新的 item。 堆的大小不变。 如果堆为空则引发 IndexError。
+  样例   单的单值存储  data=[1,2,3,-3,4,2,4,5] list=[] for v in data: heapq.heappush(list,v) print(&#34;堆:&#34;,list) print(&#34;访问最小值:&#34;,list[0]) print(&#34;访问最大值&#34;,heapq.nlargest(1,list)[0])  小顶堆也可以存储其他元素，如元组、数组。  list=[] heapq....</p>
   </section>
-  <footer class="entry-footer"><span title='2020-07-30 00:00:00 +0000 UTC'>2020-07-30</span></footer>
-  <a class="entry-link" aria-label="post link to Pandas学习笔记" href="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/"></a>
+  <footer class="entry-footer"><span title='2021-12-12 19:22:37 +0800 CST'>2021-12-12</span></footer>
+  <a class="entry-link" aria-label="post link to Python小顶堆总结" href="https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/"></a>
 </article>
     </main>
     

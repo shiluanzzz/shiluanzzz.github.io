@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>leetcode on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/tags/leetcode/</link>
+    <description>Recent content in leetcode on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 12 Dec 2021 19:22:37 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python小顶堆总结</title>
+      <link>https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sun, 12 Dec 2021 19:22:37 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</guid>
+      <description>当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
+使用方法    入堆 heapq.heappush(heap, item)
+将 item 的值加入 heap 中，保持堆的不变性。
+  出堆heapq.heappop(heap)
+弹出并返回 heap 的最小的元素，保持堆的不变性。如果堆为空，抛出 IndexError 。使用 heap[0] ，可以只访问最小的元素而不弹出它。
+  有出有入heapq.heappushpop(heap, item)
+将 item 放入堆中，然后弹出并返回 heap 的最小元素。该组合操作比先调用 heappush() 再调用 heappop() 运行起来更有效率。
+  转化为listheapq.heapify(x)
+将list x 转换成堆，原地，线性时间内。
+  替换heapq.heapreplace(heap, item)
+弹出并返回 heap 中最小的一项，同时推入新的 item。 堆的大小不变。 如果堆为空则引发 IndexError。
+  样例   单的单值存储  data=[1,2,3,-3,4,2,4,5] list=[] for v in data: heapq.heappush(list,v) print(&amp;#34;堆:&amp;#34;,list) print(&amp;#34;访问最小值:&amp;#34;,list[0]) print(&amp;#34;访问最大值&amp;#34;,heapq.nlargest(1,list)[0])  小顶堆也可以存储其他元素，如元组、数组。  list=[] heapq.</description>
+    </item>
+    
+  </channel>
+</rss>

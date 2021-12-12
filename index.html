@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.89.4" />
+<meta name="generator" content="Hugo 0.90.1" />
 <link rel="alternate" type="application/rss+xml" href="https://shiluanzzz.github.io/index.xml">
 <link rel="alternate" type="application/json" href="https://shiluanzzz.github.io/index.json">
 <noscript>
@@ -152,6 +152,29 @@
 </div>
 
     </footer>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Python小顶堆总结
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
+使用方法    入堆 heapq.heappush(heap, item)
+将 item 的值加入 heap 中，保持堆的不变性。
+  出堆heapq.heappop(heap)
+弹出并返回 heap 的最小的元素，保持堆的不变性。如果堆为空，抛出 IndexError 。使用 heap[0] ，可以只访问最小的元素而不弹出它。
+  有出有入heapq.heappushpop(heap, item)
+将 item 放入堆中，然后弹出并返回 heap 的最小元素。该组合操作比先调用 heappush() 再调用 heappop() 运行起来更有效率。
+  转化为listheapq.heapify(x)
+将list x 转换成堆，原地，线性时间内。
+  替换heapq.heapreplace(heap, item)
+弹出并返回 heap 中最小的一项，同时推入新的 item。 堆的大小不变。 如果堆为空则引发 IndexError。
+  样例   单的单值存储  data=[1,2,3,-3,4,2,4,5] list=[] for v in data: heapq.heappush(list,v) print(&#34;堆:&#34;,list) print(&#34;访问最小值:&#34;,list[0]) print(&#34;访问最大值&#34;,heapq.nlargest(1,list)[0])  小顶堆也可以存储其他元素，如元组、数组。  list=[] heapq....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-12 19:22:37 +0800 CST'>2021-12-12</span></footer>
+  <a class="entry-link" aria-label="post link to Python小顶堆总结" href="https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -319,34 +342,6 @@ notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
   </section>
   <footer class="entry-footer"><span title='2021-07-21 00:00:00 +0000 UTC'>2021-07-21</span></footer>
   <a class="entry-link" aria-label="post link to jupyter notebook 安装、配置、优化" href="https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python异步编程
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1.异步编程介绍： 在并发执行的异步模型中，许多任务被穿插在同一时间线上，所有的任务都由一个控制流执行（单一线程）。任务的执行可能被暂停或恢复，中间的这段时间线程将会去执行其他任务。
-与多线程的区别 ：多线程由操作系统决定在时间线上什么时候挂起某个活动或恢复某个活动，而在异步并发模型中，程序员必须假设线程可能在任何时间被挂起和替换。
-2.使用Python的 concurrent.futures 模块 https://docs.python.org/zh-cn/3/library/concurrent.futures.html
-这个模块具有线程池和进程池、管理并行编程任务、处理非确定性的执行流程、进程/线程同步等功能
- 该模块由以下部分组成：   - concurrent.futures.Executor: 这是一个虚拟基类，提供了异步执行的方法。
- current.Futures 模块提供了两种 Executor 的子类，各自独立操作一个线程池和一个进程池。
- - concurrent.futures.ThreadPoolExecutor(max_workers)
- - concurrent.futures.ProcessPoolExecutor(max_workers)
- - submit(function, argument): 调度函数（可调用的对象）的执行，将 argument 作为参数传入。
- - map(function, argument): 将 argument 作为参数执行函数，以 异步 的方式。
- - shutdown(Wait=True): 发出让执行者释放所有资源的信号。
- - concurrent.futures.Future: 其中包括函数的异步执行。Future对象是submit任务（即带有参数的functions）到executor的实例。
-线程池和进程池 用池可以来简化线程/进程的使用。
-池包括两部分，一部分是内部的队列，存放着待执行的任务；另一部分是一系列的进程或线程，用于执行这些任务。
-池的概念主要目的是为了重用 ：让线程或进程在生命周期内可以多次使用。它减少了创建创建线程和进程的开销，提高了程序性能。
-Talk is cheap 定义了两个函数，做单纯的加减计算
-def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_item = count(x) # 打印输入和输出结果 return result_item def count(number) : i=0 for i in range(0, 10000000): i=i&#43;1 return i * number 通过三种方式执行对比运行时间，顺序执行和多线程执行的时间基本是一样的，而多进程的执行时间明显缩短。...</p>
-  </section>
-  <footer class="entry-footer"><span title='2020-12-25 00:00:00 +0000 UTC'>2020-12-25</span></footer>
-  <a class="entry-link" aria-label="post link to Python异步编程" href="https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
