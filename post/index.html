@@ -56,7 +56,41 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Posts" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="Posts" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://shiluanzzz.github.io/post/" />
@@ -144,6 +178,50 @@
 <header class="page-header">
   <h1>Posts</h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>线程、进程、协程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
+电脑中有许多进程需要处于「同时」开启的状态，而利用CPU在进程间的快速切换，可以实现「同时」运行多个程序。而进程切换则意味着需要保留进程切换前的状态，以备切换回去的时候能够继续接着工作。 所以进程拥有自己的地址空间，全局变量，文件描述符，各种硬件等等资源。操作系统通过调度CPU去执行进程的记录、回复、切换等等。
+2线程 线程是一个程序执行过程中的最小单元，一个程序可能包含多个线程，这多个线程共享进程的所有资源。每个线程执行不同的任务来提高程序的运行效率。
+3进程与线程的区别  进程是CPU资源分配的基本单位，线程是独立运行和独立调度的基本单位（CPU上真正运行的是线程）。 进程拥有自己的资源空间，一个进程包含若干个线程，线程与CPU资源分配无关，多个线程共享同一进程内的资源。 线程的调度与切换比进程快很多。  4为什么要有线程？ 线程的出现就是为了提高单位时间内CPU的利用率。
+任务一般分为两种：CPU密集型和IO密集型。
+ CPU密集型任务对CPU的利用率较高 IO密集型的程序因为包含了大量的IO操作，所以其状态在就绪、运行、阻塞之前频繁切换。  随着程序的功能越来越复杂，程序更加偏向于IO密集型，而IO密集型任务也就是无法即使完成任务而带来大量的上下文切换。而进程之间上下文切换的代价是比较高的。
+因此为了使用更小的粒度提高进程单位时间的CPU利用率，就有了线程的概念。进程作为线程的容器，可以按不同的功能，或想达到更高效率（如多个IO线程）的同一功能，可以考虑产生多个线程。
+因为在CPU切换到本进程的时间段时，由于线程间共享进程的上下文，线程切换只需要切换线程的上下文，而不需要切换另一片内存或者寄存器资源，在功能并行执行的同时降低了开销。
+但是需要注意的是开更多的线程不会导致本进程得到更多CPU的青睐!多线程只能提高进程在执行过程中的CPU利用率。
+5什么是协程？ 虽然线程大幅的提高了CPU的效率，且能够设置一定的优先级，但是线程的资源片分配还是由CPU来管理的。
+那么能不能人为管理线程的资源分配（切换）呢？协程在语言层面实现了这一点。
+如同一个进程可以有很多线程一样，一个线程可以有很多协程。
+但是，协程不是被操作系统所管理的，没有改变CPU最小执行单元是线程，协程是完全由程序所控制的（用户态执行），不会产生上下文切换。
+目前只有部分语言实现了协程：
+ python的yield/send，当协程执行到yield关键字时，会暂停在那一行，等到主线程调用send方法发送了数据，协程才会接到数据继续执行。 Lua从5.0版本开始使用协程，通过扩展库coroutine来实现。 Go语言对协程的实现非常强大而简洁，可以轻松创建成百上千个协程并发执行。 Java语言并没有对协程的原生支持，但是某些开源框架模拟出了协程的功能，有兴趣的小伙伴可以看一看Kilim框架的源码：https://github.com/kilim/kilim  参考链接：  https://zhuanlan.zhihu.com/p/70256971  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-26 23:51:02 +0800 CST'>2022-04-26</span></footer>
+  <a class="entry-link" aria-label="post link to 线程、进程、协程" href="https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>字符串哈希
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
+我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。
+ 哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为
+$$ f(s)=\sum_{i=1}^{l} s[i] \times b^{l-i}(\bmod M) $$
+例如，字符串$xyz$的哈希值为$xb^2&#43;yb&#43;z$。
+Hash的实现 # Python Version M = int(1e9 &#43; 7) B = 233 def get_hash(s): res = 0 for char in s: res = (res * B &#43; ord(char)) % M return res def cmp(s, t): return get_hash(s) == get_hash(t)   错误率分析
+若进行 $n$ 次比较，每次错误率 $\dfrac 1 M$，那么总错误率是 $1-\left(1-\dfrac 1 M\right)^n$。在随机数据下，若 $M=10^9 &#43; 7$，$n=10^6$，错误率约为 $\dfrac 1{1000}$，并不是能够完全忽略不计的。...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-26 23:11:19 +0800 CST'>2022-04-26</span></footer>
+  <a class="entry-link" aria-label="post link to 字符串哈希" href="https://shiluanzzz.github.io/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -294,41 +372,6 @@ Go语言对这三种加密算法的实现如下所示：
   </section>
   <footer class="entry-footer"><span title='2021-10-22 00:00:00 +0000 UTC'>2021-10-22</span></footer>
   <a class="entry-link" aria-label="post link to Syncthing 数据网盘部署" href="https://shiluanzzz.github.io/post/syncthing/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>局域网打印服务
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。
-python的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。
-win32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。
-def PrintFile(file_path): allPrinter=[printer[2] for printer in win32print.EnumPrinters(2)] # PrintNum = int(input(&#34;选择打印机:\n&#34;&#43;&#34;\n&#34;.join([f&#34;{n} {p}&#34; for n,p in enumerate(allPrinter)]))) win32print.SetDefaultPrinter(allPrinter[4]) # pdf_path=&#34;C:\\Users\Luke\Desktop\Doc1.docx&#34; pdf_path=file_path win32api.ShellExecute(0, &#34;print&#34;, pdf_path, &#39;/d:&#34;%s&#34;&#39; % win32print.GetDefaultPrinter (), &#34;.&#34;, 0) 如果出现pywintypes.error: (31, ‘ShellExecute’, ‘连到系统上的设备没有发挥作用。&#39;) 错误，需要为你的pdf或者其他文件指定一个默认打开应用。
-Web服务 使用flask写了个小demo, 接受局域网的文件后调用打印机打印。
-slash = &#39;\\&#39; UPLOAD_FOLDER = &#39;upload&#39; ALLOW_EXTENSIONS = {&#39;doc&#39;, &#39;docx&#39;, &#39;pdf&#39;} app = Flask(__name__) app.config[&#39;UPLOAD_FOLDER&#39;] = UPLOAD_FOLDER #判断文件夹是否存在，如果不存在则创建 if not os.path.exists(UPLOAD_FOLDER): os.makedirs(UPLOAD_FOLDER) else: pass # 判断文件后缀是否在列表中 def allowed_file(filename): return &#39;....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-10-22 00:00:00 +0000 UTC'>2021-10-22</span></footer>
-  <a class="entry-link" aria-label="post link to 局域网打印服务" href="https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python处理excel文件
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>安装 pip install openpyxl
-**英文文档链接 ： **点击这里
- 1，定位excel 新建excel和打开现有的excel
-import openpyxl wb1 = openpyxl.load_workbook(&#39;text.xlsx&#39;) #定位到现有的excle  wb2= openpyxl.Workbook() #创建一个新的excle表 （其中没有任何工作簿！！！） 定位到具体的工作表（因为一个excle中可能存在多个工作表）
-bo1=wb1.active #定位到 wb1 指向的excle 的第一个工作簿  bo2=wb1.get_sheet_by_name(&#34;name&#34;) #定位到 名为 name 的工作簿  bo3=wb1[&#34;new title&#34;] #定位到名为 new title 的工作簿 2，读取excle中的内容 使用openpyxl.wordsheet.Worksheet.cell方法从单元格中读取内容
-#读取内容  #利用openpyxl读取内容主要是从每个单元格中 读取  #定位到单元格的方法  #使用value属性获取当前单元格的值  content=bo1[&#39;A4&#39;].value content3=bo1.cell(row=4,column=2).value #也可以使用迭代 多个单元格在使用value方法，类似于list的切片  content4=bo1[&#39;A1&#39;:&#39;C2&#39;] #使用  3，写入,修改内容 3.1 针对单个单元格写入 参考代码
-import openpyxl work=openpyxl.load_workbook(&#34;dat.xlsx&#34;) book=work.active print(&#34;before:&#34;,book.cell(1,1).value) book[&#39;A1&#39;].value=&#34;1&#34; #book.cell(1,1).value=&#34;1&#34; 效果等同于上调语句  print(&#34;after:&#34;,book....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-07-22 00:00:00 +0000 UTC'>2021-07-22</span></footer>
-  <a class="entry-link" aria-label="post link to Python处理excel文件" href="https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

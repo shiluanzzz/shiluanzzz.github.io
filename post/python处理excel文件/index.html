@@ -63,7 +63,41 @@ import openpyxl work=openpyxl.load_workbook(&#34;dat.xlsx&#34;) book=work.active
         }
 
     </style>
-</noscript><meta property="og:title" content="Python处理excel文件" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="Python处理excel文件" />
 <meta property="og:description" content="安装 pip install openpyxl
 **英文文档链接 ： **点击这里
  1，定位excel 新建excel和打开现有的excel

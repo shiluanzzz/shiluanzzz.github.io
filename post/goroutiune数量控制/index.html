@@ -60,7 +60,41 @@ func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &lt; userCo
         }
 
     </style>
-</noscript><meta property="og:title" content="控制goroutine的并发数量" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="控制goroutine的并发数量" />
 <meta property="og:description" content="控制goroutine的并发数量 chan控制（错误） 在启动go程之前尝试向chan中写入数据.
 func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &lt; userCount; i&#43;&#43; { // 控制  ch &lt;- true go Read(ch, i) } } func Read(ch chan bool, i int) { fmt.Printf(&#34;go func: %d\n&#34;, i) &lt;- ch } 这存在一个问题就是可能go程还没执行完,主协程结束子协程也被终止了. 而单纯使用waitgroup没法控制并发数量.
 方案一 : waitgroup&#43;chan组合控制并发   wg主要是防止子协程还没执行完主协程已经退出的情况发生.
@@ -462,6 +496,11 @@ func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &lt; userCo
       <li><a href="https://shiluanzzz.github.io/tags/goroutine/">goroutine</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://shiluanzzz.github.io/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>字符串哈希</span>
+  </a>
   <a class="next" href="https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/">
     <span class="title">Next Page »</span>
     <br>

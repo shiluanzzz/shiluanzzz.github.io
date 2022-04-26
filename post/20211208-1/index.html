@@ -65,7 +65,41 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
         }
 
     </style>
-</noscript><meta property="og:title" content="windows下使用choco极速安装docker" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="windows下使用choco极速安装docker" />
 <meta property="og:description" content="前言 之前在做一个计算机实训的时候，装docker环境报各种错误，今天尝试使用choco包管理工具，2行命令安装成功！
 choco安装 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
 使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。

@@ -64,7 +64,41 @@ notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
         }
 
     </style>
-</noscript><meta property="og:title" content="jupyter notebook 安装、配置、优化" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="jupyter notebook 安装、配置、优化" />
 <meta property="og:description" content="安装 安装： pip install jupyter
 启动命令：jupyter notebook
 配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）

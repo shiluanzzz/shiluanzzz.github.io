@@ -73,7 +73,41 @@ def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_ite
         }
 
     </style>
-</noscript><meta property="og:title" content="Python异步编程" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="Python异步编程" />
 <meta property="og:description" content="1.异步编程介绍： 在并发执行的异步模型中，许多任务被穿插在同一时间线上，所有的任务都由一个控制流执行（单一线程）。任务的执行可能被暂停或恢复，中间的这段时间线程将会去执行其他任务。
 与多线程的区别 ：多线程由操作系统决定在时间线上什么时候挂起某个活动或恢复某个活动，而在异步并发模型中，程序员必须假设线程可能在任何时间被挂起和替换。
 2.使用Python的 concurrent.futures 模块 https://docs.python.org/zh-cn/3/library/concurrent.futures.html

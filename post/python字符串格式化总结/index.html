@@ -60,7 +60,41 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Python字符串格式化总结" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="Python字符串格式化总结" />
 <meta property="og:description" content="字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &gt;&gt;&gt; &#34;{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{}{}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{1}{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;world hello world&#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(name=&#34;huoty&#34;, age=18) &#39;I am huoty, age is 18&#39; &gt;&gt;&gt; user = {&#34;name&#34;: &#34;huoty&#34;, &#34;age&#34;: 18} &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(**user) &#39;I am huoty, age is 18&#39; 通过对象属性 str.format() 可以直接读取用户属性:

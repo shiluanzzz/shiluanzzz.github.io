@@ -62,7 +62,41 @@ slash = &#39;\\&#39; UPLOAD_FOLDER = &#39;upload&#39; ALLOW_EXTENSIONS = {&#39;d
         }
 
     </style>
-</noscript><meta property="og:title" content="局域网打印服务" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="局域网打印服务" />
 <meta property="og:description" content="起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。
 python的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。
 win32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。

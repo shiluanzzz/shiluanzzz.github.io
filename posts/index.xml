@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/posts/</link>
+    <description>Recent content in Posts on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Tue, 26 Apr 2022 23:09:35 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>字符串哈希</title>
+      <link>https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</link>
+      <pubDate>Tue, 26 Apr 2022 23:09:35 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</guid>
+      <description>Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
+我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。
+ 哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为
+$$ f(s)=\sum_{i=1}^{l} s[i] \times b^{l-i}(\bmod M) $$
+例如，字符串$xyz$的哈希值为$xb^2+yb+z$。
+Hash的实现 # Python Version M = int(1e9 + 7) B = 233 def get_hash(s): res = 0 for char in s: res = (res * B + ord(char)) % M return res def cmp(s, t): return get_hash(s) == get_hash(t)   错误率分析
+若进行 $n$ 次比较，每次错误率 $\dfrac 1 M$，那么总错误率是 $1-\left(1-\dfrac 1 M\right)^n$。在随机数据下，若 $M=10^9 + 7$，$n=10^6$，错误率约为 $\dfrac 1{1000}$，并不是能够完全忽略不计的。</description>
+    </item>
+    
+  </channel>
+</rss>

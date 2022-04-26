@@ -60,7 +60,41 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Python自动截图拼接工具" />
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="Python自动截图拼接工具" />
 <meta property="og:description" content="需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
 实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
 本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
