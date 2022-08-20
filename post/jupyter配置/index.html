@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>jupyter notebook 安装、配置、优化 | 风吹不停</title>
 <meta name="keywords" content="软件安装" />
 <meta name="description" content="安装 安装： pip install jupyter
@@ -98,81 +98,7 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style><meta property="og:title" content="jupyter notebook 安装、配置、优化" />
-<meta property="og:description" content="安装 安装： pip install jupyter
-启动命令：jupyter notebook
-配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
-notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
-  安装 pip install ipykernel
-  将当前虚拟环境加入IPykernel
-  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图
-启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = &#34;all&#34; 自动补全   安装 pip install jupyter_contrib_nbextensions" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-21T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-21T00:00:00&#43;00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="jupyter notebook 安装、配置、优化"/>
-<meta name="twitter:description" content="安装 安装： pip install jupyter
-启动命令：jupyter notebook
-配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
-notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
-  安装 pip install ipykernel
-  将当前虚拟环境加入IPykernel
-  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图
-启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = &#34;all&#34; 自动补全   安装 pip install jupyter_contrib_nbextensions"/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "jupyter notebook 安装、配置、优化",
-      "item": "https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "jupyter notebook 安装、配置、优化",
-  "name": "jupyter notebook 安装、配置、优化",
-  "description": "安装 安装： pip install jupyter\n启动命令：jupyter notebook\n配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）\nnotebook使用virtualenv的虚拟环境   激活/注册 虚拟环境\n  安装 pip install ipykernel\n  将当前虚拟环境加入IPykernel\n  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图\n启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = \u0026#34;all\u0026#34; 自动补全   安装 pip install jupyter_contrib_nbextensions",
-  "keywords": [
-    "软件安装"
-  ],
-  "articleBody": "安装 安装： pip install jupyter\n启动命令：jupyter notebook\n配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）\nnotebook使用virtualenv的虚拟环境   激活/注册 虚拟环境\n  安装 pip install ipykernel\n  将当前虚拟环境加入IPykernel\n  python -m ipykernel install --user --name=shiyanlou  -name后的字段为notebook中显示的名称，入下图\n启动notebook，在服务中切换   参考链接1  提高效率插件 多次强制输出 from IPython.core.interactiveshell import InteractiveShell InteractiveShell.ast_node_interactivity = \"all\" 自动补全   安装 pip install jupyter_contrib_nbextensions\n  配置 jupyter contrib nbextension install --user --skip-running-check，配置前需要关闭 =koobeton\n  启动notebook，勾选设置。\n   上面两个步骤都没问题上面两个步骤都没问题上面两个步骤都没问题上面两个步骤都没问,启动notebook\n点开 Nbextensions 的选项，并勾选 Hinterland\n参考链接\n修改字体   安装网页插件Stylus \n  为网页编辑脚本\n   - 添加样式：\n/* Markdown */ div#notebook { font-family: san francisco, \"PingFangSC-Medium\", \"Microsoft YaHei\"; line-height: 20px; -webkit-font-smoothing: antialiased !important; } /* Markdown - h2 */ div#notebook h2 { color: #007aff; } /* Markdown - quote */ div#notebook blockquote { background-color: #f8f8f8; color: #505050; padding: 8.5px; margin: 0.5em -0.5em 0.5em -0.4em; } /* Markdown - code in paragraph */ div#notebook p code, div#notebook li code { font-family: Consolas, \"PingFangSC-Medium\", \"Microsoft YaHei\"; font-size: 1em !important; color: #111111; border: 0.5px solid #cfcfcf; border-radius: 2px; background-color: #f7f7f7; padding: .1em .2em; margin: 0px 2px; } /* Markdown - code */ div.text_cell_render pre { border: 1px solid #cfcfcf; border-radius: 2px; background: #f7f7f7; line-height: 1.21429em; padding: 8.5px; margin: 0.5em -0.5em 0.5em -0.4em; } div.text_cell_render code { background: #f7f7f7; } /* Code */ div.CodeMirror pre { font-family: Consolas, \"PingFangSC-Medium\", \"Microsoft YaHei\"; font-size: 11pt; line-height: 140%; -webkit-font-smoothing: antialiased !important; } /* Code - output */ div.output pre { font-family: Consolas, \"PingFangSC-Medium\", \"Microsoft YaHei\"; line-height: 20px; -webkit-font-smoothing: antialiased !important; } /* Code - comment */ span.cm-comment { font-family: san francisco, \"PingFangSC-Medium\", \"Microsoft YaHei\" !important; font-style: normal !important; } matplotlib 输出高清大图 添加2，3行语句即可\nimport matplotlib.pyplot as plt %matplotlib inline %config InlineBackend.figure_format = 'svg' ",
-  "wordCount" : "260",
-  "inLanguage": "en",
-  "datePublished": "2021-07-21T00:00:00Z",
-  "dateModified": "2021-07-21T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "风吹不停",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</style>
 </head>
 
 <body class="" id="top">

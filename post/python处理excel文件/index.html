@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Python处理excel文件 | 风吹不停</title>
 <meta name="keywords" content="Python" />
 <meta name="description" content="安装 pip install openpyxl
@@ -97,79 +97,7 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style><meta property="og:title" content="Python处理excel文件" />
-<meta property="og:description" content="安装 pip install openpyxl
-**英文文档链接 ： **点击这里
- 1，定位excel 新建excel和打开现有的excel
-import openpyxl wb1 = openpyxl.load_workbook(&#39;text.xlsx&#39;) #定位到现有的excle  wb2= openpyxl.Workbook() #创建一个新的excle表 （其中没有任何工作簿！！！） 定位到具体的工作表（因为一个excle中可能存在多个工作表）
-bo1=wb1.active #定位到 wb1 指向的excle 的第一个工作簿  bo2=wb1.get_sheet_by_name(&#34;name&#34;) #定位到 名为 name 的工作簿  bo3=wb1[&#34;new title&#34;] #定位到名为 new title 的工作簿 2，读取excle中的内容 使用openpyxl.wordsheet.Worksheet.cell方法从单元格中读取内容
-#读取内容  #利用openpyxl读取内容主要是从每个单元格中 读取  #定位到单元格的方法  #使用value属性获取当前单元格的值  content=bo1[&#39;A4&#39;].value content3=bo1.cell(row=4,column=2).value #也可以使用迭代 多个单元格在使用value方法，类似于list的切片  content4=bo1[&#39;A1&#39;:&#39;C2&#39;] #使用  3，写入,修改内容 3.1 针对单个单元格写入 参考代码
-import openpyxl work=openpyxl.load_workbook(&#34;dat.xlsx&#34;) book=work.active print(&#34;before:&#34;,book.cell(1,1).value) book[&#39;A1&#39;].value=&#34;1&#34; #book.cell(1,1).value=&#34;1&#34; 效果等同于上调语句  print(&#34;after:&#34;,book." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-22T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-22T00:00:00&#43;00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python处理excel文件"/>
-<meta name="twitter:description" content="安装 pip install openpyxl
-**英文文档链接 ： **点击这里
- 1，定位excel 新建excel和打开现有的excel
-import openpyxl wb1 = openpyxl.load_workbook(&#39;text.xlsx&#39;) #定位到现有的excle  wb2= openpyxl.Workbook() #创建一个新的excle表 （其中没有任何工作簿！！！） 定位到具体的工作表（因为一个excle中可能存在多个工作表）
-bo1=wb1.active #定位到 wb1 指向的excle 的第一个工作簿  bo2=wb1.get_sheet_by_name(&#34;name&#34;) #定位到 名为 name 的工作簿  bo3=wb1[&#34;new title&#34;] #定位到名为 new title 的工作簿 2，读取excle中的内容 使用openpyxl.wordsheet.Worksheet.cell方法从单元格中读取内容
-#读取内容  #利用openpyxl读取内容主要是从每个单元格中 读取  #定位到单元格的方法  #使用value属性获取当前单元格的值  content=bo1[&#39;A4&#39;].value content3=bo1.cell(row=4,column=2).value #也可以使用迭代 多个单元格在使用value方法，类似于list的切片  content4=bo1[&#39;A1&#39;:&#39;C2&#39;] #使用  3，写入,修改内容 3.1 针对单个单元格写入 参考代码
-import openpyxl work=openpyxl.load_workbook(&#34;dat.xlsx&#34;) book=work.active print(&#34;before:&#34;,book.cell(1,1).value) book[&#39;A1&#39;].value=&#34;1&#34; #book.cell(1,1).value=&#34;1&#34; 效果等同于上调语句  print(&#34;after:&#34;,book."/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Python处理excel文件",
-      "item": "https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Python处理excel文件",
-  "name": "Python处理excel文件",
-  "description": "安装 pip install openpyxl\n**英文文档链接 ： **点击这里\n 1，定位excel 新建excel和打开现有的excel\nimport openpyxl wb1 = openpyxl.load_workbook(\u0026#39;text.xlsx\u0026#39;) #定位到现有的excle  wb2= openpyxl.Workbook() #创建一个新的excle表 （其中没有任何工作簿！！！） 定位到具体的工作表（因为一个excle中可能存在多个工作表）\nbo1=wb1.active #定位到 wb1 指向的excle 的第一个工作簿  bo2=wb1.get_sheet_by_name(\u0026#34;name\u0026#34;) #定位到 名为 name 的工作簿  bo3=wb1[\u0026#34;new title\u0026#34;] #定位到名为 new title 的工作簿 2，读取excle中的内容 使用openpyxl.wordsheet.Worksheet.cell方法从单元格中读取内容\n#读取内容  #利用openpyxl读取内容主要是从每个单元格中 读取  #定位到单元格的方法  #使用value属性获取当前单元格的值  content=bo1[\u0026#39;A4\u0026#39;].value content3=bo1.cell(row=4,column=2).value #也可以使用迭代 多个单元格在使用value方法，类似于list的切片  content4=bo1[\u0026#39;A1\u0026#39;:\u0026#39;C2\u0026#39;] #使用  3，写入,修改内容 3.1 针对单个单元格写入 参考代码\nimport openpyxl work=openpyxl.load_workbook(\u0026#34;dat.xlsx\u0026#34;) book=work.active print(\u0026#34;before:\u0026#34;,book.cell(1,1).value) book[\u0026#39;A1\u0026#39;].value=\u0026#34;1\u0026#34; #book.cell(1,1).value=\u0026#34;1\u0026#34; 效果等同于上调语句  print(\u0026#34;after:\u0026#34;,book.",
-  "keywords": [
-    "Python"
-  ],
-  "articleBody": "安装 pip install openpyxl\n**英文文档链接 ： **点击这里\n 1，定位excel 新建excel和打开现有的excel\nimport openpyxl wb1 = openpyxl.load_workbook('text.xlsx') #定位到现有的excle  wb2= openpyxl.Workbook() #创建一个新的excle表 （其中没有任何工作簿！！！） 定位到具体的工作表（因为一个excle中可能存在多个工作表）\nbo1=wb1.active #定位到 wb1 指向的excle 的第一个工作簿  bo2=wb1.get_sheet_by_name(\"name\") #定位到 名为 name 的工作簿  bo3=wb1[\"new title\"] #定位到名为 new title 的工作簿 2，读取excle中的内容 使用openpyxl.wordsheet.Worksheet.cell方法从单元格中读取内容\n#读取内容  #利用openpyxl读取内容主要是从每个单元格中 读取  #定位到单元格的方法  #使用value属性获取当前单元格的值  content=bo1['A4'].value content3=bo1.cell(row=4,column=2).value #也可以使用迭代 多个单元格在使用value方法，类似于list的切片  content4=bo1['A1':'C2'] #使用  3，写入,修改内容 3.1 针对单个单元格写入 参考代码\nimport openpyxl work=openpyxl.load_workbook(\"dat.xlsx\") book=work.active print(\"before:\",book.cell(1,1).value) book['A1'].value=\"1\" #book.cell(1,1).value=\"1\" 效果等同于上调语句  print(\"after:\",book.cell(1,1).value) work.save(\"123.xlsx\")#一定记得保存！！！ 3.2 针对多个单元格写入 参考代码\nimport openpyxl work=openpyxl.load_workbook(\"123.xlsx\") book=work.active # print(\"before:\",book.cell(1,1).value)  # book['A1'].value=\"1\"  # print(\"after:\",book.cell(1,1).value)  # work.save(\"123.xlsx\")  for a in range(1,6): #写入第1行至第5行  for b in range(1,11): #迭代第1列到第10列  #下面三条语句的效果都是一样的  book.cell(a,b).value=str(a)+\":\"+str(b) # book.cell(row=a,column=b).value=str(a)+\":\"+str(b)  # book.cell(row=a, column=b,value=\"{}\".format(str(a)+\":\"+str(b)))  work.save(\"1.xlsx\") 4，文件保存 通过 openpyxl.workbook,Workbook.save()方法保存文件是最简单最安全的：\nwb.save('balances.xlsx') 5, 其他  excel多少行sheet.max_row  ",
-  "wordCount" : "103",
-  "inLanguage": "en",
-  "datePublished": "2021-07-22T00:00:00Z",
-  "dateModified": "2021-07-22T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "风吹不停",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</style>
 </head>
 
 <body class="" id="top">

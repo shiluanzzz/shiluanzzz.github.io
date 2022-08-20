@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Docker学习笔记 | 风吹不停</title>
 <meta name="keywords" content="Docker" />
 <meta name="description" content="Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
@@ -92,69 +92,7 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style><meta property="og:title" content="Docker学习笔记" />
-<meta property="og:description" content="Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
-FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&#34;." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-10T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-12-10T00:00:00&#43;00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Docker学习笔记"/>
-<meta name="twitter:description" content="Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
-FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&#34;."/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Docker学习笔记",
-      "item": "https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Docker学习笔记",
-  "name": "Docker学习笔记",
-  "description": "Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) \u0026amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考\nFROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [\u0026#34;.",
-  "keywords": [
-    "Docker"
-  ],
-  "articleBody": "Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) \u0026 docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考\nFROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [\"./go-gin-example\"] 其他 相关教程网站 更换docker镜像源   打开配置文件\nlinux路径：/etc/docker/daemon.json\nwindows路径：C:\\Users\\shilu\\.docker\\daemon.json\n  添加配置文件\n  { \"registry-mirrors\": [\"https://almtd3fa.mirror.aliyuncs.com\"] }  重启docker服务  docker 构建go应用速度慢  解决git安装慢的问题：给 Git 指定代理，在 Dockerfile 中添加以下内容  RUN git config --global https.proxy http://127.0.0.1:1080 RUN git config --global https.proxy https://127.0.0.1:1080   解决 golang.org 依赖下载失败的问题\n修改Dockerfile中的编译命令\nRUN GOPROXY=\"https://goproxy.io\" go build -o main endgame/main.go\n  Docker push上传镜像失败 Docker hub被墙，不稳定，所以容易出现超时，解决方案如下\n 使用国内阿里云docker或者DaoCloud(目前创建docker仓库是收费的) 多次重试  Docker Login账号密码正确仍然登陆不上  在后台配置一个访问密钥 使用密钥登陆即可。  Docker Login登陆报证书错误 docker login 出现错误，提示：Error saving credentials: error storing credentials - err: exit status 1, out: Cannot autolaunch D-Bus without X11 $DISPLAY\n解决办法：\n 首先安装 gnupg2 和 pass 包，并生成 gpg2 key （我没有用到生成步骤一样可行）  sudo apt install gnupg2 pass gpg2 --full-generate-key  查看生成的 key ，使用 pass 加载验证  gpg2 -k pass init \"whatever key id you have\" 这里引号中 要填写前面给出的密钥\n做完上述操作后，再使用 docker login 就没有问题了。\nLinux中的注意事项 Docker 需要用户具有 sudo 权限，为了避免每次命令都输入sudo，可以把用户加入 Docker 用户组。sudo usermod -aG docker $USER\n",
-  "wordCount" : "192",
-  "inLanguage": "en",
-  "datePublished": "2021-12-10T00:00:00Z",
-  "dateModified": "2021-12-10T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "风吹不停",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</style>
 </head>
 
 <body class="" id="top">

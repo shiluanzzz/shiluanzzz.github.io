@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Python小顶堆总结 | 风吹不停</title>
 <meta name="keywords" content="Python, leetcode" />
 <meta name="description" content="当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
@@ -102,89 +102,7 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style><meta property="og:title" content="Python小顶堆总结" />
-<meta property="og:description" content="当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
-使用方法    入堆 heapq.heappush(heap, item)
-将 item 的值加入 heap 中，保持堆的不变性。
-  出堆heapq.heappop(heap)
-弹出并返回 heap 的最小的元素，保持堆的不变性。如果堆为空，抛出 IndexError 。使用 heap[0] ，可以只访问最小的元素而不弹出它。
-  有出有入heapq.heappushpop(heap, item)
-将 item 放入堆中，然后弹出并返回 heap 的最小元素。该组合操作比先调用 heappush() 再调用 heappop() 运行起来更有效率。
-  转化为listheapq.heapify(x)
-将list x 转换成堆，原地，线性时间内。
-  替换heapq.heapreplace(heap, item)
-弹出并返回 heap 中最小的一项，同时推入新的 item。 堆的大小不变。 如果堆为空则引发 IndexError。
-  样例   单的单值存储  data=[1,2,3,-3,4,2,4,5] list=[] for v in data: heapq.heappush(list,v) print(&#34;堆:&#34;,list) print(&#34;访问最小值:&#34;,list[0]) print(&#34;访问最大值&#34;,heapq.nlargest(1,list)[0])  小顶堆也可以存储其他元素，如元组、数组。  list=[] heapq." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-12T19:22:37&#43;08:00" />
-<meta property="article:modified_time" content="2021-12-12T19:22:37&#43;08:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python小顶堆总结"/>
-<meta name="twitter:description" content="当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
-使用方法    入堆 heapq.heappush(heap, item)
-将 item 的值加入 heap 中，保持堆的不变性。
-  出堆heapq.heappop(heap)
-弹出并返回 heap 的最小的元素，保持堆的不变性。如果堆为空，抛出 IndexError 。使用 heap[0] ，可以只访问最小的元素而不弹出它。
-  有出有入heapq.heappushpop(heap, item)
-将 item 放入堆中，然后弹出并返回 heap 的最小元素。该组合操作比先调用 heappush() 再调用 heappop() 运行起来更有效率。
-  转化为listheapq.heapify(x)
-将list x 转换成堆，原地，线性时间内。
-  替换heapq.heapreplace(heap, item)
-弹出并返回 heap 中最小的一项，同时推入新的 item。 堆的大小不变。 如果堆为空则引发 IndexError。
-  样例   单的单值存储  data=[1,2,3,-3,4,2,4,5] list=[] for v in data: heapq.heappush(list,v) print(&#34;堆:&#34;,list) print(&#34;访问最小值:&#34;,list[0]) print(&#34;访问最大值&#34;,heapq.nlargest(1,list)[0])  小顶堆也可以存储其他元素，如元组、数组。  list=[] heapq."/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Python小顶堆总结",
-      "item": "https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Python小顶堆总结",
-  "name": "Python小顶堆总结",
-  "description": "当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。\n使用方法    入堆 heapq.heappush(heap, item)\n将 item 的值加入 heap 中，保持堆的不变性。\n  出堆heapq.heappop(heap)\n弹出并返回 heap 的最小的元素，保持堆的不变性。如果堆为空，抛出 IndexError 。使用 heap[0] ，可以只访问最小的元素而不弹出它。\n  有出有入heapq.heappushpop(heap, item)\n将 item 放入堆中，然后弹出并返回 heap 的最小元素。该组合操作比先调用 heappush() 再调用 heappop() 运行起来更有效率。\n  转化为listheapq.heapify(x)\n将list x 转换成堆，原地，线性时间内。\n  替换heapq.heapreplace(heap, item)\n弹出并返回 heap 中最小的一项，同时推入新的 item。 堆的大小不变。 如果堆为空则引发 IndexError。\n  样例   单的单值存储  data=[1,2,3,-3,4,2,4,5] list=[] for v in data: heapq.heappush(list,v) print(\u0026#34;堆:\u0026#34;,list) print(\u0026#34;访问最小值:\u0026#34;,list[0]) print(\u0026#34;访问最大值\u0026#34;,heapq.nlargest(1,list)[0])  小顶堆也可以存储其他元素，如元组、数组。  list=[] heapq.",
-  "keywords": [
-    "Python", "leetcode"
-  ],
-  "articleBody": "当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。\n使用方法    入堆 heapq.heappush(heap, item)\n将 item 的值加入 heap 中，保持堆的不变性。\n  出堆heapq.heappop(heap)\n弹出并返回 heap 的最小的元素，保持堆的不变性。如果堆为空，抛出 IndexError 。使用 heap[0] ，可以只访问最小的元素而不弹出它。\n  有出有入heapq.heappushpop(heap, item)\n将 item 放入堆中，然后弹出并返回 heap 的最小元素。该组合操作比先调用 heappush() 再调用 heappop() 运行起来更有效率。\n  转化为listheapq.heapify(x)\n将list x 转换成堆，原地，线性时间内。\n  替换heapq.heapreplace(heap, item)\n弹出并返回 heap 中最小的一项，同时推入新的 item。 堆的大小不变。 如果堆为空则引发 IndexError。\n  样例   单的单值存储  data=[1,2,3,-3,4,2,4,5] list=[] for v in data: heapq.heappush(list,v) print(\"堆:\",list) print(\"访问最小值:\",list[0]) print(\"访问最大值\",heapq.nlargest(1,list)[0])  小顶堆也可以存储其他元素，如元组、数组。  list=[] heapq.heappush(list,[3,\"three\"]) heapq.heappush(list,[1,\"one\"]) heapq.heappush(list,[5,\"five\"]) print(\"堆:\",list) print(\"访问最小值:\",list[0]) print(\"访问最大值\",heapq.nlargest(1,list)[0]) ### output: #堆: [[1, 'one'], [3, 'three'], [5, 'five']] #访问最小值: [1, 'one'] #访问最大值 [5, 'five'] 使用注意事项   若数组X为维护的小顶堆，获取X中的最小值可以使用X[0] 因为内部不是一个有序状态，而是堆数据，访问数组中的最大值不能用X[-1]，可以使用heapq.nlargest(n, iterable, key=None)方法获取前N个最大值。 同理可以使用heapq.nsmallest(n, iterable, key=None) 获取前n个最小值。 不一定要局限于小顶堆，力扣 506题，我们需要根据得分情况对数据从大到小排列。可以将满分减去运动员的分数，在对分数入堆就可以得到一个实际上的“大顶堆”  参考链接   https://docs.python.org/zh-cn/3.8/library/heapq.html  ",
-  "wordCount" : "90",
-  "inLanguage": "en",
-  "datePublished": "2021-12-12T19:22:37+08:00",
-  "dateModified": "2021-12-12T19:22:37+08:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "风吹不停",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</style>
 </head>
 
 <body class="" id="top">

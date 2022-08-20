@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Python Tqdm进度条使用 | 风吹不停</title>
 <meta name="keywords" content="Python, 类库" />
 <meta name="description" content="tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
@@ -92,69 +92,7 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style><meta property="og:title" content="Python Tqdm进度条使用" />
-<meta property="og:description" content="tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
-基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&#39;进度条&#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&#34;第{i}轮&#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/tqdm/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-08-05T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-08-05T00:00:00&#43;00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python Tqdm进度条使用"/>
-<meta name="twitter:description" content="tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
-基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&#39;进度条&#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&#34;第{i}轮&#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm."/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Python Tqdm进度条使用",
-      "item": "https://shiluanzzz.github.io/post/tqdm/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Python Tqdm进度条使用",
-  "name": "Python Tqdm进度条使用",
-  "description": "tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。\n基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=\u0026#39;进度条\u0026#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02\u0026lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01\u0026lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02\u0026lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f\u0026#34;第{i}轮\u0026#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm.",
-  "keywords": [
-    "Python", "类库"
-  ],
-  "articleBody": "tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。\n基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc='进度条'): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f\"第{i}轮\") #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm.notebook import trange # for i in trange(1,20): # time.sleep(0.2) # 好像不太行 手动更新tqdm进度条 import time from tqdm import tqdm with tqdm(total=200) as pbar: pbar.set_description('Processing:') # total表示总的项目, 循环的次数20*10(每次更新数目) = 200(total) for i in range(20): # 进行动作, 这里是过0.1s time.sleep(0.1) # 进行进度更新, 这里设置10个 pbar.update(10) # Processing:: 100%|██████████| 200/200 [00:02模块参数说明 class tqdm(object): \"\"\" Decorate an iterable object, returning an iterator which acts exactly like the original iterable, but prints a dynamically updating progressbar every time a value is requested. \"\"\" def __init__(self, iterable=None, desc=None, total=None, leave=False, file=sys.stderr, ncols=None, mininterval=0.1, maxinterval=10.0, miniters=None, ascii=None, disable=False, unit='it', unit_scale=False, dynamic_ncols=False, smoothing=0.3, nested=False, bar_format=None, initial=0, gui=False):  iterable: 可迭代的对象, 在手动更新时不需要进行设置 desc: 字符串, 左边进度条描述文字 total: 总的项目数 leave: bool值, 迭代完成后是否保留进度条 file: 输出指向位置, 默认是终端, 一般不需要设置 ncols: 调整进度条宽度, 默认是根据环境自动调节长度, 如果设置为0, 就没有进度条, 只有输出的信息 unit: 描述处理项目的文字, 默认是’it', 例如: 100 it/s, 处理照片的话设置为’img' ,则为 100 img/s unit_scale: 自动根据国际标准进行项目处理速度单位的换算, 例如 100000 it/s » 100k it/s  ",
-  "wordCount" : "210",
-  "inLanguage": "en",
-  "datePublished": "2020-08-05T00:00:00Z",
-  "dateModified": "2020-08-05T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/tqdm/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "风吹不停",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</style>
 </head>
 
 <body class="" id="top">

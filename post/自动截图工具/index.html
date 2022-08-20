@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Python自动截图拼接工具 | 风吹不停</title>
 <meta name="keywords" content="折腾, python, 造轮子" />
 <meta name="description" content="需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
@@ -94,73 +94,7 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style><meta property="og:title" content="Python自动截图拼接工具" />
-<meta property="og:description" content="需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
-实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
-本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
-  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print(&#39;{0}at {1}&#39;.format(&#39;Pressed&#39; if pressed else &#39;Released&#39;, (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]&gt;30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-12-14T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-12-14T00:00:00&#43;00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Python自动截图拼接工具"/>
-<meta name="twitter:description" content="需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
-实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
-本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
-  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print(&#39;{0}at {1}&#39;.format(&#39;Pressed&#39; if pressed else &#39;Released&#39;, (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]&gt;30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener."/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Python自动截图拼接工具",
-      "item": "https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Python自动截图拼接工具",
-  "name": "Python自动截图拼接工具",
-  "description": "需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。\n实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置\n本来是被这个join事件困惑住，原来直接在子事件里stop就好了。\n  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print(\u0026#39;{0}at {1}\u0026#39;.format(\u0026#39;Pressed\u0026#39; if pressed else \u0026#39;Released\u0026#39;, (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]\u0026gt;30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener.",
-  "keywords": [
-    "折腾", "python", "造轮子"
-  ],
-  "articleBody": "需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。\n实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置\n本来是被这个join事件困惑住，原来直接在子事件里stop就好了。\n  def on_click(x, y, button, pressed): global press_pos, flag global release_pos print('{0}at {1}'.format('Pressed' if pressed else 'Released', (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]30: listener.stop() flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener.join() print(\"截图位置获取成功\")   注册快捷键，每按一次就对固定区域截图\n没有把单张图片保存，直接读到内存里。f2为截图的快捷键，f4为停止截图的快捷键\n  def screen_it(): global file img = ImageGrab.grab(bbox=(press_pos[0], press_pos[1], release_pos[0], release_pos[1])) file.append(img) print(\"已经截图\") file=[] keyboard.add_hotkey('f2',screen_it) keyboard.wait('f4')   图片拼接\n拼接就是用PIL中的拼接，文件保存后调用os.startfile()就可以用系统默认应用程序打开文件了~\n  def concat_img(file): width,height=file[0].size result = Image.new(file[0].mode,(width,height*len(file))) for i,im in enumerate(file): result.paste(im,box=(0,i*height)) file_name='result{}.jpg'.format(time.strftime('%H-%M-%S', time.localtime())) result.save(file_name) return file_name fp=concat_img(file) print(\"图片保存成功\") os.startfile(fp)  完整源码V1.0 2020/12/14  # -*- coding:utf-8 -*- # __author__ = \"shiluanzzz\" from pynput import mouse import keyboard import pyautogui import time from PIL import ImageGrab,Image import os def on_move(x, y): print('Pointer moved to {0}'.format( (x, y))) def on_click(x, y, button, pressed): global press_pos, flag global release_pos print('{0}at {1}'.format('Pressed' if pressed else 'Released', (x, y))) if pressed: press_pos = (x, y) else: release_pos = (x, y) if release_pos[0]-press_pos[0]30: listener.stop() def on_scroll(x, y, dx, dy): print('Scrolled {0}at {1}'.format( 'down' if dy  0 else 'up', (x, y))) def screen_it(): global file img = ImageGrab.grab(bbox=(press_pos[0], press_pos[1], release_pos[0], release_pos[1])) file.append(img) print(\"已经截图\") def concat_img(file): width,height=file[0].size result = Image.new(file[0].mode,(width,height*len(file))) for i,im in enumerate(file): result.paste(im,box=(0,i*height)) file_name='result{}.jpg'.format(time.strftime('%H-%M-%S', time.localtime())) result.save(file_name) return file_name if __name__ == '__main__': flag = False press_pos = () release_pos = () file=[] # Collect events until released with mouse.Listener( # on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener: listener.join() print(\"截图位置获取成功\") keyboard.add_hotkey('f2',screen_it) keyboard.wait('f4') fp=concat_img(file) print(\"图片保存成功\") os.startfile(fp) 参考链接：   https://blog.csdn.net/zhouchen1998/article/details/82080664\n  https://www.pythonf.cn/read/121179\n  ",
-  "wordCount" : "253",
-  "inLanguage": "en",
-  "datePublished": "2020-12-14T00:00:00Z",
-  "dateModified": "2020-12-14T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "风吹不停",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</style>
 </head>
 
 <body class="" id="top">

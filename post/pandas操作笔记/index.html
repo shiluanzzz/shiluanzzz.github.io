@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Pandas学习笔记 | 风吹不停</title>
 <meta name="keywords" content="pandas, Python" />
 <meta name="description" content="Pandas笔记 最佳阅读体验请阅读笔记原文
@@ -103,91 +103,7 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style><meta property="og:title" content="Pandas学习笔记" />
-<meta property="og:description" content="Pandas笔记 最佳阅读体验请阅读笔记原文
-什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
-  高性能
-  容易使用的数据结构
-  容易使用的数据分析工具
-  很方便和其它类库一起使用
-  numpy：用于数学计算
-  scikit- learn：用于机器学习
-  Pandas 读取数据 Pandas 需要先读取表格类型的数据
-读取文件   读取csv文件 ratings = pd.read_csv(fpath)
-  读取txt文件 pvuv = pd.read_csv()
-  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
-  读取 sql文件 mysql_page = pd.read_sql(&quot;select * from crazyant_pvuv&quot;, con=conn)" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-07-30T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-07-30T00:00:00&#43;00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Pandas学习笔记"/>
-<meta name="twitter:description" content="Pandas笔记 最佳阅读体验请阅读笔记原文
-什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
-  高性能
-  容易使用的数据结构
-  容易使用的数据分析工具
-  很方便和其它类库一起使用
-  numpy：用于数学计算
-  scikit- learn：用于机器学习
-  Pandas 读取数据 Pandas 需要先读取表格类型的数据
-读取文件   读取csv文件 ratings = pd.read_csv(fpath)
-  读取txt文件 pvuv = pd.read_csv()
-  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
-  读取 sql文件 mysql_page = pd.read_sql(&quot;select * from crazyant_pvuv&quot;, con=conn)"/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Pandas学习笔记",
-      "item": "https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Pandas学习笔记",
-  "name": "Pandas学习笔记",
-  "description": "Pandas笔记 最佳阅读体验请阅读笔记原文\n什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化\n  高性能\n  容易使用的数据结构\n  容易使用的数据分析工具\n  很方便和其它类库一起使用\n  numpy：用于数学计算\n  scikit- learn：用于机器学习\n  Pandas 读取数据 Pandas 需要先读取表格类型的数据\n读取文件   读取csv文件 ratings = pd.read_csv(fpath)\n  读取txt文件 pvuv = pd.read_csv()\n  pvuv = pd.read_csv( fpath, sep=\u0026#34;\\t\u0026#34;, header=None, names=[\u0026#39;pdate\u0026#39;, \u0026#39;pv\u0026#39;, \u0026#39;uv\u0026#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)\n  读取 sql文件 mysql_page = pd.read_sql(\u0026quot;select * from crazyant_pvuv\u0026quot;, con=conn)",
-  "keywords": [
-    "pandas", "Python"
-  ],
-  "articleBody": "Pandas笔记 最佳阅读体验请阅读笔记原文\n什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化\n  高性能\n  容易使用的数据结构\n  容易使用的数据分析工具\n  很方便和其它类库一起使用\n  numpy：用于数学计算\n  scikit- learn：用于机器学习\n  Pandas 读取数据 Pandas 需要先读取表格类型的数据\n读取文件   读取csv文件 ratings = pd.read_csv(fpath)\n  读取txt文件 pvuv = pd.read_csv()\n  pvuv = pd.read_csv( fpath, sep=\"\\t\", header=None, names=['pdate', 'pv', 'uv'] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)\n  读取 sql文件 mysql_page = pd.read_sql(\"select * from crazyant_pvuv\", con=conn)\n  import pymysql conn = pymysql.connect( 参数省略 ) #创建链接 mysql_page = pd.read_sql(\"select * from crazyant_pvuv\", con=conn) 查看数据  查看前几行数据 ratings.head()   查看数据的形状，返回(行数、列数) ratings.shape   查看列名列表 ratings.columns   查看索引列 ratings.index   查看每列的数据类型 ratings.dtypes  Pandas数据结构 Series Series是一种类似于一维数组的对象，它由一组数据（不同数据类型）以及一组与之相关的数据标签（即索引）组成。\n创建默认Series  创建 s1 = pd.Series([1,'a',5.2,7])   创建的数据没有传入索引，则为默认索引0,1,2,3\n 获取数据 s1.values  # output: array([1, 'a', 5.2, 7], dtype=object) 创建具有标签的Series   创建带索引的Series\n  s2.index\n  #output Index(['d', 'b', 'a', 'c'], dtype='object') 使用字典创建Series 将字典传入即可\nsdata={'Ohio':35000,'Texas':72000,'Oregon':16000,'Utah':5000} s3=pd.Series(sdata) s3 # output  Ohio 35000 Texas 72000 Oregon 16000 Utah 5000 dtype: int64 通过便签索引数据 DataFrame DataFrame是一个表格型的数据结构\n  每列可以是不同的值类型（数值、字符串、布尔值等）\n  既有行索引index,也有列索引columns\n  可以被看做由Series组成的字典\n  创建dataframe最常用的方法，使用pd.read_XXX读取纯文本文件、excel、mysql数据库\n使用字典创建dataframe data={ 'state':['Ohio','Ohio','Ohio','Nevada','Nevada'], 'year':[2000,2001,2002,2001,2002], 'pop':[1.5,1.7,3.6,2.4,2.9] } df = pd.DataFrame(data) 从DataFrame中查询数据   如果只查询一行、一列，返回的是pd.Series\n  如果查询多行、多列，返回的是pd.DataFrame\n  查询一列，结果是一个pd.Series df['year'] # outout 0 2000 1 2001 2 2002 3 2001 4 2002 Name: year, dtype: int64 type(df['year'])# outputpandas.core.series.Series  \u0026ensp\n3.2 查询多列，结果是一个pd.DataFrame df[['year', 'pop']] type(df.loc[1:3]) #output pandas.core.frame.DataFrame Pandas 查询数据 后面的数据查询示例为一个天气数据，其中将日期作为索引 df.set_index('ymd', inplace=True)\n使用单个label值查询数 # 得到单个值df.loc['2018-01-03', 'bWendu']#output2 # 得到一个Seriesdf.loc['2018-01-03', ['bWendu', 'yWendu']]#outputbWendu 2yWendu -5Name: 2018-01-03, dtype: object 因为查询的是单个数据，所以返回的是series。第二个字段指定需要返回的字段，若不指定，使用：代替，则返回所有字段。\n使用值列表批量查询 # 得到Seriesdf.loc[['2018-01-03','2018-01-04','2018-01-05'], 'bWendu']#outputymd2018-01-03 22018-01-04 02018-01-05 3Name: bWendu, dtype: int32 使用数值区间进行范围查询 # 行index按区间，前面设置了日期作为索引。df.loc['2018-01-03':'2018-01-05', :] # 行和列都按区间查询df.loc['2018-01-03':'2018-01-05', 'bWendu':'fengxiang'] 使用条件表达式查询   最低温度低于-10度的列表 df.loc[df[\"yWendu\"]  使用组合条件查询最高温度小于30度，并且最低温度大于15度，并且是晴天，并且天气为优的数据\n  df.loc[(df[\"bWendu\"]30) \u0026 (df[\"yWendu\"]=15) \u0026 (df[\"tianqi\"]=='晴') \u0026 (df[\"aqiLevel\"]==1), :]  使用函数查询   - 直接写lambda表达式 df.loc[lambda df : (df[\"bWendu\"]=15), :]\n - 编写函数查询\n# 编写自己的函数，查询9月份，空气质量好的数据def query_my_data(df): return df.index.str.startswith(\"2018-09\") \u0026 (df[\"aqiLevel\"]==1) df.loc[query_my_data, :] 查询空值\u0026\u0026删除含有空值的列 match_data=match_data[match_data['home_player_1'].notnull()] Pandas 新增数据列   直接赋值\n  df.apply方法\n  df.assign方法\n  按条件选择分组分别赋值f\n  直接赋值 字符串替换\n# 替换掉温度的后缀℃df.loc[:, \"bWendu\"] = df[\"bWendu\"].str.replace(\"℃\", \"\").astype('int32')df.loc[:, \"yWendu\"] = df[\"yWendu\"].str.replace(\"℃\", \"\").astype('int32') 数据加减\n# 注意，df[\"bWendu\"]其实是一个Series，后面的减法返回的是Seriesdf.loc[:, \"wencha\"] = df[\"bWendu\"] - df[\"yWendu\"] df.apply() DataFrame.apply(func, axis=0, broadcast=False, raw=False, reduce=None, args=(), **kwds)\n函数需要自己实现，函数的传入参数根据axis来定，比如axis = 1，就会把一行数据作为Series的数据结构传入给自己实现的函数中，我们在函数中实现对Series不同属性之间的计算，返回一个结果，则apply函数会自动遍历每一行DataFrame的数据，最后将所有结果组合成一个Series数据结构并返回。\ndef get_wendu_type(x): if x[\"bWendu\"]  33: return '高温' if x[\"yWendu\"]  -10: return '低温' return '常温'# 注意需要设置axis==1，这是series的index是columnsdf.loc[:, \"wendu_type\"] = df.apply(get_wendu_type, axis=1) df.assign() # 可以同时添加多个新的列df.assign( yWendu_huashi = lambda x : x[\"yWendu\"] * 9 / 5 + 32, # 摄氏度转华氏度 bWendu_huashi = lambda x : x[\"bWendu\"] * 9 / 5 + 32) 按条件选择分组分别赋值 按条件先选择数据，然后对这部分数据赋值新列\n实例：高低温差大于10度，则认为温差大\n# 先创建空列（这是第一种创建新列的方法）df['wencha_type'] = ''df.loc[df[\"bWendu\"]-df[\"yWendu\"]10, \"wencha_type\"] = \"温差大\"df.loc[df[\"bWendu\"]-df[\"yWendu\"]Pandas 数据统计函数   汇总类统计\n  唯一去重和按值计数\n  相关系数和协方差\n  汇总统计类   统计所有结果 df.describe()\n  单个数据的平均值df[\"bWendu\"].mean()\n  单个数据的最大值，最小值 df[\"bWendu\"].max()  df[\"bWendu\"].min()\n  唯一去重 一般用于枚举，分类列\ndf[\"fengxiang\"].unique()#outputarray(['东北风', '北风', '西北风', '西南风', '南风', '东南风', '东风', '西风'], dtype=object)df[\"fengli\"].unique()#outputarray(['1-2级', '4-5级', '3-4级', '2级', '1级', '3级'], dtype=object) 按值计数 df[\"fengxiang\"].value_counts()\n相关系数和协方差 用途：\n  两只股票，是不是同涨同跌？程度多大？正相关还是负相关？\n  产品销量的波动，跟哪些因素正相关、负相关，程度有多大？\n  来自知乎，对于两个变量X、Y：\n  协方差：衡量同向反向程度 ，如果协方差为正，说明X，Y同向变化，协方差越大说明同向程度越高；如果协方差为负，说明X，Y反向运动，协方差越小说明反向程度越高。\n  相关系数：衡量相似度程度 ，当他们的相关系数为1时，说明两个变量变化时的正向相似度最大，当相关系数为－1时，说明两个变量变化的反向相似度最大\n  编码\n 协方差矩阵： df.cov()   相关系数矩阵 df.corr()    单独查看两个指标的相关系数 df[\"aqi\"].corr(df[\"bWendu\"])\n  空气质量和温差的相关系数 df[\"aqi\"].corr(df[\"bWendu\"]-df[\"yWendu\"])\n  ",
-  "wordCount" : "388",
-  "inLanguage": "en",
-  "datePublished": "2020-07-30T00:00:00Z",
-  "dateModified": "2020-07-30T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "风吹不停",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</style>
 </head>
 
 <body class="" id="top">
