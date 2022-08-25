@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Paddle实战手写数字识别 | 风吹不停</title>
 <meta name="keywords" content="人工智能, paddlepaddle" />
 <meta name="description" content="paddle 手写数字识别 参考链接： 1 2
@@ -100,7 +100,85 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="Paddle实战手写数字识别" />
+<meta property="og:description" content="paddle 手写数字识别 参考链接： 1 2
+任务介绍   手写识别属于典型的图像多分类问题
+  输入 &amp;&amp; 输出
+  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本
+数据准备  数据提供器   &gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。
+ - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱
+ - paddle.batch()表示每BATCH_SIZE组成一个batch
+BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图
+ &gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
+def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-07-05T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-07-05T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Paddle实战手写数字识别"/>
+<meta name="twitter:description" content="paddle 手写数字识别 参考链接： 1 2
+任务介绍   手写识别属于典型的图像多分类问题
+  输入 &amp;&amp; 输出
+  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本
+数据准备  数据提供器   &gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。
+ - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱
+ - paddle.batch()表示每BATCH_SIZE组成一个batch
+BUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图
+ &gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。
+def multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Paddle实战手写数字识别",
+      "item": "https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Paddle实战手写数字识别",
+  "name": "Paddle实战手写数字识别",
+  "description": "paddle 手写数字识别 参考链接： 1 2\n任务介绍   手写识别属于典型的图像多分类问题\n  输入 \u0026amp;\u0026amp; 输出\n  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本\n数据准备  数据提供器   \u0026gt; batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。\n - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱\n - paddle.batch()表示每BATCH_SIZE组成一个batch\nBUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图\n \u0026gt; fluid.layers.fc 该OP将在神经网络中构建一个全连接层。\ndef multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.",
+  "keywords": [
+    "人工智能", "paddlepaddle"
+  ],
+  "articleBody": "paddle 手写数字识别 参考链接： 1 2\n任务介绍   手写识别属于典型的图像多分类问题\n  输入 \u0026\u0026 输出\n  MNIST数据集 美国国家标准与技术研究所 10个互斥类别，28 * 28的灰度图 250 个人的手写数字， 50% 来自人口普查局的 工作人员，50%来自高中学生 训练集：60000个样本 测试集：10000个样本\n数据准备  数据提供器    batch reader: 用于读取数据的函数，数据可来自于文件、网络、随机数生成器等，函数每次返回一个batch大小的数据项。\n - paddle.reader.shuffle()表示每次缓存BUF_SIZE个数据项，并进行打乱\n - paddle.batch()表示每BATCH_SIZE组成一个batch\nBUF_SIZE=512 # 每次提取的数据量 BATCH_SIZE=128 #  train_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.train(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) test_reader=paddle.batch( paddle.reader.shuffle(paddle.dataset.mnist.test(),buf_size=BUF_SIZE), batch_size=BATCH_SIZE ) train_data=paddle.dataset.mnist.train() 网络配置  网络模型   - 网络模型图\n  fluid.layers.fc 该OP将在神经网络中构建一个全连接层。\ndef multilayer_percetron(input): # multilayer-多层的 percetron-感知器 # 两个影藏层 激活函数为relu hiddle1=fluid.layers.fc(input=input,size=100,act='relu') hiddle2=fluid.layers.fc(input=hiddle1,size=100,act='relu') # 输出层，使用softmax激活 prediction=fluid.layers.fc(input=hiddle2,size=10,act='softmax') return prediction 损失函数   - fluid.layers.cross_entropy 该OP计算输入input和标签label间的交叉熵\ncost=fluid.layers.cross_entropy(input=predict,label=label) avg_cost=fluid.layers.mean(cost) # 对损失函数求平均值，方便后面反向传播使用 ## 准确率 acc=fluid.layers.accuracy(input=predict,label='label') 优化函数   使用内置的Adam方法，并指定学习率\noptimizer=fluid.optimizer.AdamOptimizer(learning_rate=0.001) opts=optimizer.minimize(avg_cost) 模型训练、评估 # 创建executor usr_cuda=False # 使用CPU训练 place=fluid.CUDAPlace(0) if usr_cuda else fluid.CPUPlace() test_program=fluid.default_main_program().clone(for_test=True) exe=fluid.Executor(place) exe.run(fluid.default_startup_program()) # 数据提供器： 转成一种特殊的数据结构，使其可以输入到Executor中。 feeder=fluid.DataFeeder(place=place,feed_list=[image,label]) 训练 %time EPOCH_NUM=2 model_save_dir=\"Handwriting_recognition_V1.0\" for pass_id in range(EPOCH_NUM): for betch_id,data in enumerate(train_reader()): train_cost,train_acc=exe.run( program=fluid.default_main_program(), feed=feeder.feed(data), fetch_list=[avg_cost,acc] ) all_train_iter+=BATCH_SIZE all_train_iters.append(all_train_iter) all_train_costs.append(train_cost[0]) all_train_accs.append(train_acc[0]) if betch_id % 200 == 0: print('Pass:%d, Batch:%d, Cost:%0.5f, Accuracy:%0.5f' % (pass_id, betch_id, train_cost[0], train_acc[0])) # test test_accs=[] test_costs=[] for betch_id,data in enumerate(test_reader()): test_cost,test_acc=exe.run( program=test_program, feed=feeder.feed(data), fetch_list=[avg_cost,acc] ) test_accs.append(test_acc) test_costs.append(test_cost) test_cost=(sum(test_costs))/len(test_costs) test_acc=(sum(test_accs))/len(test_accs) print(\"test:%d, cost:%0.5f,accuracy:%0.5f\"%(pass_id,test_cost,test_acc)) #保存模型 # 如果保存路径不存在就创建 if not os.path.exists(model_save_dir): os.makedirs(model_save_dir) print ('save models to %s' % (model_save_dir)) fluid.io.save_inference_model(model_save_dir, #保存推理model的路径 ['image'], #推理（inference）需要 feed 的数据 [predict], #保存推理（inference）结果的 Variables exe) #executor 保存 inference model print('训练模型保存完成！') draw_train_process(\"training\", all_train_iters, all_train_costs, all_train_accs, \"trainning cost\", \"trainning acc\") ",
+  "wordCount" : "193",
+  "inLanguage": "en",
+  "datePublished": "2020-07-05T00:00:00Z",
+  "dateModified": "2020-07-05T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

@@ -8,12 +8,13 @@
     <language>zh</language>
     <lastBuildDate>Tue, 26 Apr 2022 23:51:02 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/%E5%BA%95%E5%B1%82/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>线程、进程、协程</title>
+      <title>线程、进程、协程的区别</title>
       <link>https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</link>
       <pubDate>Tue, 26 Apr 2022 23:51:02 +0800</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</guid>
-      <description>1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
+      <description>对操作系统来说，线程是最小的执行单元，进程是最小的资源管理单元。 无论进程还是线程，都是由操作系统所管理的。协程(Coroutines)是一种比线程更加轻量级的存在
+1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
 电脑中有许多进程需要处于「同时」开启的状态，而利用CPU在进程间的快速切换，可以实现「同时」运行多个程序。而进程切换则意味着需要保留进程切换前的状态，以备切换回去的时候能够继续接着工作。 所以进程拥有自己的地址空间，全局变量，文件描述符，各种硬件等等资源。操作系统通过调度CPU去执行进程的记录、回复、切换等等。
 2线程 线程是一个程序执行过程中的最小单元，一个程序可能包含多个线程，这多个线程共享进程的所有资源。每个线程执行不同的任务来提高程序的运行效率。
 3进程与线程的区别  进程是CPU资源分配的基本单位，线程是独立运行和独立调度的基本单位（CPU上真正运行的是线程）。 进程拥有自己的资源空间，一个进程包含若干个线程，线程与CPU资源分配无关，多个线程共享同一进程内的资源。 线程的调度与切换比进程快很多。  4为什么要有线程？ 线程的出现就是为了提高单位时间内CPU的利用率。
@@ -27,7 +28,7 @@
 如同一个进程可以有很多线程一样，一个线程可以有很多协程。
 但是，协程不是被操作系统所管理的，没有改变CPU最小执行单元是线程，协程是完全由程序所控制的（用户态执行），不会产生上下文切换。
 目前只有部分语言实现了协程：
- python的yield/send，当协程执行到yield关键字时，会暂停在那一行，等到主线程调用send方法发送了数据，协程才会接到数据继续执行。 Lua从5.0版本开始使用协程，通过扩展库coroutine来实现。 Go语言对协程的实现非常强大而简洁，可以轻松创建成百上千个协程并发执行。 Java语言并没有对协程的原生支持，但是某些开源框架模拟出了协程的功能，有兴趣的小伙伴可以看一看Kilim框架的源码：https://github.com/kilim/kilim  参考链接：  https://zhuanlan.zhihu.com/p/70256971  </description>
+ python的yield/send，当协程执行到yield关键字时，会暂停在那一行，等到主线程调用send方法发送了数据，协程才会接到数据继续执行。 Lua从5.0版本开始使用协程，通过扩展库coroutine来实现。 Go语言对协程的实现非常强大而简洁，可以轻松创建成百上千个协程并发执行。 Java语言并没有对协程的原生支持，但是某些开源框架模拟出了协程的功能，可以看一看Kilim框架的源码：https://github.com/kilim/kilim  参考链接：  https://zhuanlan.zhihu.com/p/70256971  </description>
     </item>
     
   </channel>

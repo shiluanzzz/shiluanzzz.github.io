@@ -6,14 +6,78 @@
     <description>Recent content in Posts on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 26 Apr 2022 23:51:02 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Aug 2022 17:08:28 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>线程、进程、协程</title>
+      <title>Golang通过反射校验结构体中的零值字段</title>
+      <link>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</link>
+      <pubDate>Thu, 25 Aug 2022 17:08:28 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</guid>
+      <description>问题 问题： 在web服务开发中，http请求需要绑定到一个结构体上，如何处理结构体的零值问题？
+场景： 零值问题指无法确认是默认生成的零值还是用户传的零值，例如结构体A中有一个age字段为int类型，如果用户在请求时不传这个字段会默认反序列化为0，如果传了0也会是零。
+解决方案： 处理这类零值问题通常是将这个字段类型设置为对应的指针类型，通过指针是否为空判断调用方传没传这个值。
+缺陷： 但是validator无法校验指针类型的数据。
+如何灵活校验指针类型的数据？ 在model结构体中不直接进行校验，使用反射根据字符串调用函数进行校验
+ ctx函数中（数据绑定，取非零值参数，通过字段名调用对应的校验函数）  // 数据绑定  if err := ctx.ShouldBindJSON(&amp;amp;data); err != nil { ginBindError(ctx, err, data) return } defer commonControllerDefer(ctx, &amp;amp;code, &amp;amp;msg, &amp;amp;data, &amp;amp;data) // 将结构体中非nil的字段提取到map中  if res, code = tools.StructToMap(data, &amp;#34;structs&amp;#34;); code != errmsg.SUCCESS { return } // 数据校验 将不同的字段绑定到不同的校验函数中，使用反射做校验  validateFunc := map[string]interface{}{ &amp;#34;name&amp;#34;: validator.Name, &amp;#34;phone&amp;#34;: validator.Phone, &amp;#34;work_experience&amp;#34;: validator.WorkExperience, &amp;#34;bio&amp;#34;: validator.Bio, &amp;#34;about&amp;#34;: validator.About, } // 反射数据校验  for key, value := range res { if msg, code = validator.</description>
+    </item>
+    
+    <item>
+      <title>MySQL终端命令总结</title>
+      <link>https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sat, 20 Aug 2022 17:00:24 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</guid>
+      <description>创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户
+  创建用户  create user test identified by &#39;123456&#39;;
+  创建数据表 create table_name;
+  授权 gran all privileges on ``table_name``.* to Luke@&#39;%&#39; identified by &#39;ssss6666&#39;;
+    删除unique key
+ alter table table_name drop index index_name;    新增unique key
+ alter table table_name add unique key new_index_name (col1,col2);    查看表的结构</description>
+    </item>
+    
+    <item>
+      <title>Json Web Token</title>
+      <link>https://shiluanzzz.github.io/post/2208/jwt/</link>
+      <pubDate>Tue, 28 Jun 2022 16:55:33 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/2208/jwt/</guid>
+      <description>什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。
+ 传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。
+但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.
+问题：
+ Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。 **扩展性: ** 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。 **CSRF: **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。  基于token的鉴权机制 基于token的鉴权机制类似于http协议也是无状态的，但是它不需要在服务端去保留用户的认证信息或者会话信息。鉴权机制大致流程如下
+ 用户使用用户名密码来请求服务器 服务器验证用户的信息 服务器通过验证发送给用户一个token 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据  JWT的构成 jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用.隔开。
+header  jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。
+{ &amp;#39;typ&amp;#39;: &amp;#39;JWT&amp;#39;, &amp;#39;alg&amp;#39;: &amp;#39;HS256&amp;#39; } 对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+playload  载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。
+标准中注册的声明 (建议但不强制使用) ：
+iss: jwt签发者 sub: jwt所面向的用户 aud: 接收jwt的一方 exp: jwt的过期时间，这个过期时间必须要大于签发时间 nbf: 定义在什么时间之前，该jwt都是不可用的. iat: jwt的签发时间 jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。 公共的声明 ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.
+私有的声明 ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。
+signature  signature即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。</description>
+    </item>
+    
+    <item>
+      <title>Logrus为http请求自动添加trace Id</title>
+      <link>https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</link>
+      <pubDate>Mon, 27 Jun 2022 16:43:44 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</guid>
+      <description>日志Trace-Id 在后端服务中使用logrus作为日志系统，当接受到一条请求时，该请求可能会调用其他层(controller,biz,service)的代码而产生很多日志，这时候就需要一个trace-id来快速定位到与某一条请求相关的日志。
+如果是在每条日志前手动加一个id，那也太蠢了。主要实现方法有两种
+ 使用context在每个函数之前传递id，这样实际上还是多了一个参数，不够优雅 使用webhook为当前作用域添加一个field  使用webhook为日志添加Trace-Id 自定义了一个TraceId的结构体，实现了logrus中的hook接口，该接口需要实现Fire和Levels两个方法
+// 自定义一个TraceIdHook 并实现Fire和Levels方法 type TraceIdHook struct { TraceId string } func NewTraceIdHook(traceId string) logrus.Hook { hook := TraceIdHook{ TraceId: traceId, } return &amp;amp;hook } func (hook *TraceIdHook) Fire(entry *logrus.Entry) error { // 注入trace-ID  entry.Data[&amp;#34;trace-ID&amp;#34;] = hook.TraceId return nil } func (hook *TraceIdHook) Levels() []logrus.Level { return logrus.AllLevels } 模拟不同作用域下的使用,完整的代码可以在go-playground看到
+func doSth(params string) { logrus.Info(&amp;#34;do sth&amp;#34;, params) subJob(params) } func subJob(params string) { logrus.</description>
+    </item>
+    
+    <item>
+      <title>线程、进程、协程的区别</title>
       <link>https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</link>
       <pubDate>Tue, 26 Apr 2022 23:51:02 +0800</pubDate>
       
       <guid>https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</guid>
-      <description>1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
+      <description>对操作系统来说，线程是最小的执行单元，进程是最小的资源管理单元。 无论进程还是线程，都是由操作系统所管理的。协程(Coroutines)是一种比线程更加轻量级的存在
+1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
 电脑中有许多进程需要处于「同时」开启的状态，而利用CPU在进程间的快速切换，可以实现「同时」运行多个程序。而进程切换则意味着需要保留进程切换前的状态，以备切换回去的时候能够继续接着工作。 所以进程拥有自己的地址空间，全局变量，文件描述符，各种硬件等等资源。操作系统通过调度CPU去执行进程的记录、回复、切换等等。
 2线程 线程是一个程序执行过程中的最小单元，一个程序可能包含多个线程，这多个线程共享进程的所有资源。每个线程执行不同的任务来提高程序的运行效率。
 3进程与线程的区别  进程是CPU资源分配的基本单位，线程是独立运行和独立调度的基本单位（CPU上真正运行的是线程）。 进程拥有自己的资源空间，一个进程包含若干个线程，线程与CPU资源分配无关，多个线程共享同一进程内的资源。 线程的调度与切换比进程快很多。  4为什么要有线程？ 线程的出现就是为了提高单位时间内CPU的利用率。
@@ -27,7 +91,7 @@
 如同一个进程可以有很多线程一样，一个线程可以有很多协程。
 但是，协程不是被操作系统所管理的，没有改变CPU最小执行单元是线程，协程是完全由程序所控制的（用户态执行），不会产生上下文切换。
 目前只有部分语言实现了协程：
- python的yield/send，当协程执行到yield关键字时，会暂停在那一行，等到主线程调用send方法发送了数据，协程才会接到数据继续执行。 Lua从5.0版本开始使用协程，通过扩展库coroutine来实现。 Go语言对协程的实现非常强大而简洁，可以轻松创建成百上千个协程并发执行。 Java语言并没有对协程的原生支持，但是某些开源框架模拟出了协程的功能，有兴趣的小伙伴可以看一看Kilim框架的源码：https://github.com/kilim/kilim  参考链接：  https://zhuanlan.zhihu.com/p/70256971  </description>
+ python的yield/send，当协程执行到yield关键字时，会暂停在那一行，等到主线程调用send方法发送了数据，协程才会接到数据继续执行。 Lua从5.0版本开始使用协程，通过扩展库coroutine来实现。 Go语言对协程的实现非常强大而简洁，可以轻松创建成百上千个协程并发执行。 Java语言并没有对协程的原生支持，但是某些开源框架模拟出了协程的功能，可以看一看Kilim框架的源码：https://github.com/kilim/kilim  参考链接：  https://zhuanlan.zhihu.com/p/70256971  </description>
     </item>
     
     <item>

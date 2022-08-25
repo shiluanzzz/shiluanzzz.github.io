@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Json Web Token | 风吹不停</title>
+<meta name="keywords" content=", " />
+<meta name="description" content="什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。
+ 传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。
+但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.
+问题：
+ Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。 **扩展性: ** 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。 **CSRF: **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。  基于token的鉴权机制 基于token的鉴权机制类似于http协议也是无状态的，但是它不需要在服务端去保留用户的认证信息或者会话信息。鉴权机制大致流程如下
+ 用户使用用户名密码来请求服务器 服务器验证用户的信息 服务器通过验证发送给用户一个token 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据  JWT的构成 jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用.隔开。
+header  jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。
+{ &#39;typ&#39;: &#39;JWT&#39;, &#39;alg&#39;: &#39;HS256&#39; } 对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+playload  载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。
+标准中注册的声明 (建议但不强制使用) ：
+iss: jwt签发者 sub: jwt所面向的用户 aud: 接收jwt的一方 exp: jwt的过期时间，这个过期时间必须要大于签发时间 nbf: 定义在什么时间之前，该jwt都是不可用的. iat: jwt的签发时间 jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。 公共的声明 ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.
+私有的声明 ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。
+signature  signature即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。">
+<meta name="author" content="">
+<link rel="canonical" href="https://shiluanzzz.github.io/post/2208/jwt/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.8291fbae80a381aa8a9592828bb9f9682c551756e0453d50b599e4493b8f9eba.css" integrity="sha256-gpH7roCjgaqKlZKCi7n5aCxVF1bgRT1QtZnkSTuPnro=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.89.4" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="Json Web Token" />
+<meta property="og:description" content="什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。
+ 传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。
+但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.
+问题：
+ Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。 **扩展性: ** 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。 **CSRF: **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。  基于token的鉴权机制 基于token的鉴权机制类似于http协议也是无状态的，但是它不需要在服务端去保留用户的认证信息或者会话信息。鉴权机制大致流程如下
+ 用户使用用户名密码来请求服务器 服务器验证用户的信息 服务器通过验证发送给用户一个token 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据  JWT的构成 jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用.隔开。
+header  jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。
+{ &#39;typ&#39;: &#39;JWT&#39;, &#39;alg&#39;: &#39;HS256&#39; } 对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+playload  载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。
+标准中注册的声明 (建议但不强制使用) ：
+iss: jwt签发者 sub: jwt所面向的用户 aud: 接收jwt的一方 exp: jwt的过期时间，这个过期时间必须要大于签发时间 nbf: 定义在什么时间之前，该jwt都是不可用的. iat: jwt的签发时间 jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。 公共的声明 ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.
+私有的声明 ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。
+signature  signature即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/2208/jwt/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-28T16:55:33&#43;08:00" />
+<meta property="article:modified_time" content="2022-06-28T16:55:33&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Json Web Token"/>
+<meta name="twitter:description" content="什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。
+ 传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。
+但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.
+问题：
+ Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。 **扩展性: ** 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。 **CSRF: **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。  基于token的鉴权机制 基于token的鉴权机制类似于http协议也是无状态的，但是它不需要在服务端去保留用户的认证信息或者会话信息。鉴权机制大致流程如下
+ 用户使用用户名密码来请求服务器 服务器验证用户的信息 服务器通过验证发送给用户一个token 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据  JWT的构成 jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用.隔开。
+header  jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。
+{ &#39;typ&#39;: &#39;JWT&#39;, &#39;alg&#39;: &#39;HS256&#39; } 对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+playload  载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。
+标准中注册的声明 (建议但不强制使用) ：
+iss: jwt签发者 sub: jwt所面向的用户 aud: 接收jwt的一方 exp: jwt的过期时间，这个过期时间必须要大于签发时间 nbf: 定义在什么时间之前，该jwt都是不可用的. iat: jwt的签发时间 jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。 公共的声明 ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.
+私有的声明 ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。
+signature  signature即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Json Web Token",
+      "item": "https://shiluanzzz.github.io/post/2208/jwt/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Json Web Token",
+  "name": "Json Web Token",
+  "description": "什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。\n 传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。\n但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.\n问题：\n Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。 **扩展性: ** 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。 **CSRF: **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。  基于token的鉴权机制 基于token的鉴权机制类似于http协议也是无状态的，但是它不需要在服务端去保留用户的认证信息或者会话信息。鉴权机制大致流程如下\n 用户使用用户名密码来请求服务器 服务器验证用户的信息 服务器通过验证发送给用户一个token 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据  JWT的构成 jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用.隔开。\nheader  jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。\n{ \u0026#39;typ\u0026#39;: \u0026#39;JWT\u0026#39;, \u0026#39;alg\u0026#39;: \u0026#39;HS256\u0026#39; } 对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\nplayload  载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。\n标准中注册的声明 (建议但不强制使用) ：\niss: jwt签发者 sub: jwt所面向的用户 aud: 接收jwt的一方 exp: jwt的过期时间，这个过期时间必须要大于签发时间 nbf: 定义在什么时间之前，该jwt都是不可用的. iat: jwt的签发时间 jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。 公共的声明 ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.\n私有的声明 ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。\nsignature  signature即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。",
+  "keywords": [
+    "", ""
+  ],
+  "articleBody": "什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。\n 传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。\n但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.\n问题：\n Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。 **扩展性: ** 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。 **CSRF: **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。  基于token的鉴权机制 基于token的鉴权机制类似于http协议也是无状态的，但是它不需要在服务端去保留用户的认证信息或者会话信息。鉴权机制大致流程如下\n 用户使用用户名密码来请求服务器 服务器验证用户的信息 服务器通过验证发送给用户一个token 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据  JWT的构成 jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用.隔开。\nheader  jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。\n{ 'typ': 'JWT', 'alg': 'HS256' } 对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\nplayload  载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。\n标准中注册的声明 (建议但不强制使用) ：\niss: jwt签发者 sub: jwt所面向的用户 aud: 接收jwt的一方 exp: jwt的过期时间，这个过期时间必须要大于签发时间 nbf: 定义在什么时间之前，该jwt都是不可用的. iat: jwt的签发时间 jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。 公共的声明 ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.\n私有的声明 ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。\nsignature  signature即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。\n首先将header和payload通过.连接组成字符串，对对这个字符串进行加盐加密构成secret，即jwt的第三部分。有关加盐存储可以看后端密码储存方案。\n// javascript var encodedString = base64UrlEncode(header) + '.' + base64UrlEncode(payload); var signature = HMACSHA256(encodedString, 'secret'); // TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ 将这三部分用.连接成一个完整的字符串,构成了最终的jwt。\n需要注意的是密钥的保存、签发生成都是在服务端生成的。而secret就是服务端的私钥，在任何情况下都不应该泄露出去，如果泄露会被伪造jwt。\njwt的总结 优点  因为json的通用性，所以JWT是可以进行跨语言支持的，像JAVA,JavaScript,NodeJS,PHP等很多语言都可以使用。 因为有了payload部分，所以JWT可以在自身存储一些其他业务逻辑所必要的非敏感信息。 便于传输，jwt的构成非常简单，字节占用很小，所以它是非常便于传输的。 它不需要在服务端保存会话信息, 所以它易于应用的扩展  安全相关  不应该在jwt的payload部分存放敏感信息，因为该部分是客户端可解密的部分。 保护好secret私钥，该私钥非常重要。 如果可以，请使用https协议  关于jwt的问题  在退出登录or修改密码的时候，如何实现token 失效？  在服务端存一个token的黑名单，失效就加入黑名单中。 在服务端设置加密的 key 时，为每个用户生成唯一的 key，失效则改变该 key 在playload部分增加一个版本号字段，失效就更改该版本号。    ",
+  "wordCount" : "107",
+  "inLanguage": "en",
+  "datePublished": "2022-06-28T16:55:33+08:00",
+  "dateModified": "2022-06-28T16:55:33+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/2208/jwt/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                    <span>🏷️标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                    <span>📚归档</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Json Web Token
+    </h1>
+    <div class="post-meta"><span title='2022-06-28 16:55:33 +0800 CST'>2022-06-28</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%bb%80%e4%b9%88%e6%98%afjwt" aria-label="什么是JWT">什么是JWT</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bc%a0%e7%bb%9f%e7%9a%84session%e8%ae%a4%e8%af%81" aria-label="传统的session认证">传统的session认证</a></li>
+                <li>
+                    <a href="#%e5%9f%ba%e4%ba%8etoken%e7%9a%84%e9%89%b4%e6%9d%83%e6%9c%ba%e5%88%b6" aria-label="基于token的鉴权机制">基于token的鉴权机制</a></li></ul>
+                </li>
+                <li>
+                    <a href="#jwt%e7%9a%84%e6%9e%84%e6%88%90" aria-label="JWT的构成">JWT的构成</a><ul>
+                        
+                <li>
+                    <a href="#header" aria-label="header"><code>header</code></a></li>
+                <li>
+                    <a href="#playload" aria-label="playload"><code>playload</code></a></li>
+                <li>
+                    <a href="#signature" aria-label="signature"><code>signature</code></a></li></ul>
+                </li>
+                <li>
+                    <a href="#jwt%e7%9a%84%e6%80%bb%e7%bb%93" aria-label="jwt的总结">jwt的总结</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bc%98%e7%82%b9" aria-label="优点">优点</a></li>
+                <li>
+                    <a href="#%e5%ae%89%e5%85%a8%e7%9b%b8%e5%85%b3" aria-label="安全相关">安全相关</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%85%b3%e4%ba%8ejwt%e7%9a%84%e9%97%ae%e9%a2%98" aria-label="关于jwt的问题">关于jwt的问题</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="什么是jwt">什么是JWT<a hidden class="anchor" aria-hidden="true" href="#什么是jwt">#</a></h2>
+<blockquote>
+<p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).  该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。</p>
+</blockquote>
+<h3 id="传统的session认证">传统的session认证<a hidden class="anchor" aria-hidden="true" href="#传统的session认证">#</a></h3>
+<p>http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。</p>
+<p>但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.</p>
+<p><strong>问题：</strong></p>
+<ul>
+<li><strong>Session</strong>: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。</li>
+<li>**扩展性: **  用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。</li>
+<li>**CSRF:     **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。</li>
+</ul>
+<h3 id="基于token的鉴权机制">基于token的鉴权机制<a hidden class="anchor" aria-hidden="true" href="#基于token的鉴权机制">#</a></h3>
+<p>基于token的鉴权机制类似于http协议也是无状态的，但是它<strong>不需要在服务端去保留</strong>用户的认证信息或者会话信息。鉴权机制大致流程如下</p>
+<ul>
+<li>用户使用用户名密码来请求服务器</li>
+<li>服务器验证用户的信息</li>
+<li>服务器通过验证发送给用户一个token</li>
+<li>客户端存储token，并在每次请求时附送上这个token值</li>
+<li>服务端验证token值，并返回数据</li>
+</ul>
+<h2 id="jwt的构成">JWT的构成<a hidden class="anchor" aria-hidden="true" href="#jwt的构成">#</a></h2>
+<p>jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用<code>.</code>隔开。</p>
+<h3 id="header"><code>header</code><a hidden class="anchor" aria-hidden="true" href="#header">#</a></h3>
+<hr>
+<p>jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{
+  <span style="color:#960050;background-color:#1e0010">&#39;typ&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;JWT&#39;,</span>
+  <span style="color:#960050;background-color:#1e0010">&#39;alg&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;HS256&#39;</span>
+}
+</code></pre></div><p>对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为<code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</code></p>
+<h3 id="playload"><code>playload</code><a hidden class="anchor" aria-hidden="true" href="#playload">#</a></h3>
+<hr>
+<p>载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。</p>
+<p><strong>标准中注册的声明</strong> (建议但不强制使用) ：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#a6e22e">iss</span>: <span style="color:#a6e22e">jwt签发者</span>
+<span style="color:#a6e22e">sub</span>: <span style="color:#a6e22e">jwt所面向的用户</span>
+<span style="color:#a6e22e">aud</span>: <span style="color:#a6e22e">接收jwt的一方</span>
+<span style="color:#a6e22e">exp</span>: <span style="color:#a6e22e">jwt的过期时间</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">这个过期时间必须要大于签发时间</span>
+<span style="color:#a6e22e">nbf</span>: <span style="color:#a6e22e">定义在什么时间之前</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">该jwt都是不可用的</span>.
+<span style="color:#a6e22e">iat</span>: <span style="color:#a6e22e">jwt的签发时间</span>
+<span style="color:#a6e22e">jti</span>: <span style="color:#a6e22e">jwt的唯一身份标识</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">主要用来作为一次性token</span>,<span style="color:#a6e22e">从而回避重放攻击</span><span style="color:#960050;background-color:#1e0010">。</span>
+</code></pre></div><p><strong>公共的声明</strong> ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.</p>
+<p><strong>私有的声明</strong> ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。</p>
+<h3 id="signature"><code>signature</code><a hidden class="anchor" aria-hidden="true" href="#signature">#</a></h3>
+<hr>
+<p><code>signature</code>即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。</p>
+<p>首先将header和payload通过<code>.</code>连接组成字符串，对对这个字符串进行<strong>加盐</strong>加密构成secret，即jwt的第三部分。有关加盐存储可以看后端密码储存方案。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#75715e">// javascript
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">encodedString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">base64UrlEncode</span>(<span style="color:#a6e22e">header</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">base64UrlEncode</span>(<span style="color:#a6e22e">payload</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">signature</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">HMACSHA256</span>(<span style="color:#a6e22e">encodedString</span>, <span style="color:#e6db74">&#39;secret&#39;</span>); 
+<span style="color:#75715e">// TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+</span></code></pre></div><p>将这三部分用<code>.</code>连接成一个完整的字符串,构成了最终的jwt。</p>
+<p>需要注意的是密钥的保存、签发生成都是在服务端生成的。而secret就是服务端的私钥，在任何情况下都不应该泄露出去，如果泄露会被伪造jwt。</p>
+<h2 id="jwt的总结">jwt的总结<a hidden class="anchor" aria-hidden="true" href="#jwt的总结">#</a></h2>
+<h3 id="优点">优点<a hidden class="anchor" aria-hidden="true" href="#优点">#</a></h3>
+<ul>
+<li>因为json的通用性，所以JWT是可以进行跨语言支持的，像JAVA,JavaScript,NodeJS,PHP等很多语言都可以使用。</li>
+<li>因为有了payload部分，所以JWT可以在自身存储一些其他业务逻辑所必要的非敏感信息。</li>
+<li>便于传输，jwt的构成非常简单，字节占用很小，所以它是非常便于传输的。</li>
+<li>它不需要在服务端保存会话信息, 所以它易于应用的扩展</li>
+</ul>
+<h3 id="安全相关">安全相关<a hidden class="anchor" aria-hidden="true" href="#安全相关">#</a></h3>
+<ul>
+<li>不应该在jwt的payload部分存放敏感信息，因为该部分是客户端可解密的部分。</li>
+<li>保护好secret私钥，该私钥非常重要。</li>
+<li>如果可以，请使用https协议</li>
+</ul>
+<h2 id="关于jwt的问题">关于jwt的问题<a hidden class="anchor" aria-hidden="true" href="#关于jwt的问题">#</a></h2>
+<ul>
+<li>在退出登录or修改密码的时候，如何实现token 失效？
+<ul>
+<li>在服务端存一个token的黑名单，失效就加入黑名单中。</li>
+<li>在服务端设置加密的 key 时，为每个用户生成唯一的 key，失效则改变该 key</li>
+<li>在playload部分增加一个版本号字段，失效就更改该版本号。</li>
+</ul>
+</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>MySQL终端命令总结</span>
+  </a>
+  <a class="next" href="https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Logrus为http请求自动添加trace Id</span>
+  </a>
+</nav>
+
+  </footer><script src="https://utteranc.es/client.js"
+        repo="shiluanzzz/hugo-comments"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

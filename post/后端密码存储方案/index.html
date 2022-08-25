@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>后端密码存储方案 | 风吹不停</title>
 <meta name="keywords" content="后端, 加密" />
 <meta name="description" content="作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
@@ -99,7 +99,83 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="后端密码存储方案" />
+<meta property="og:description" content="作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
+普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。
+Go语言对这三种加密算法的实现如下所示：
+//import &#34;crypto/sha256&#34; h := sha256.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/sha1&#34; h := sha1.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/md5&#34; h := md5.New() io.WriteString(h, &#34;需要加密的密码&#34;) fmt.Printf(&#34;%x&#34;, h.Sum(nil)) 单向哈希有两个特性：
+ 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。
+因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。
+进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。
+一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。
+但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-27T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-10-27T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端密码存储方案"/>
+<meta name="twitter:description" content="作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
+普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。
+Go语言对这三种加密算法的实现如下所示：
+//import &#34;crypto/sha256&#34; h := sha256.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/sha1&#34; h := sha1.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/md5&#34; h := md5.New() io.WriteString(h, &#34;需要加密的密码&#34;) fmt.Printf(&#34;%x&#34;, h.Sum(nil)) 单向哈希有两个特性：
+ 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。
+因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。
+进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。
+一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。
+但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "后端密码存储方案",
+      "item": "https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "后端密码存储方案",
+  "name": "后端密码存储方案",
+  "description": "作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?\n普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。\nGo语言对这三种加密算法的实现如下所示：\n//import \u0026#34;crypto/sha256\u0026#34; h := sha256.New() io.WriteString(h, \u0026#34;His money is twice tainted: \u0026#39;taint yours and \u0026#39;taint mine.\u0026#34;) fmt.Printf(\u0026#34;% x\u0026#34;, h.Sum(nil)) //import \u0026#34;crypto/sha1\u0026#34; h := sha1.New() io.WriteString(h, \u0026#34;His money is twice tainted: \u0026#39;taint yours and \u0026#39;taint mine.\u0026#34;) fmt.Printf(\u0026#34;% x\u0026#34;, h.Sum(nil)) //import \u0026#34;crypto/md5\u0026#34; h := md5.New() io.WriteString(h, \u0026#34;需要加密的密码\u0026#34;) fmt.Printf(\u0026#34;%x\u0026#34;, h.Sum(nil)) 单向哈希有两个特性：\n 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。\n因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。\n进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。\n一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。\n但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。",
+  "keywords": [
+    "后端", "加密"
+  ],
+  "articleBody": "作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?\n普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。\nGo语言对这三种加密算法的实现如下所示：\n//import \"crypto/sha256\" h := sha256.New() io.WriteString(h, \"His money is twice tainted: 'taint yours and 'taint mine.\") fmt.Printf(\"% x\", h.Sum(nil)) //import \"crypto/sha1\" h := sha1.New() io.WriteString(h, \"His money is twice tainted: 'taint yours and 'taint mine.\") fmt.Printf(\"% x\", h.Sum(nil)) //import \"crypto/md5\" h := md5.New() io.WriteString(h, \"需要加密的密码\") fmt.Printf(\"%x\", h.Sum(nil)) 单向哈希有两个特性：\n 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。\n因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。\n进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。\n一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。\n但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。\n现在安全性比较好的网站，都会用一种叫做“加盐”的方式来存储密码，也就是常说的 “salt”。他们通常的做法是，先将用户输入的密码进行一次MD5（或其它哈希算法）加密；将得到的 MD5 值前后加上一些只有管理员自己知道的随机串，再进行一次MD5加密。这个随机串中可以包括某些固定的串，也可以包括用户名（用来保证每个用户加密使用的密钥都不一样）。\n//import \"crypto/md5\" //假设用户名abc，密码123456 h := md5.New() io.WriteString(h, \"需要加密的密码\") //pwmd5等于e10adc3949ba59abbe56e057f20f883e pwmd5 :=fmt.Sprintf(\"%x\", h.Sum(nil)) //指定两个 salt： salt1 = @#$% salt2 = ^\u0026*() salt1 := \"@#$%\" salt2 := \"^\u0026*()\" //salt1+用户名+salt2+MD5拼接 io.WriteString(h, salt1) io.WriteString(h, \"abc\") io.WriteString(h, salt2) io.WriteString(h, pwmd5) last :=fmt.Sprintf(\"%x\", h.Sum(nil)) 在两个salt没有泄露的情况下，黑客如果拿到的是最后这个加密串，就几乎不可能推算出原始的密码是什么了。\n专家方案 上面的进阶方案在几年前也许是足够安全的方案，因为攻击者没有足够的资源建立这么多的rainbow table。 但是，时至今日，因为并行计算能力的提升，这种攻击已经完全可行。\n怎么解决这个问题呢？只要时间与资源允许，没有破译不了的密码，所以方案是:故意增加密码计算所需耗费的资源和时间，使得任何人都不可获得足够的资源建立所需的rainbow table。\n这类方案有一个特点，算法中都有个因子，用于指明计算密码摘要所需要的资源和时间，也就是计算强度。计算强度越大，攻击者建立rainbow table越困难，以至于不可继续。\n这里推荐scrypt方案，scrypt是由著名的FreeBSD黑客Colin Percival为他的备份服务Tarsnap开发的。\n目前Go语言里面支持的库 https://github.com/golang/crypto/tree/master/scrypt\ndk := scrypt.Key([]byte(\"some password\"), []byte(salt), 16384, 8, 1, 32) 通过上面的方法可以获取唯一的相应的密码值，这是目前为止最难破解的。\n总结  使用专家方案这里推荐scrypt方案，scrypt是由著名的FreeBSD黑客Colin Percival为他的备份服务Tarsnap开发的。https://pkg.go.dev/golang.org/x/crypto/scrypt 使用另外一种比较成熟的方案 https://pkg.go.dev/golang.org/x/crypto/bcrypt  ",
+  "wordCount" : "139",
+  "inLanguage": "en",
+  "datePublished": "2021-10-27T00:00:00Z",
+  "dateModified": "2021-10-27T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

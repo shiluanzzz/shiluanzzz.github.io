@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>字符串哈希 | 风吹不停</title>
 <meta name="keywords" content=", " />
 <meta name="description" content="Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
@@ -97,7 +97,79 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="字符串哈希" />
+<meta property="og:description" content="Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
+我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。
+ 哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为
+$$ f(s)=\sum_{i=1}^{l} s[i] \times b^{l-i}(\bmod M) $$
+例如，字符串$xyz$的哈希值为$xb^2&#43;yb&#43;z$。
+Hash的实现 # Python Version M = int(1e9 &#43; 7) B = 233 def get_hash(s): res = 0 for char in s: res = (res * B &#43; ord(char)) % M return res def cmp(s, t): return get_hash(s) == get_hash(t)   错误率分析
+若进行 $n$ 次比较，每次错误率 $\dfrac 1 M$，那么总错误率是 $1-\left(1-\dfrac 1 M\right)^n$。在随机数据下，若 $M=10^9 &#43; 7$，$n=10^6$，错误率约为 $\dfrac 1{1000}$，并不是能够完全忽略不计的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-26T23:09:35&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-26T23:09:35&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="字符串哈希"/>
+<meta name="twitter:description" content="Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
+我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。
+ 哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为
+$$ f(s)=\sum_{i=1}^{l} s[i] \times b^{l-i}(\bmod M) $$
+例如，字符串$xyz$的哈希值为$xb^2&#43;yb&#43;z$。
+Hash的实现 # Python Version M = int(1e9 &#43; 7) B = 233 def get_hash(s): res = 0 for char in s: res = (res * B &#43; ord(char)) % M return res def cmp(s, t): return get_hash(s) == get_hash(t)   错误率分析
+若进行 $n$ 次比较，每次错误率 $\dfrac 1 M$，那么总错误率是 $1-\left(1-\dfrac 1 M\right)^n$。在随机数据下，若 $M=10^9 &#43; 7$，$n=10^6$，错误率约为 $\dfrac 1{1000}$，并不是能够完全忽略不计的。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "字符串哈希",
+      "item": "https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "字符串哈希",
+  "name": "字符串哈希",
+  "description": "Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。\n我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。\n 哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为\n$$ f(s)=\\sum_{i=1}^{l} s[i] \\times b^{l-i}(\\bmod M) $$\n例如，字符串$xyz$的哈希值为$xb^2+yb+z$。\nHash的实现 # Python Version M = int(1e9 + 7) B = 233 def get_hash(s): res = 0 for char in s: res = (res * B + ord(char)) % M return res def cmp(s, t): return get_hash(s) == get_hash(t)   错误率分析\n若进行 $n$ 次比较，每次错误率 $\\dfrac 1 M$，那么总错误率是 $1-\\left(1-\\dfrac 1 M\\right)^n$。在随机数据下，若 $M=10^9 + 7$，$n=10^6$，错误率约为 $\\dfrac 1{1000}$，并不是能够完全忽略不计的。",
+  "keywords": [
+    "", ""
+  ],
+  "articleBody": "Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。\n我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。\n 哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为\n$$ f(s)=\\sum_{i=1}^{l} s[i] \\times b^{l-i}(\\bmod M) $$\n例如，字符串$xyz$的哈希值为$xb^2+yb+z$。\nHash的实现 # Python Version M = int(1e9 + 7) B = 233 def get_hash(s): res = 0 for char in s: res = (res * B + ord(char)) % M return res def cmp(s, t): return get_hash(s) == get_hash(t)   错误率分析\n若进行 $n$ 次比较，每次错误率 $\\dfrac 1 M$，那么总错误率是 $1-\\left(1-\\dfrac 1 M\\right)^n$。在随机数据下，若 $M=10^9 + 7$，$n=10^6$，错误率约为 $\\dfrac 1{1000}$，并不是能够完全忽略不计的。\n  改进| 多次询问子串哈希 单次计算一个字符串的哈希时间复杂度为$O(n)$，n为串长。如果多次询问一个字符串的子串的哈希值，每次重新计算效率低下。\n一般采取的方法是对整个字符串先预处理出每个前缀的哈希值，将哈希值看成一个 $b$ 进制的数对 $M$ 取模的结果，这样的话每次就能快速求出子串的哈希了：\n令 $f_i(s)$ 表示 $f(s[1..i])$，即原串长度为 $i$ 的前缀的哈希值，那么按照定义有\n$$ f_i(s)=s[1]\\cdot b^{i-1}+s[2]\\cdot b^{i-2}+…+s[i-1]\\cdot b+s[i] $$\n现在，我们想要用类似前缀和的方式快速求出 $f(s[l..r])$，按照定义有字符串 $s[l..r]$ 的哈希值为\n$$ f(s[l..r])=s[l]\\cdot b^{r-l}+s[l+1]\\cdot b^{r-l-1}+…+s[r-1]\\cdot b+s[r] $$\n对比观察上述两个式子，我们发现 $f(s[l..r])=f_r(s)-f_{l-1}(s) \\times b^{r-l+1}$ 成立（可以手动代入验证一下），因此我们用这个式子就可以快速得到子串的哈希值。其中 $b^{r-l+1}$ 可以 $O(n)$ 的预处理出来然后 $O(1)$ 的回答每次询问（当然也可以快速幂 $O(\\log n)$ 的回答每次询问）。\nRabin-Karp 字符串编码  RK字符串编码的思想跟上面多次询问子串哈希一样，以一个仅包含小写英文字母的字符串编码为例。\n 字符串中仅包含小写字母，可以使用arr[i]=ord('i')-ord('a')将字母编码为0-25之间的数字，比如字符串abcde可编码为[0,1,2,3,4]。 将子串看成一个26进制的数，这个数对应的10进制数就是它的编码。  字符串abc的编码为$h_0=0 \\times 26^2 + 1 \\times 26^1 + 2 \\times 26^0 = 28$ 公式表达：对于一个长度为$L$的字符串，设$c_i$为 $s$ 的第 $i$ 个字符编码后的数字，$a$ 为编码的进制，那么有 $h_0 = c_0a^{L-1} + c_1a^{L-2} + … +c_{L-1}a^0 = \\sum_{i=0}^{L-1} c_ia^{L-1-i}$   在上一步中，对每一个子串的求解编码时间复杂度仍然为$O(n)$，但是当求同一个长度的字符串编码时，可以利用相邻的同长度字符串来求解。   字符串abc的编码为$h_0=0 \\times 26^2 + 1 \\times 26^1 + 2 \\times 26^0 = 28$\n  字符串bcd的编码$h_1=1 \\times 26^2 + 2 \\times 26^1 + 3 \\times 26^0 = 731 $，其实h1可以在h0的基础上，更快的求解出编码，即$h_1=(h_0-0\\times26^2)\\times26+3\\times26^0=731 $\n更一般的表达式为：$h_{1}=\\left(h_{0} \\times a-c_{0} \\times a^{L}\\right)+c_{L+1} $\n  这样即可在常数时间内根据上一个子串求解出下一个子串的字符串编码。\n   当字符个数过多后，字符串编码的数会特别大，一般的做法是需要对编码进行取模来防止溢出，模一般选取编码的信息量的平方的数量级。而取模则会带来哈希碰撞。  为了避免哈希碰撞可以使用两套进制和模的组合。当两套都一样时视作相同。 或者对编码在调用一次内置的hash函数进行哈希。    ",
+  "wordCount" : "191",
+  "inLanguage": "en",
+  "datePublished": "2022-04-26T23:09:35+08:00",
+  "dateModified": "2022-04-26T23:09:35+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

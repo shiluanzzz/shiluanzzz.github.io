@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>MySQL终端命令总结 | 风吹不停</title>
+<meta name="keywords" content=", " />
+<meta name="description" content="创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户
+  创建用户  create user test identified by &#39;123456&#39;;
+  创建数据表 create table_name;
+  授权 gran all privileges on ``table_name``.* to Luke@&#39;%&#39; identified by &#39;ssss6666&#39;;
+    删除unique key
+ alter table table_name drop index index_name;    新增unique key
+ alter table table_name add unique key new_index_name (col1,col2);    查看表的结构">
+<meta name="author" content="">
+<link rel="canonical" href="https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.8291fbae80a381aa8a9592828bb9f9682c551756e0453d50b599e4493b8f9eba.css" integrity="sha256-gpH7roCjgaqKlZKCi7n5aCxVF1bgRT1QtZnkSTuPnro=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.89.4" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += 'has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax{
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #f03535;
+}
+</style><meta property="og:title" content="MySQL终端命令总结" />
+<meta property="og:description" content="创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户
+  创建用户  create user test identified by &#39;123456&#39;;
+  创建数据表 create table_name;
+  授权 gran all privileges on ``table_name``.* to Luke@&#39;%&#39; identified by &#39;ssss6666&#39;;
+    删除unique key
+ alter table table_name drop index index_name;    新增unique key
+ alter table table_name add unique key new_index_name (col1,col2);    查看表的结构" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-20T17:00:24&#43;08:00" />
+<meta property="article:modified_time" content="2022-08-20T17:00:24&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL终端命令总结"/>
+<meta name="twitter:description" content="创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户
+  创建用户  create user test identified by &#39;123456&#39;;
+  创建数据表 create table_name;
+  授权 gran all privileges on ``table_name``.* to Luke@&#39;%&#39; identified by &#39;ssss6666&#39;;
+    删除unique key
+ alter table table_name drop index index_name;    新增unique key
+ alter table table_name add unique key new_index_name (col1,col2);    查看表的结构"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "MySQL终端命令总结",
+      "item": "https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MySQL终端命令总结",
+  "name": "MySQL终端命令总结",
+  "description": "创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户\n  创建用户  create user test identified by '123456';\n  创建数据表 create table_name;\n  授权 gran all privileges on ``table_name``.* to Luke@'%' identified by 'ssss6666';\n    删除unique key\n alter table table_name drop index index_name;    新增unique key\n alter table table_name add unique key new_index_name (col1,col2);    查看表的结构",
+  "keywords": [
+    "", ""
+  ],
+  "articleBody": "创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户\n  创建用户  create user test identified by '123456';\n  创建数据表 create table_name;\n  授权 gran all privileges on ``table_name``.* to Luke@'%' identified by 'ssss6666';\n    删除unique key\n alter table table_name drop index index_name;    新增unique key\n alter table table_name add unique key new_index_name (col1,col2);    查看表的结构\n  desc table_name显示表结构，字段类型，主键是否为空等。但是不显示外键\n  show create table table_name 显示创建表的DDL\n    修改表的储存引擎ALTER TABLE account ENGINE=MyISAM;\n  修改表 ALTER TABLE   修改表名 ALTER TABLE  RENAME \n 例:ALTER TABLE game_account RENAME account;    添加字段ALTER TABLE  ADD   [ FIRST | AFTER col_name]\nALTER TABLE account ADD Game_zone VARCHAR(20) NOT NULL DEFAULT \"HuaBei\" FIRST;\n 如果需要指定加在某个位置，在语句最后加上FIRST 或者 AFTER col_name    删除字段ALTER TABLE  DROP \nALTER TABLE account DROP Account_role ;\n  修改字段ALTER TABLE  CHANGE   \nALTER TABLE account CHANGE password password VARCHAR(60) ;\n  修改表的编码 ALTER TABLE  character set utf8mb4;\nalter table email character set utf8mb4;\n  修改数据库的编码 ALTER database  character set utf8mb4;\n  导出|导入 导出数据\n  导出整个数据库 mysqldump -u 用户名 -p 数据库名  导出的文件名\n  导出表mysqldump -u 用户名 -p 数据库名 表名 导出的文件名\n 使用mysqldump 导出数据库可能会产生中文乱码的情况，加上--default-character-set=utf8 即可解决导出乱码问题    上面两条命令都是带数据的导出，如果不带数据导出，在-p 添加 -d --add-drop-table\n  导入数据\n  进入mysql控制台后使用source命令 source xxx.sql\n  ~~使用cmd执行 ~~~~~~\n  导出查询结果\n  编辑好一个sql查询文件, 例如文件名 user_id.sql,内容如下\nuse psychic; select distinct user_id from `order`;   mysql -uUserName -pPasssword res.txt\n  存储时间字段   varchar: 存放yyyy-MM-dd HH:mm:ss 的时间格式字符串\n  datetime: 存放与上面格式一致的时间，与varchar的区别在于，它对时间做了校检，可以避免写入2月31日这样的无效日期\n  timestamp：存放时间戳，默认是10位数的（timestamp(0))，精确到秒。然后如果想存储毫秒，纳秒需要把长度对应地加大。毫秒13位长度，timestamp(3)，更精细的timestamp(6)\n  字段长度问题   整数类型：显示宽度和数据的取值范围没有关系，如果超过了显示宽度依然可以正常插入。\n不设置宽度，系统将添加默认的宽度 tinyint(4),smallint(6),mediumint(9),int(11),bigint(20)\n  字符串类型：varchar(20) 指的是字符串的最大长度，如果输入了一个21长度的字符串则会丢失信息。由于varchar是变成存储的，所以开发过程中通常设置宽度为255，不用完也不会浪费空间。\n **varchar变长存储相关 **https://liuchenyang0515.blog.csdn.net/article/details/117524328     浮点和日期等数据类型对数据的宽度没有要求一般也不用设定。\n  开发总结   create_at字段，设置默认值为CURRENT_TIMESTAMP\n  update_at字段设置为DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP，当条目被修改时会自动更新\n  is_del字段，用来表示是否被删除- -\n  id 一般都用自增id作为主键\n  尽量避免关联查询\n  utf8mb4是utf8的超集，理论上由utf8升级到utf8mb4字符编码没有任何兼容问题。utf8mb4主要是解决了MySQL数据库存储emoji表情的问题。\n  blob,text的区别以及性能影响\nhttps://www.cnblogs.com/wt645631686/p/10102509.html\nBLOB字段用于存储二进制数据，是一个可以存储大量数据的容器，它能容纳不同大小的数据。\n类型 大小(单位：字节) TinyBlob 最大 255 Blob 最大 65K MediumBlob 最大 16M LongBlob 最大 4G\n  mysql下如何查看字段的长度\nlength()： 单位是字节，utf8编码下,一个汉字三个字节，一个数字或字母一个字节。gbk编码下,一个汉字两个字节，一个数字或字母一个字节。\nhttps://www.py.cn/db/mysql/20100.html\n  mysql中text,tinytext,varchar的区别。varchar的长度限制\n 如果是海量文本的存储，可以直接用mongodb做kv存储。    MySQL事务\n事务内容\n  查询订单状态是否为1\n  修改订单状态为2\n  问题：如果事务在查询订单状态为1后，在修改钱订单状态变为了其他，这个事务最终还能提交成功吗？\nA: 事务一般只做修改，查询的话不行\n  bug排查记录 https://blog.csdn.net/jlu16/article/details/82809937 https://blog.csdn.net/github_38336924/article/details/82455500\n参考链接 https://learnku.com/articles/46979 https://github.com/didi/gendry/issues https://www.runoob.com/mysql\n",
+  "wordCount" : "272",
+  "inLanguage": "en",
+  "datePublished": "2022-08-20T17:00:24+08:00",
+  "dateModified": "2022-08-20T17:00:24+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                    <span>🏷️标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                    <span>📚归档</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      MySQL终端命令总结
+    </h1>
+    <div class="post-meta"><span title='2022-08-20 17:00:24 +0800 CST'>2022-08-20</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%88%9b%e5%bb%ba%e8%a1%a8%e6%a0%bc" aria-label="创建表格">创建表格</a></li>
+                <li>
+                    <a href="#%e4%bf%ae%e6%94%b9%e8%a1%a8-alter-table" aria-label="修改表 ALTER TABLE">修改表 ALTER TABLE</a></li>
+                <li>
+                    <a href="#%e5%af%bc%e5%87%ba%e5%af%bc%e5%85%a5" aria-label="导出|导入">导出|导入</a></li>
+                <li>
+                    <a href="#%e5%ad%98%e5%82%a8%e6%97%b6%e9%97%b4%e5%ad%97%e6%ae%b5" aria-label="存储时间字段">存储时间字段</a></li>
+                <li>
+                    <a href="#%e5%ad%97%e6%ae%b5%e9%95%bf%e5%ba%a6%e9%97%ae%e9%a2%98" aria-label="字段长度问题">字段长度问题</a></li>
+                <li>
+                    <a href="#%e5%bc%80%e5%8f%91%e6%80%bb%e7%bb%93" aria-label="开发总结">开发总结</a></li>
+                <li>
+                    <a href="#bug%e6%8e%92%e6%9f%a5%e8%ae%b0%e5%bd%95" aria-label="bug排查记录">bug排查记录</a></li>
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" aria-label="参考链接">参考链接</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h3 id="创建表格">创建表格<a hidden class="anchor" aria-hidden="true" href="#创建表格">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> userinfo(
+  id int <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span> AUTO_INCREMENT,
+  name varchar(<span style="color:#ae81ff">100</span>) <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span>,
+  lasttime int ,
+  <span style="color:#66d9ef">primary</span> <span style="color:#66d9ef">key</span> (id)
+);
+
+</code></pre></div><ul>
+<li>
+<p>创建远程访问的用户</p>
+<ul>
+<li>
+<p>创建用户 <code> create user test identified by '123456';</code></p>
+</li>
+<li>
+<p>创建数据表 <code>create table_name;</code></p>
+</li>
+<li>
+<p>授权 <code>gran all privileges on ``table_name``.* to Luke@'%' identified by 'ssss6666';</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>删除unique key</p>
+<ul>
+<li><code>alter table table_name drop index index_name;</code></li>
+</ul>
+</li>
+<li>
+<p>新增unique key</p>
+<ul>
+<li><code>alter table table_name add unique key new_index_name (col1,col2);</code></li>
+</ul>
+</li>
+<li>
+<p>查看表的结构</p>
+<ul>
+<li>
+<p><code>desc table_name</code>显示表结构，字段类型，主键是否为空等。但是不显示外键</p>
+</li>
+<li>
+<p><code>show create table table_name</code> 显示创建表的DDL</p>
+</li>
+</ul>
+</li>
+<li>
+<p>修改表的储存引擎<code>ALTER TABLE account ENGINE=MyISAM;</code></p>
+</li>
+</ul>
+<h3 id="修改表-alter-table">修改表 ALTER TABLE<a hidden class="anchor" aria-hidden="true" href="#修改表-alter-table">#</a></h3>
+<ul>
+<li>
+<p>修改表名 <code>ALTER TABLE &lt;表名&gt; RENAME &lt;新表名&gt;</code></p>
+<ul>
+<li>例:<code>ALTER TABLE game_account RENAME account;</code></li>
+</ul>
+</li>
+<li>
+<p>添加字段<code>ALTER TABLE &lt;表名&gt; ADD &lt;字段名称&gt; &lt;字段定义&gt; [ FIRST | AFTER col_name]</code></p>
+<p><code>ALTER TABLE account ADD Game_zone VARCHAR(20) NOT NULL DEFAULT &quot;HuaBei&quot; FIRST;</code></p>
+<ul>
+<li>如果需要指定加在某个位置，在语句最后加上<code>FIRST</code> 或者 <code>AFTER col_name</code></li>
+</ul>
+</li>
+<li>
+<p>删除字段<code>ALTER TABLE &lt;表名&gt; DROP &lt;字段名称&gt;</code></p>
+<p><code>ALTER TABLE account DROP Account_role ;</code></p>
+</li>
+<li>
+<p>修改字段<code>ALTER TABLE &lt;表名&gt; CHANGE &lt;旧字段名称&gt; &lt;新字段名称&gt; &lt;字段定义&gt;</code></p>
+<p><code>ALTER TABLE account CHANGE password password VARCHAR(60) ;</code></p>
+</li>
+<li>
+<p>修改表的编码 <code>ALTER TABLE &lt;表名&gt; character set utf8mb4;</code></p>
+<p><code>alter table email character set utf8mb4;</code></p>
+</li>
+<li>
+<p>修改数据库的编码 <code>ALTER database &lt;库名&gt; character set utf8mb4;</code></p>
+</li>
+</ul>
+<h3 id="导出导入">导出|导入<a hidden class="anchor" aria-hidden="true" href="#导出导入">#</a></h3>
+<p>导出数据</p>
+<ul>
+<li>
+<p>导出整个数据库 <code>mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名</code></p>
+</li>
+<li>
+<p>导出表<code>mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名</code></p>
+<ul>
+<li>使用<code>mysqldump </code>导出数据库可能会产生中文乱码的情况，加上<code>--default-character-set=utf8</code> 即可解决导出乱码问题</li>
+</ul>
+</li>
+<li>
+<p>上面两条命令都是带数据的导出，如果不带数据导出，在<code>-p</code> 添加 <code>-d --add-drop-table</code></p>
+</li>
+</ul>
+<p>导入数据</p>
+<ul>
+<li>
+<p>进入mysql控制台后使用source命令 <code>source xxx.sql</code></p>
+</li>
+<li>
+<p>~~使用cmd执行 ~~~~~~</p>
+</li>
+</ul>
+<p>导出查询结果</p>
+<ul>
+<li>
+<p>编辑好一个sql查询文件, 例如文件名 user_id.sql,内容如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">use psychic;
+<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> user_id <span style="color:#66d9ef">from</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">order</span><span style="color:#f92672">`</span>;
+</code></pre></div></li>
+<li>
+<p><code>mysql -uUserName -pPasssword &lt; user.sql  &gt;res.txt</code></p>
+</li>
+</ul>
+<h3 id="存储时间字段">存储时间字段<a hidden class="anchor" aria-hidden="true" href="#存储时间字段">#</a></h3>
+<ul>
+<li>
+<p><code>varchar</code>: 存放yyyy-MM-dd HH:mm:ss 的时间格式字符串</p>
+</li>
+<li>
+<p><code>datetime</code>: 存放与上面格式一致的时间，与varchar的区别在于，它对时间做了校检，可以避免写入2月31日这样的无效日期</p>
+</li>
+<li>
+<p><code>timestamp</code>：存放时间戳，默认是10位数的（timestamp(0))，精确到秒。然后如果想存储毫秒，纳秒需要把长度对应地加大。毫秒13位长度，timestamp(3)，更精细的timestamp(6)</p>
+</li>
+</ul>
+<h3 id="字段长度问题">字段长度问题<a hidden class="anchor" aria-hidden="true" href="#字段长度问题">#</a></h3>
+<ul>
+<li>
+<p>整数类型：显示宽度和数据的取值范围没有关系，如果超过了显示宽度依然可以正常插入。</p>
+<p>不设置宽度，系统将添加默认的宽度 tinyint(4),smallint(6),mediumint(9),int(11),bigint(20)</p>
+</li>
+<li>
+<p>字符串类型：<code>varchar(20)</code> 指的是字符串的最大长度，如果输入了一个21长度的字符串则会丢失信息。由于varchar是变成存储的，所以开发过程中通常设置宽度为255，不用完也不会浪费空间。</p>
+<ul>
+<li>**varchar变长存储相关 **<a href="https://liuchenyang0515.blog.csdn.net/article/details/117524328?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~Rate-1-117524328-blog-119427045.pc_relevant_paycolumn_v3&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~Rate-1-117524328-blog-119427045.pc_relevant_paycolumn_v3&amp;utm_relevant_index=1" title="https://liuchenyang0515.blog.csdn.net/article/details/117524328"><strong>https://liuchenyang0515.blog.csdn.net/article/details/117524328</strong></a></li>
+</ul>
+</li>
+<li>
+<p> 浮点和日期等数据类型对数据的宽度没有要求一般也不用设定。</p>
+</li>
+</ul>
+<h3 id="开发总结">开发总结<a hidden class="anchor" aria-hidden="true" href="#开发总结">#</a></h3>
+<ul>
+<li>
+<p>create_at字段，设置默认值为<code>CURRENT_TIMESTAMP</code></p>
+</li>
+<li>
+<p>update_at字段设置为<code>DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code>，当条目被修改时会自动更新</p>
+</li>
+<li>
+<p>is_del字段，用来表示是否被删除- -</p>
+</li>
+<li>
+<p>id 一般都用自增id作为主键</p>
+</li>
+<li>
+<p>尽量避免关联查询</p>
+</li>
+<li>
+<p>utf8mb4是<strong>utf8的超集</strong>，理论上由utf8升级到utf8mb4字符编码没有任何兼容问题。utf8mb4主要是解决了MySQL数据库<strong>存储emoji表情</strong>的问题。</p>
+</li>
+<li>
+<p>blob,text的区别以及性能影响</p>
+<p><a href="https://www.cnblogs.com/wt645631686/p/10102509.html" title="https://www.cnblogs.com/wt645631686/p/10102509.html">https://www.cnblogs.com/wt645631686/p/10102509.html</a></p>
+<p>BLOB字段用于存储二进制数据，是一个可以存储大量数据的容器，它能容纳不同大小的数据。</p>
+<p>类型                     大小(单位：字节)
+TinyBlob                   最大 255
+Blob                         最大 65K
+MediumBlob            最大 16M
+LongBlob                 最大 4G</p>
+</li>
+<li>
+<p>mysql下如何查看字段的长度</p>
+<p>length()： 单位是字节，utf8编码下,一个汉字三个字节，一个数字或字母一个字节。gbk编码下,一个汉字两个字节，一个数字或字母一个字节。</p>
+<p><img loading="lazy" src="image/image_y4RDK34x7x.png" alt=""  />
+</p>
+<p><a href="https://www.py.cn/db/mysql/20100.html" title="https://www.py.cn/db/mysql/20100.html">https://www.py.cn/db/mysql/20100.html</a></p>
+</li>
+<li>
+<p>mysql中text,tinytext,varchar的区别。varchar的长度限制</p>
+<ul>
+<li>如果是海量文本的存储，可以直接用mongodb做kv存储。</li>
+</ul>
+</li>
+<li>
+<p>MySQL事务</p>
+<p><code>事务内容</code></p>
+<ol>
+<li>
+<p>查询订单状态是否为1</p>
+</li>
+<li>
+<p>修改订单状态为2</p>
+</li>
+</ol>
+<p>问题：如果事务在查询订单状态为1后，在修改钱订单状态变为了其他，这个事务最终还能提交成功吗？</p>
+<p>A: 事务一般只做修改，查询的话不行</p>
+</li>
+</ul>
+<h3 id="bug排查记录">bug排查记录<a hidden class="anchor" aria-hidden="true" href="#bug排查记录">#</a></h3>
+<p><a href="https://blog.csdn.net/jlu16/article/details/82809937">https://blog.csdn.net/jlu16/article/details/82809937</a>
+<a href="https://blog.csdn.net/github_38336924/article/details/82455500">https://blog.csdn.net/github_38336924/article/details/82455500</a></p>
+<h3 id="参考链接">参考链接<a hidden class="anchor" aria-hidden="true" href="#参考链接">#</a></h3>
+<p><a href="https://learnku.com/articles/46979">https://learnku.com/articles/46979</a>
+<a href="https://github.com/didi/gendry/issues">https://github.com/didi/gendry/issues</a>
+<a href="https://www.runoob.com/mysql">https://www.runoob.com/mysql</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Golang通过反射校验结构体中的零值字段</span>
+  </a>
+  <a class="next" href="https://shiluanzzz.github.io/post/2208/jwt/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Json Web Token</span>
+  </a>
+</nav>
+
+  </footer><script src="https://utteranc.es/client.js"
+        repo="shiluanzzz/hugo-comments"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+
+        </br>人生在世，靠的是坚持不懈的走在正道上。</br>
+                勿忘初衷，不要被世俗蒙蔽了双眼。
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

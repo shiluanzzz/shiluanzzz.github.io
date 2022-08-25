@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Flask部署 | 风吹不停</title>
 <meta name="keywords" content="Python" />
 <meta name="description" content="常用命令：   导出win虚拟环境中的第三方库 pip freeze &gt; requirements.txt 
@@ -98,7 +98,81 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="Flask部署" />
+<meta property="og:description" content="常用命令：   导出win虚拟环境中的第三方库 pip freeze &gt; requirements.txt 
+  Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3
+  后台运行程序 nohup python -u wechat_tixing.py &gt; nohup.out 2&gt;&amp;1 &amp;c
+  gunicorn -w 1 -b 127.0.0.1:1234 app:app
+  获取gunicorn的进程树，然后kill掉顶层任务 pstree -ap|grep gunicorn
+  部署  编辑配置文件 /etc/nginx/conf.d/shitou.conf  新端口的话记得去控制台开放端口
+ Nginx重启 ：  nginx -s reload service nginx restart  后端重启、停止  编辑配置文件 gunicorn.conf
+# 并行工作线程数 workers = 4 # 监听内网端口5000【按需要更改】 bind = &#39;127." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-10-31T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-10-31T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Flask部署"/>
+<meta name="twitter:description" content="常用命令：   导出win虚拟环境中的第三方库 pip freeze &gt; requirements.txt 
+  Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3
+  后台运行程序 nohup python -u wechat_tixing.py &gt; nohup.out 2&gt;&amp;1 &amp;c
+  gunicorn -w 1 -b 127.0.0.1:1234 app:app
+  获取gunicorn的进程树，然后kill掉顶层任务 pstree -ap|grep gunicorn
+  部署  编辑配置文件 /etc/nginx/conf.d/shitou.conf  新端口的话记得去控制台开放端口
+ Nginx重启 ：  nginx -s reload service nginx restart  后端重启、停止  编辑配置文件 gunicorn.conf
+# 并行工作线程数 workers = 4 # 监听内网端口5000【按需要更改】 bind = &#39;127."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Flask部署",
+      "item": "https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Flask部署",
+  "name": "Flask部署",
+  "description": "常用命令：   导出win虚拟环境中的第三方库 pip freeze \u0026gt; requirements.txt \n  Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3\n  后台运行程序 nohup python -u wechat_tixing.py \u0026gt; nohup.out 2\u0026gt;\u0026amp;1 \u0026amp;c\n  gunicorn -w 1 -b 127.0.0.1:1234 app:app\n  获取gunicorn的进程树，然后kill掉顶层任务 pstree -ap|grep gunicorn\n  部署  编辑配置文件 /etc/nginx/conf.d/shitou.conf  新端口的话记得去控制台开放端口\n Nginx重启 ：  nginx -s reload service nginx restart  后端重启、停止  编辑配置文件 gunicorn.conf\n# 并行工作线程数 workers = 4 # 监听内网端口5000【按需要更改】 bind = \u0026#39;127.",
+  "keywords": [
+    "Python"
+  ],
+  "articleBody": "常用命令：   导出win虚拟环境中的第三方库 pip freeze  requirements.txt \n  Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3\n  后台运行程序 nohup python -u wechat_tixing.py  nohup.out 2\u00261 \u0026c\n  gunicorn -w 1 -b 127.0.0.1:1234 app:app\n  获取gunicorn的进程树，然后kill掉顶层任务 pstree -ap|grep gunicorn\n  部署  编辑配置文件 /etc/nginx/conf.d/shitou.conf  新端口的话记得去控制台开放端口\n Nginx重启 ：  nginx -s reload service nginx restart  后端重启、停止  编辑配置文件 gunicorn.conf\n# 并行工作线程数 workers = 4 # 监听内网端口5000【按需要更改】 bind = '127.0.0.1:8000' # 设置守护进程【关闭连接时，程序仍在运行】 daemon = True # 设置超时时间120s，默认为30s。按自己的需求进行设置 timeout = 120 # 设置访问日志和错误信息日志路径 # accesslog = './logs/acess.log' # errorlog = './logs/error.log' 通过配置文件加载进程gunicorn app:app -c gunicorn.conf \n或者单独启动 gunicorn -w 4 -b 127.0.0.1:8000 app:app\n相关参考：  https://www.jianshu.com/p/7cc457e06aee  常见问题   Nginx内网可以访问，外网无法访问\n  检查防火墙是否放通\niptables -I INPUT -p tcp --dport 80 -j ACCEPT   检查云服务器运营商处是否放通端口\n    ",
+  "wordCount" : "101",
+  "inLanguage": "en",
+  "datePublished": "2020-10-31T00:00:00Z",
+  "dateModified": "2020-10-31T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

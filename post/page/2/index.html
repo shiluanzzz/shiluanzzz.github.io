@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Posts | 风吹不停</title>
 <meta name="keywords" content="" />
 <meta name="description" content="Posts - 风吹不停">
@@ -90,7 +90,30 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="Posts" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:description" content=""/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -155,6 +178,89 @@ code.has-jax{
 <header class="page-header">
   <h1>Posts</h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>windows下使用choco极速安装docker
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>前言 之前在做一个计算机实训的时候，装docker环境报各种错误，今天尝试使用choco包管理工具，2行命令安装成功！
+choco安装 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
+使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
+docker 安装 在管理员cmd下输入如下命令
+choco install docker-cli docker-machine docker-compose docker-desktop docker-toolbox 输入后会提示是否执行脚本，输入a回车，即可。
+测试安装情况 安装上述五个软件包后，需要自行启动docker-desktop软件，如果没有报错则安装成功。
+或者新开一个cmd窗口，输入命令docker-info, 如果没有保存则表示安装成功！
+常见报错  如果报如下图所示提示WSL 2 installation is incomplete ，是因为电脑没有安装linux子系统，   - 同样建议使用choco安装，输入命令choco install wsl2 安装后重试。</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-08 00:00:00 +0000 UTC'>2021-12-08</span></footer>
+  <a class="entry-link" aria-label="post link to windows下使用choco极速安装docker" href="https://shiluanzzz.github.io/post/20211208-1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Go 传递切片入参的隐藏风险
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Go 切片数据结构 Go 中常用的切片（Slice）数据结构是一枚动态数组，提供方便的局部索引功能，切片长度并不固定，并且会在容量不足时自动扩容。
+切片实质上是对一个底层数组的抽象视图 ，由 Go 运行时维护。在运行时，切片由如下的SliceHeader结构体表示，其中Data字段是指向底层数组的指针，Len表示当前切片的长度，而Cap表示当前切片的容量，也就是Data数组的大小。
+type SliceHeader struct { Data uintptr Len int Cap int }  代码示例：Go 切片 Slice 数据结构
+ 切片作为函数入参 许多 Go 开发者对传递切片作为函数入参的习惯性认知是：**传递切片，等同于传递指针，函数内部对切片的修改，将会影响到函数外部的切片。**这一习惯性认知在大部分情况下都是正确的。如以下代码所示：在modify函数中修改切片，外部main函数中的切片受到了影响。
+package main import ( &#34;fmt&#34; ) func modify(s []string) { for i := 0; i &lt; len(s); i&#43;&#43; { s[i] = &#34;b&#34; } fmt.Println(&#34;Inner:&#34;, s) } func main() { s := []string{&#34;a1&#34;, &#34;a2&#34;} fmt.Println(&#34;Before:&#34;, s) modify(s) fmt.Println(&#34;After:&#34;, s) }  代码示例：Go 切片作为函数入参...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-02 11:16:38 +0800 CST'>2021-12-02</span></footer>
+  <a class="entry-link" aria-label="post link to Go 传递切片入参的隐藏风险" href="https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>后端密码存储方案
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
+普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。
+Go语言对这三种加密算法的实现如下所示：
+//import &#34;crypto/sha256&#34; h := sha256.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/sha1&#34; h := sha1.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/md5&#34; h := md5.New() io.WriteString(h, &#34;需要加密的密码&#34;) fmt.Printf(&#34;%x&#34;, h.Sum(nil)) 单向哈希有两个特性：
+ 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。
+因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。
+进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。
+一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。
+但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-10-27 00:00:00 +0000 UTC'>2021-10-27</span></footer>
+  <a class="entry-link" aria-label="post link to 后端密码存储方案" href="https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Syncthing 数据网盘部署
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。
+下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份
+ syncthing-linux-amd64-v1.18.2.tar.gz
+ 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing
+ 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing
+ 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384
+ 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！
+配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases
+在github下载图形界面安装包安装打开
+配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。
+照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动
+连接到服务器 添加后在云盘的管理界面接受即可
+添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘
+在云盘中接受同步请求
+两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
+其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份&#43;同步都达到了。</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-10-22 00:00:00 +0000 UTC'>2021-10-22</span></footer>
+  <a class="entry-link" aria-label="post link to Syncthing 数据网盘部署" href="https://shiluanzzz.github.io/post/syncthing/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -277,77 +383,6 @@ X,y=read_data() random_grid={ &#39;n_estimators&#39;: [i for i in range(10,1000,
   </section>
   <footer class="entry-footer"><span title='2020-12-09 00:00:00 +0000 UTC'>2020-12-09</span></footer>
   <a class="entry-link" aria-label="post link to 随机森林调参" href="https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python字符串格式化总结
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
-&gt;&gt;&gt; &#34;{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{}{}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;hello world&#39; &gt;&gt;&gt; &#34;{1}{0}{1}&#34;.format(&#34;hello&#34;, &#34;world&#34;) &#39;world hello world&#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
-&gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(name=&#34;huoty&#34;, age=18) &#39;I am huoty, age is 18&#39; &gt;&gt;&gt; user = {&#34;name&#34;: &#34;huoty&#34;, &#34;age&#34;: 18} &gt;&gt;&gt; &#34;I am {name}, age is {age}&#34;.format(**user) &#39;I am huoty, age is 18&#39; 通过对象属性 str.format() 可以直接读取用户属性:
-&gt;&gt;&gt; class User(object): ... def __init__(self, name, age): ... self.name = name ....</p>
-  </section>
-  <footer class="entry-footer"><span title='2020-11-11 00:00:00 +0000 UTC'>2020-11-11</span></footer>
-  <a class="entry-link" aria-label="post link to Python字符串格式化总结" href="https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Flask部署
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>常用命令：   导出win虚拟环境中的第三方库 pip freeze &gt; requirements.txt 
-  Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3
-  后台运行程序 nohup python -u wechat_tixing.py &gt; nohup.out 2&gt;&amp;1 &amp;c
-  gunicorn -w 1 -b 127.0.0.1:1234 app:app
-  获取gunicorn的进程树，然后kill掉顶层任务 pstree -ap|grep gunicorn
-  部署  编辑配置文件 /etc/nginx/conf.d/shitou.conf  新端口的话记得去控制台开放端口
- Nginx重启 ：  nginx -s reload service nginx restart  后端重启、停止  编辑配置文件 gunicorn.conf
-# 并行工作线程数 workers = 4 # 监听内网端口5000【按需要更改】 bind = &#39;127....</p>
-  </section>
-  <footer class="entry-footer"><span title='2020-10-31 00:00:00 +0000 UTC'>2020-10-31</span></footer>
-  <a class="entry-link" aria-label="post link to Flask部署" href="https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python Tqdm进度条使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
-基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&#39;进度条&#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&#34;第{i}轮&#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm....</p>
-  </section>
-  <footer class="entry-footer"><span title='2020-08-05 00:00:00 +0000 UTC'>2020-08-05</span></footer>
-  <a class="entry-link" aria-label="post link to Python Tqdm进度条使用" href="https://shiluanzzz.github.io/post/tqdm/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Pandas学习笔记
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Pandas笔记 最佳阅读体验请阅读笔记原文
-什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
-  高性能
-  容易使用的数据结构
-  容易使用的数据分析工具
-  很方便和其它类库一起使用
-  numpy：用于数学计算
-  scikit- learn：用于机器学习
-  Pandas 读取数据 Pandas 需要先读取表格类型的数据
-读取文件   读取csv文件 ratings = pd.read_csv(fpath)
-  读取txt文件 pvuv = pd.read_csv()
-  pvuv = pd.read_csv( fpath, sep=&#34;\t&#34;, header=None, names=[&#39;pdate&#39;, &#39;pv&#39;, &#39;uv&#39;] # 指定列名 )   读取excel文件 pvuv = pd.read_excel(fpath)
-  读取 sql文件 mysql_page = pd.read_sql(&#34;select * from crazyant_pvuv&#34;, con=conn)...</p>
-  </section>
-  <footer class="entry-footer"><span title='2020-07-30 00:00:00 +0000 UTC'>2020-07-30</span></footer>
-  <a class="entry-link" aria-label="post link to Pandas学习笔记" href="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

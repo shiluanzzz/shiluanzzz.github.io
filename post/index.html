@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Posts | 风吹不停</title>
 <meta name="keywords" content="" />
 <meta name="description" content="Posts - 风吹不停">
@@ -90,7 +90,30 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="Posts" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:description" content=""/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -158,11 +181,87 @@ code.has-jax{
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>线程、进程、协程
+    <h2>Golang通过反射校验结构体中的零值字段
     </h2>
   </header>
   <section class="entry-content">
-    <p>1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
+    <p>问题 问题： 在web服务开发中，http请求需要绑定到一个结构体上，如何处理结构体的零值问题？
+场景： 零值问题指无法确认是默认生成的零值还是用户传的零值，例如结构体A中有一个age字段为int类型，如果用户在请求时不传这个字段会默认反序列化为0，如果传了0也会是零。
+解决方案： 处理这类零值问题通常是将这个字段类型设置为对应的指针类型，通过指针是否为空判断调用方传没传这个值。
+缺陷： 但是validator无法校验指针类型的数据。
+如何灵活校验指针类型的数据？ 在model结构体中不直接进行校验，使用反射根据字符串调用函数进行校验
+ ctx函数中（数据绑定，取非零值参数，通过字段名调用对应的校验函数）  // 数据绑定  if err := ctx.ShouldBindJSON(&amp;data); err != nil { ginBindError(ctx, err, data) return } defer commonControllerDefer(ctx, &amp;code, &amp;msg, &amp;data, &amp;data) // 将结构体中非nil的字段提取到map中  if res, code = tools.StructToMap(data, &#34;structs&#34;); code != errmsg.SUCCESS { return } // 数据校验 将不同的字段绑定到不同的校验函数中，使用反射做校验  validateFunc := map[string]interface{}{ &#34;name&#34;: validator.Name, &#34;phone&#34;: validator.Phone, &#34;work_experience&#34;: validator.WorkExperience, &#34;bio&#34;: validator.Bio, &#34;about&#34;: validator.About, } // 反射数据校验  for key, value := range res { if msg, code = validator....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-25 17:08:28 +0800 CST'>2022-08-25</span></footer>
+  <a class="entry-link" aria-label="post link to Golang通过反射校验结构体中的零值字段" href="https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>MySQL终端命令总结
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户
+  创建用户  create user test identified by &#39;123456&#39;;
+  创建数据表 create table_name;
+  授权 gran all privileges on ``table_name``.* to Luke@&#39;%&#39; identified by &#39;ssss6666&#39;;
+    删除unique key
+ alter table table_name drop index index_name;    新增unique key
+ alter table table_name add unique key new_index_name (col1,col2);    查看表的结构...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-20 17:00:24 +0800 CST'>2022-08-20</span></footer>
+  <a class="entry-link" aria-label="post link to MySQL终端命令总结" href="https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Json Web Token
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。
+ 传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。
+但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.
+问题：
+ Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。 **扩展性: ** 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。 **CSRF: **因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。  基于token的鉴权机制 基于token的鉴权机制类似于http协议也是无状态的，但是它不需要在服务端去保留用户的认证信息或者会话信息。鉴权机制大致流程如下
+ 用户使用用户名密码来请求服务器 服务器验证用户的信息 服务器通过验证发送给用户一个token 客户端存储token，并在每次请求时附送上这个token值 服务端验证token值，并返回数据  JWT的构成 jwt主要由三部分组成（header,payload,signature），分别为头部、载荷和签证。每个部分之间用.隔开。
+header  jwt的头部主要记录声明类型和加密算法，完整的头部如下面的json所示。
+{ &#39;typ&#39;: &#39;JWT&#39;, &#39;alg&#39;: &#39;HS256&#39; } 对头部进行base64加密后即构成jwt的第一部分，例如上面的json经过base64加密后转化为eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+playload  载荷存放token的声明，包含标准中注册的声明、公共的声明和私有的声明。
+标准中注册的声明 (建议但不强制使用) ：
+iss: jwt签发者 sub: jwt所面向的用户 aud: 接收jwt的一方 exp: jwt的过期时间，这个过期时间必须要大于签发时间 nbf: 定义在什么时间之前，该jwt都是不可用的. iat: jwt的签发时间 jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。 公共的声明 ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.
+私有的声明 ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。
+signature  signature即jwt的签证信息，该部分的生成需要前面提到的header (base64后的)，payload (base64后的), secret。...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-28 16:55:33 +0800 CST'>2022-06-28</span></footer>
+  <a class="entry-link" aria-label="post link to Json Web Token" href="https://shiluanzzz.github.io/post/2208/jwt/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Logrus为http请求自动添加trace Id
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>日志Trace-Id 在后端服务中使用logrus作为日志系统，当接受到一条请求时，该请求可能会调用其他层(controller,biz,service)的代码而产生很多日志，这时候就需要一个trace-id来快速定位到与某一条请求相关的日志。
+如果是在每条日志前手动加一个id，那也太蠢了。主要实现方法有两种
+ 使用context在每个函数之前传递id，这样实际上还是多了一个参数，不够优雅 使用webhook为当前作用域添加一个field  使用webhook为日志添加Trace-Id 自定义了一个TraceId的结构体，实现了logrus中的hook接口，该接口需要实现Fire和Levels两个方法
+// 自定义一个TraceIdHook 并实现Fire和Levels方法 type TraceIdHook struct { TraceId string } func NewTraceIdHook(traceId string) logrus.Hook { hook := TraceIdHook{ TraceId: traceId, } return &amp;hook } func (hook *TraceIdHook) Fire(entry *logrus.Entry) error { // 注入trace-ID  entry.Data[&#34;trace-ID&#34;] = hook.TraceId return nil } func (hook *TraceIdHook) Levels() []logrus.Level { return logrus.AllLevels } 模拟不同作用域下的使用,完整的代码可以在go-playground看到
+func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params) } func subJob(params string) { logrus....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-27 16:43:44 +0800 CST'>2022-06-27</span></footer>
+  <a class="entry-link" aria-label="post link to Logrus为http请求自动添加trace Id" href="https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>线程、进程、协程的区别
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>对操作系统来说，线程是最小的执行单元，进程是最小的资源管理单元。 无论进程还是线程，都是由操作系统所管理的。协程(Coroutines)是一种比线程更加轻量级的存在
+1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
 电脑中有许多进程需要处于「同时」开启的状态，而利用CPU在进程间的快速切换，可以实现「同时」运行多个程序。而进程切换则意味着需要保留进程切换前的状态，以备切换回去的时候能够继续接着工作。 所以进程拥有自己的地址空间，全局变量，文件描述符，各种硬件等等资源。操作系统通过调度CPU去执行进程的记录、回复、切换等等。
 2线程 线程是一个程序执行过程中的最小单元，一个程序可能包含多个线程，这多个线程共享进程的所有资源。每个线程执行不同的任务来提高程序的运行效率。
 3进程与线程的区别  进程是CPU资源分配的基本单位，线程是独立运行和独立调度的基本单位（CPU上真正运行的是线程）。 进程拥有自己的资源空间，一个进程包含若干个线程，线程与CPU资源分配无关，多个线程共享同一进程内的资源。 线程的调度与切换比进程快很多。  4为什么要有线程？ 线程的出现就是为了提高单位时间内CPU的利用率。
@@ -176,10 +275,10 @@ code.has-jax{
 如同一个进程可以有很多线程一样，一个线程可以有很多协程。
 但是，协程不是被操作系统所管理的，没有改变CPU最小执行单元是线程，协程是完全由程序所控制的（用户态执行），不会产生上下文切换。
 目前只有部分语言实现了协程：
- python的yield/send，当协程执行到yield关键字时，会暂停在那一行，等到主线程调用send方法发送了数据，协程才会接到数据继续执行。 Lua从5.0版本开始使用协程，通过扩展库coroutine来实现。 Go语言对协程的实现非常强大而简洁，可以轻松创建成百上千个协程并发执行。 Java语言并没有对协程的原生支持，但是某些开源框架模拟出了协程的功能，有兴趣的小伙伴可以看一看Kilim框架的源码：https://github.com/kilim/kilim  参考链接：  https://zhuanlan.zhihu.com/p/70256971  </p>
+ python的yield/send，当协程执行到yield关键字时，会暂停在那一行，等到主线程调用send方法发送了数据，协程才会接到数据继续执行。 Lua从5.0版本开始使用协程，通过扩展库coroutine来实现。 Go语言对协程的实现非常强大而简洁，可以轻松创建成百上千个协程并发执行。 Java语言并没有对协程的原生支持，但是某些开源框架模拟出了协程的功能，可以看一看Kilim框架的源码：https://github.com/kilim/kilim  参考链接：  https://zhuanlan.zhihu.com/p/70256971  </p>
   </section>
   <footer class="entry-footer"><span title='2022-04-26 23:51:02 +0800 CST'>2022-04-26</span></footer>
-  <a class="entry-link" aria-label="post link to 线程、进程、协程" href="https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/"></a>
+  <a class="entry-link" aria-label="post link to 线程、进程、协程的区别" href="https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -266,89 +365,6 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
   </section>
   <footer class="entry-footer"><span title='2021-12-08 00:00:00 +0000 UTC'>2021-12-08</span></footer>
   <a class="entry-link" aria-label="post link to windows 安装Chocolatey" href="https://shiluanzzz.github.io/post/20211208-2/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>windows下使用choco极速安装docker
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>前言 之前在做一个计算机实训的时候，装docker环境报各种错误，今天尝试使用choco包管理工具，2行命令安装成功！
-choco安装 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
-使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
-docker 安装 在管理员cmd下输入如下命令
-choco install docker-cli docker-machine docker-compose docker-desktop docker-toolbox 输入后会提示是否执行脚本，输入a回车，即可。
-测试安装情况 安装上述五个软件包后，需要自行启动docker-desktop软件，如果没有报错则安装成功。
-或者新开一个cmd窗口，输入命令docker-info, 如果没有保存则表示安装成功！
-常见报错  如果报如下图所示提示WSL 2 installation is incomplete ，是因为电脑没有安装linux子系统，   - 同样建议使用choco安装，输入命令choco install wsl2 安装后重试。</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-08 00:00:00 +0000 UTC'>2021-12-08</span></footer>
-  <a class="entry-link" aria-label="post link to windows下使用choco极速安装docker" href="https://shiluanzzz.github.io/post/20211208-1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Go 传递切片入参的隐藏风险
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Go 切片数据结构 Go 中常用的切片（Slice）数据结构是一枚动态数组，提供方便的局部索引功能，切片长度并不固定，并且会在容量不足时自动扩容。
-切片实质上是对一个底层数组的抽象视图 ，由 Go 运行时维护。在运行时，切片由如下的SliceHeader结构体表示，其中Data字段是指向底层数组的指针，Len表示当前切片的长度，而Cap表示当前切片的容量，也就是Data数组的大小。
-type SliceHeader struct { Data uintptr Len int Cap int }  代码示例：Go 切片 Slice 数据结构
- 切片作为函数入参 许多 Go 开发者对传递切片作为函数入参的习惯性认知是：**传递切片，等同于传递指针，函数内部对切片的修改，将会影响到函数外部的切片。**这一习惯性认知在大部分情况下都是正确的。如以下代码所示：在modify函数中修改切片，外部main函数中的切片受到了影响。
-package main import ( &#34;fmt&#34; ) func modify(s []string) { for i := 0; i &lt; len(s); i&#43;&#43; { s[i] = &#34;b&#34; } fmt.Println(&#34;Inner:&#34;, s) } func main() { s := []string{&#34;a1&#34;, &#34;a2&#34;} fmt.Println(&#34;Before:&#34;, s) modify(s) fmt.Println(&#34;After:&#34;, s) }  代码示例：Go 切片作为函数入参...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-02 11:16:38 +0800 CST'>2021-12-02</span></footer>
-  <a class="entry-link" aria-label="post link to Go 传递切片入参的隐藏风险" href="https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>后端密码存储方案
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
-普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。
-Go语言对这三种加密算法的实现如下所示：
-//import &#34;crypto/sha256&#34; h := sha256.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/sha1&#34; h := sha1.New() io.WriteString(h, &#34;His money is twice tainted: &#39;taint yours and &#39;taint mine.&#34;) fmt.Printf(&#34;% x&#34;, h.Sum(nil)) //import &#34;crypto/md5&#34; h := md5.New() io.WriteString(h, &#34;需要加密的密码&#34;) fmt.Printf(&#34;%x&#34;, h.Sum(nil)) 单向哈希有两个特性：
- 1）同一个密码进行单向哈希，得到的总是唯一确定的摘要。 2）计算速度快。随着技术进步，一秒钟能够完成数十亿次单向哈希计算。  结合上面两个特点，考虑到多数人所使用的密码为常见的组合，攻击者可以将所有密码的常见组合进行单向哈希，得到一个摘要组合, 然后与数据库中的摘要进行比对即可获得对应的密码。这个摘要组合也被称为rainbow table。
-因此通过单向加密之后存储的数据，和明文存储没有多大区别。因此，一旦网站的数据库泄露，所有用户的密码本身就大白于天下。
-进阶方案 通过上面介绍我们知道黑客可以用rainbow table来破解哈希后的密码，很大程度上是因为加密时使用的哈希算法是公开的。如果黑客不知道加密的哈希算法是什么，那他也就无从下手了。
-一个直接的解决办法是，自己设计一个哈希算法。然而，一个好的哈希算法是很难设计的——既要避免碰撞，又不能有明显的规律，做到这两点要比想象中的要困难很多。因此实际应用中更多的是利用已有的哈希算法进行多次哈希。
-但是单纯的多次哈希，依然阻挡不住黑客。两次 MD5、三次 MD5之类的方法，我们能想到，黑客自然也能想到。特别是对于一些开源代码，这样哈希更是相当于直接把算法告诉了黑客。...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-10-27 00:00:00 +0000 UTC'>2021-10-27</span></footer>
-  <a class="entry-link" aria-label="post link to 后端密码存储方案" href="https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Syncthing 数据网盘部署
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>因为实验室的PC和宿舍的笔记本数据无法互通，所以将Syncthing部署在服务器上备份同步代码文件等重要的小文件。
-下载部署在Linux服务器上  从官网下载Linux平台部署包   v1.18.2 备份
- syncthing-linux-amd64-v1.18.2.tar.gz
- 将文件复制到/usr/bin目录下   sudo cp syncthing /usr/bin/syncthing
- 先把服务跑一遍，让他自动生成配置文件   ./usr/bin/syncthing
- 服务默认是只能局域网访问，需要更改配置文件， 配置文件路径为/home/你的用户/.config/syncthing/config.xml   找到配置文件将address部分改成0.0.0.0/8384
- 放通8384端口 即可直接访问服务器的syncthing后台页面   记得设置密码！
-配置安装 windows平台安装 https://github.com/canton7/SyncTrayzor/releases
-在github下载图形界面安装包安装打开
-配置 默认只有127.0.0.1，localhost可以访问，没有远程访问权限。
-照下图，右边的设置，用来修改图形界面监听地址，并且可以设置随开机自动启动
-连接到服务器 添加后在云盘的管理界面接受即可
-添加需要同步的文件夹 点击添加文件夹 ，配置文件夹路径，根据自己的需求配置忽略模式 。 最后在共享里勾选共享到你的云盘
-在云盘中接受同步请求
-两个笔记本之间的数据同步 在另外一个笔记本中安装客户端，在服务器后台将对应的文件夹共享给你的设备即可。
-其实不需要服务器中转也可以，但是这要求你的两台电脑都在线而且速率会有限制。 利用服务器，备份&#43;同步都达到了。</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-10-22 00:00:00 +0000 UTC'>2021-10-22</span></footer>
-  <a class="entry-link" aria-label="post link to Syncthing 数据网盘部署" href="https://shiluanzzz.github.io/post/syncthing/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

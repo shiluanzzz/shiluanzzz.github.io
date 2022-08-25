@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>控制goroutine的并发数量 | 风吹不停</title>
 <meta name="keywords" content="go, goroutine" />
 <meta name="description" content="控制goroutine的并发数量 chan控制（错误） 在启动go程之前尝试向chan中写入数据.
@@ -94,7 +94,73 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="控制goroutine的并发数量" />
+<meta property="og:description" content="控制goroutine的并发数量 chan控制（错误） 在启动go程之前尝试向chan中写入数据.
+func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &lt; userCount; i&#43;&#43; { // 控制  ch &lt;- true go Read(ch, i) } } func Read(ch chan bool, i int) { fmt.Printf(&#34;go func: %d\n&#34;, i) &lt;- ch } 这存在一个问题就是可能go程还没执行完,主协程结束子协程也被终止了. 而单纯使用waitgroup没法控制并发数量.
+方案一 : waitgroup&#43;chan组合控制并发   wg主要是防止子协程还没执行完主协程已经退出的情况发生.
+... var wg = sync.WaitGroup{} func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &lt; userCount; i&#43;&#43; { wg." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/goroutiune%E6%95%B0%E9%87%8F%E6%8E%A7%E5%88%B6/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-22T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-12-22T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="控制goroutine的并发数量"/>
+<meta name="twitter:description" content="控制goroutine的并发数量 chan控制（错误） 在启动go程之前尝试向chan中写入数据.
+func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &lt; userCount; i&#43;&#43; { // 控制  ch &lt;- true go Read(ch, i) } } func Read(ch chan bool, i int) { fmt.Printf(&#34;go func: %d\n&#34;, i) &lt;- ch } 这存在一个问题就是可能go程还没执行完,主协程结束子协程也被终止了. 而单纯使用waitgroup没法控制并发数量.
+方案一 : waitgroup&#43;chan组合控制并发   wg主要是防止子协程还没执行完主协程已经退出的情况发生.
+... var wg = sync.WaitGroup{} func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &lt; userCount; i&#43;&#43; { wg."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "控制goroutine的并发数量",
+      "item": "https://shiluanzzz.github.io/post/goroutiune%E6%95%B0%E9%87%8F%E6%8E%A7%E5%88%B6/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "控制goroutine的并发数量",
+  "name": "控制goroutine的并发数量",
+  "description": "控制goroutine的并发数量 chan控制（错误） 在启动go程之前尝试向chan中写入数据.\nfunc main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i \u0026lt; userCount; i++ { // 控制  ch \u0026lt;- true go Read(ch, i) } } func Read(ch chan bool, i int) { fmt.Printf(\u0026#34;go func: %d\\n\u0026#34;, i) \u0026lt;- ch } 这存在一个问题就是可能go程还没执行完,主协程结束子协程也被终止了. 而单纯使用waitgroup没法控制并发数量.\n方案一 : waitgroup+chan组合控制并发   wg主要是防止子协程还没执行完主协程已经退出的情况发生.\n... var wg = sync.WaitGroup{} func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i \u0026lt; userCount; i++ { wg.",
+  "keywords": [
+    "go", "goroutine"
+  ],
+  "articleBody": "控制goroutine的并发数量 chan控制（错误） 在启动go程之前尝试向chan中写入数据.\nfunc main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i userCount; i++ { // 控制  ch  true go Read(ch, i) } } func Read(ch chan bool, i int) { fmt.Printf(\"go func: %d\\n\", i)  ch } 这存在一个问题就是可能go程还没执行完,主协程结束子协程也被终止了. 而单纯使用waitgroup没法控制并发数量.\n方案一 : waitgroup+chan组合控制并发   wg主要是防止子协程还没执行完主协程已经退出的情况发生.\n... var wg = sync.WaitGroup{} func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i userCount; i++ { wg.Add(1) go Read(ch, i) } wg.Wait() } func Read(ch chan bool, i int) { defer wg.Done() ch  true fmt.Printf(\"go func: %d, time: %d\\n\", i, time.Now().Unix()) time.Sleep(time.Second) ch }   这种方案可行,可以将其封装为一个信号量,保护waitgroup和chan的结构体,封装好add方法和Done方法.在每个go程中调用这两个方法.\nvar sema = gsema.NewSemaphore(3) func Read(i int) { defer sema.Done( sema.Add(1) // do something. }   完整的信号量封装示例\npackage gsema import \"sync\" type Semaphore struct { c chan struct{} wg *sync.WaitGroup } func NewSemaphore(maxSize int) *Semaphore { return \u0026Semaphore{ c: make(chan struct{}, maxSize), wg: new(sync.WaitGroup), } } func (s *Semaphore) Add(delta int) { s.wg.Add(delta) for i := 0; i delta; i++ { s.c  struct{}{} } } func (s *Semaphore) Done() { s.c s.wg.Done() } func (s *Semaphore) Wait() { s.wg.Wait() }   利\n 适合量不大、复杂度低 的使用场景  几百几千个、几十万个也是可以接受的（看具体业务场景） 实际业务逻辑在运行前就已经被阻塞等待了（因为并发数受限），基本实际业务逻辑损耗的性能比 goroutine 本身大 goroutine 本身很轻便，仅损耗极少许的内存空间和调度。这种等待响应的情况都是躺好了，等待任务唤醒   Semaphore 操作复杂度低且流转简单，容易控制  弊 因为是将所有的goroutine启动后在内部控制其执行.所以还是有弊.\n 不适合量很大、复杂度高 的使用场景  有几百万、几千万个 goroutine 的话，就浪费了大量调度 goroutine 和内存空间。恰好你的服务器也接受不了的话   Semaphore 操作复杂度提高，要管理更多的状态  方案二: 使用waitgroup灵活控制chan 在go程中通过遍历chan来执行任务,在函数外部每次向chan中写入的数量就是允许并发的数量.\npackage main import ( \"fmt\" \"sync\" \"time\" ) var wg sync.WaitGroup func main() { userCount := 10 ch := make(chan int, 5) for i := 0; i userCount; i++ { wg.Add(1) go func() { defer wg.Done() for d := range ch { fmt.Printf(\"go func: %d, time: %d\\n\", d, time.Now().Unix()) time.Sleep(time.Second * time.Duration(d)) } }() } for i := 0; i 10; i++ { ch  1 ch  2 //time.Sleep(time.Second)  } close(ch) wg.Wait() } 方案三:第三方库  Jeffail/tunny panjf2000/ants go-playground/pool nozzle/throttler  比较成熟的第三方库也不少，基本都是以生成和管理 goroutine 为目标的池工具。我简单列了几个，具体建议大家阅读下源码或者多找找，原理相似\nants goroutine池的实现　   golang的net/http标准库中请求处理就用到了goroutine, 并且每来一个请求就开一个goroutine去处理该请求. 源码分析如下.\n  net/http 接收请求且开始处理的源码放在 src/net/http/server.go 里，先从入口函数 ListenAndServe 进去：\nfunc (srv *Server) ListenAndServe() error { addr := srv.Addr if addr == \"\" { addr = \":http\" } ln, err := net.Listen(\"tcp\", addr) if err != nil { return err } return srv.Serve(tcpKeepAliveListener{ln.(*net.TCPListener)}) } 看到最后那个 srv.Serve 调用了吗？没错，这个 Serve 方法里面就是实际处理 http 请求的逻辑，我们再进入这个方法内部：\nfunc (srv *Server) Serve(l net.Listener) error { defer l.Close() ... // 不断循环取出TCP连接  for { // 看我看我！！！  rw, e := l.Accept() ... // 再看我再看我！！！  go c.serve(ctx) } } 首先，这个方法的参数(l net.Listener) ，是一个 TCP 监听的封装，负责监听网络端口， rw, e := l.Accept() 则是一个阻塞操作，从网络端口取出一个新的 TCP 连接进行处理，最后 go c.serve(ctx) 就是最后真正去处理这个 http 请求的逻辑了，看到前面的 go 关键字了吗？没错，这里启动了一个新的 goroutine 去执行处理逻辑，而且这是在一个无限循环体里面，所以意味着，每来一个请求它就会开一个 goroutine 去处理，相当任性粗暴啊 …，不过有 Go 调度器背书，一般来说也没啥压力，然而，如果，我是说如果哈，突然一大波请求涌进来了（比方说黑客搞了成千上万的肉鸡 DDOS 你，没错！就这么倒霉！），这时候，就很成问题了，他来 10w 个请求你就要开给他 10w 个 goroutine，来 100w 个你就要老老实实开给他 100w 个，线程调度压力陡升，内存爆满，再然后，你就跪了\n    对于大规模的goroutine调度又两种方案:\n 如同net/http中的方法,每一个请求开一个goroutine. I/O 多路复用 100w 个任务，是不是真的需要 100w 个 goroutine 来处理？未必！用 1w 个 goroutine 也一样可以处理，让一个 goroutine 多处理几个任务就是了嘛，池化的核心优势就在于对 goroutine 的复用。此举首先极大减轻了 runtime 调度 goroutine 的压力，其次，便是降低了对内存的消耗。  实现思路 启动服务之时先初始化一个 Goroutine Pool 池，这个 Pool 维护了一个类似栈的 LIFO 队列 ，里面存放负责处理任务的 Worker，然后在 client 端提交 task 到 Pool 中之后，在 Pool 内部，接收 task 之后的核心操作是：\n 检查当前 Worker 队列中是否有可用的 Worker，如果有，取出执行当前的 task； 没有可用的 Worker，判断当前在运行的 Worker 是否已超过该 Pool 的容量： 是 → 再判断工作池是否为非阻塞模式： 是 → 直接返回 nil， 否 → 阻塞等待直至有 Worker 被放回 Pool 否 →新开一个 Worker（goroutine）处理 每个 Worker 执行完任务之后，放回 Pool 的队列中等待。  此外，该调度系统还有一个清理过期 Worker 的定时任务，该任务在初始化一个 Pool 之时启动，每隔一定的时间间隔去检查空闲 Worker 队列中是否有已经过期的 Worker，有则清理掉，通过定时清理过期 worker，进一步节省系统资源。\n实现细节 https://strikefreedom.top/high-performance-implementation-of-goroutine-pool\n参考 ants作者写的一篇文章:\nhttps://strikefreedom.top/high-performance-implementation-of-goroutine-pool\n",
+  "wordCount" : "503",
+  "inLanguage": "en",
+  "datePublished": "2021-12-22T00:00:00Z",
+  "dateModified": "2021-12-22T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/goroutiune%E6%95%B0%E9%87%8F%E6%8E%A7%E5%88%B6/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

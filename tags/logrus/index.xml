@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>logrus on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/tags/logrus/</link>
+    <description>Recent content in logrus on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 27 Jun 2022 16:43:44 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/logrus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Logrus为http请求自动添加trace Id</title>
+      <link>https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</link>
+      <pubDate>Mon, 27 Jun 2022 16:43:44 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</guid>
+      <description>日志Trace-Id 在后端服务中使用logrus作为日志系统，当接受到一条请求时，该请求可能会调用其他层(controller,biz,service)的代码而产生很多日志，这时候就需要一个trace-id来快速定位到与某一条请求相关的日志。
+如果是在每条日志前手动加一个id，那也太蠢了。主要实现方法有两种
+ 使用context在每个函数之前传递id，这样实际上还是多了一个参数，不够优雅 使用webhook为当前作用域添加一个field  使用webhook为日志添加Trace-Id 自定义了一个TraceId的结构体，实现了logrus中的hook接口，该接口需要实现Fire和Levels两个方法
+// 自定义一个TraceIdHook 并实现Fire和Levels方法 type TraceIdHook struct { TraceId string } func NewTraceIdHook(traceId string) logrus.Hook { hook := TraceIdHook{ TraceId: traceId, } return &amp;amp;hook } func (hook *TraceIdHook) Fire(entry *logrus.Entry) error { // 注入trace-ID  entry.Data[&amp;#34;trace-ID&amp;#34;] = hook.TraceId return nil } func (hook *TraceIdHook) Levels() []logrus.Level { return logrus.AllLevels } 模拟不同作用域下的使用,完整的代码可以在go-playground看到
+func doSth(params string) { logrus.Info(&amp;#34;do sth&amp;#34;, params) subJob(params) } func subJob(params string) { logrus.</description>
+    </item>
+    
+  </channel>
+</rss>

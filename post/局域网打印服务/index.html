@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>局域网打印服务 | 风吹不停</title>
 <meta name="keywords" content="未分类" />
 <meta name="description" content="起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。
@@ -96,7 +96,77 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="局域网打印服务" />
+<meta property="og:description" content="起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。
+python的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。
+win32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。
+def PrintFile(file_path): allPrinter=[printer[2] for printer in win32print.EnumPrinters(2)] # PrintNum = int(input(&#34;选择打印机:\n&#34;&#43;&#34;\n&#34;.join([f&#34;{n} {p}&#34; for n,p in enumerate(allPrinter)]))) win32print.SetDefaultPrinter(allPrinter[4]) # pdf_path=&#34;C:\\Users\Luke\Desktop\Doc1.docx&#34; pdf_path=file_path win32api.ShellExecute(0, &#34;print&#34;, pdf_path, &#39;/d:&#34;%s&#34;&#39; % win32print.GetDefaultPrinter (), &#34;.&#34;, 0) 如果出现pywintypes.error: (31, &lsquo;ShellExecute&rsquo;, &lsquo;连到系统上的设备没有发挥作用。&#39;) 错误，需要为你的pdf或者其他文件指定一个默认打开应用。
+Web服务 使用flask写了个小demo, 接受局域网的文件后调用打印机打印。
+slash = &#39;\\&#39; UPLOAD_FOLDER = &#39;upload&#39; ALLOW_EXTENSIONS = {&#39;doc&#39;, &#39;docx&#39;, &#39;pdf&#39;} app = Flask(__name__) app.config[&#39;UPLOAD_FOLDER&#39;] = UPLOAD_FOLDER #判断文件夹是否存在，如果不存在则创建 if not os.path.exists(UPLOAD_FOLDER): os.makedirs(UPLOAD_FOLDER) else: pass # 判断文件后缀是否在列表中 def allowed_file(filename): return &#39;." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-22T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-10-22T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="局域网打印服务"/>
+<meta name="twitter:description" content="起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。
+python的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。
+win32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。
+def PrintFile(file_path): allPrinter=[printer[2] for printer in win32print.EnumPrinters(2)] # PrintNum = int(input(&#34;选择打印机:\n&#34;&#43;&#34;\n&#34;.join([f&#34;{n} {p}&#34; for n,p in enumerate(allPrinter)]))) win32print.SetDefaultPrinter(allPrinter[4]) # pdf_path=&#34;C:\\Users\Luke\Desktop\Doc1.docx&#34; pdf_path=file_path win32api.ShellExecute(0, &#34;print&#34;, pdf_path, &#39;/d:&#34;%s&#34;&#39; % win32print.GetDefaultPrinter (), &#34;.&#34;, 0) 如果出现pywintypes.error: (31, &lsquo;ShellExecute&rsquo;, &lsquo;连到系统上的设备没有发挥作用。&#39;) 错误，需要为你的pdf或者其他文件指定一个默认打开应用。
+Web服务 使用flask写了个小demo, 接受局域网的文件后调用打印机打印。
+slash = &#39;\\&#39; UPLOAD_FOLDER = &#39;upload&#39; ALLOW_EXTENSIONS = {&#39;doc&#39;, &#39;docx&#39;, &#39;pdf&#39;} app = Flask(__name__) app.config[&#39;UPLOAD_FOLDER&#39;] = UPLOAD_FOLDER #判断文件夹是否存在，如果不存在则创建 if not os.path.exists(UPLOAD_FOLDER): os.makedirs(UPLOAD_FOLDER) else: pass # 判断文件后缀是否在列表中 def allowed_file(filename): return &#39;."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://shiluanzzz.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "局域网打印服务",
+      "item": "https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "局域网打印服务",
+  "name": "局域网打印服务",
+  "description": "起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。\npython的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。\nwin32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。\ndef PrintFile(file_path): allPrinter=[printer[2] for printer in win32print.EnumPrinters(2)] # PrintNum = int(input(\u0026#34;选择打印机:\\n\u0026#34;+\u0026#34;\\n\u0026#34;.join([f\u0026#34;{n} {p}\u0026#34; for n,p in enumerate(allPrinter)]))) win32print.SetDefaultPrinter(allPrinter[4]) # pdf_path=\u0026#34;C:\\\\Users\\Luke\\Desktop\\Doc1.docx\u0026#34; pdf_path=file_path win32api.ShellExecute(0, \u0026#34;print\u0026#34;, pdf_path, \u0026#39;/d:\u0026#34;%s\u0026#34;\u0026#39; % win32print.GetDefaultPrinter (), \u0026#34;.\u0026#34;, 0) 如果出现pywintypes.error: (31, \u0026lsquo;ShellExecute\u0026rsquo;, \u0026lsquo;连到系统上的设备没有发挥作用。') 错误，需要为你的pdf或者其他文件指定一个默认打开应用。\nWeb服务 使用flask写了个小demo, 接受局域网的文件后调用打印机打印。\nslash = \u0026#39;\\\\\u0026#39; UPLOAD_FOLDER = \u0026#39;upload\u0026#39; ALLOW_EXTENSIONS = {\u0026#39;doc\u0026#39;, \u0026#39;docx\u0026#39;, \u0026#39;pdf\u0026#39;} app = Flask(__name__) app.config[\u0026#39;UPLOAD_FOLDER\u0026#39;] = UPLOAD_FOLDER #判断文件夹是否存在，如果不存在则创建 if not os.path.exists(UPLOAD_FOLDER): os.makedirs(UPLOAD_FOLDER) else: pass # 判断文件后缀是否在列表中 def allowed_file(filename): return \u0026#39;.",
+  "keywords": [
+    "未分类"
+  ],
+  "articleBody": "起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。\npython的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。\nwin32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。\ndef PrintFile(file_path): allPrinter=[printer[2] for printer in win32print.EnumPrinters(2)] # PrintNum = int(input(\"选择打印机:\\n\"+\"\\n\".join([f\"{n} {p}\" for n,p in enumerate(allPrinter)]))) win32print.SetDefaultPrinter(allPrinter[4]) # pdf_path=\"C:\\\\Users\\Luke\\Desktop\\Doc1.docx\" pdf_path=file_path win32api.ShellExecute(0, \"print\", pdf_path, '/d:\"%s\"' % win32print.GetDefaultPrinter (), \".\", 0) 如果出现pywintypes.error: (31, ‘ShellExecute’, ‘连到系统上的设备没有发挥作用。') 错误，需要为你的pdf或者其他文件指定一个默认打开应用。\nWeb服务 使用flask写了个小demo, 接受局域网的文件后调用打印机打印。\nslash = '\\\\' UPLOAD_FOLDER = 'upload' ALLOW_EXTENSIONS = {'doc', 'docx', 'pdf'} app = Flask(__name__) app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER #判断文件夹是否存在，如果不存在则创建 if not os.path.exists(UPLOAD_FOLDER): os.makedirs(UPLOAD_FOLDER) else: pass # 判断文件后缀是否在列表中 def allowed_file(filename): return '.' in filename and \\ filename.rsplit('.', 1)[1] in ALLOW_EXTENSIONS @app.route('/',methods=['GET','POST']) def upload_file(): if request.method =='POST': #获取post过来的文件名称，从name=file参数中获取 file = request.files['file'] if file and allowed_file(file.filename): # secure_filename方法会去掉文件名中的中文 filename = secure_filename(file.filename) #因为上次的文件可能有重名，因此使用uuid保存文件 file_name = str(uuid.uuid4()) + '.' + filename.rsplit('.', 1)[1] file.save(os.path.join(app.config['UPLOAD_FOLDER'],file_name)) base_path = os.getcwd() file_path = base_path + slash + app.config['UPLOAD_FOLDER'] + slash + file_name PrintFile(file_path) return redirect(url_for('upload_file',filename = file_name)) return render_template('index.html')  其中使用的index模板文件如下   html lang=\"en\" head meta charset=\"UTF-8\" title310Lab Printertitle head h1上传文件并打印h1 form action=\"\" method=\"post\" enctype=multipart/form-data pinput type=file name=file input type=submit value=Upload form 仅支持doc,docx,pdf文件\n-- body body html 源码  https://github.com/shiluanzzz/webprint  参考   https://stackoverflow.com/questions/39249360/python-print-pdf-file-with-win32print\n  https://stackoverflow.com/questions/39249360/python-print-pdf-file-with-win32print\n  ",
+  "wordCount" : "161",
+  "inLanguage": "en",
+  "datePublished": "2021-10-22T00:00:00Z",
+  "dateModified": "2021-10-22T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "风吹不停",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://shiluanzzz.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

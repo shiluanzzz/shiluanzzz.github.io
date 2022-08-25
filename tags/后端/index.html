@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>后端 | 风吹不停</title>
 <meta name="keywords" content="" />
 <meta name="description" content="">
@@ -90,7 +90,15 @@ code.has-jax{
     border: inherit;
     color: #f03535;
 }
-</style>
+</style><meta property="og:title" content="后端" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://shiluanzzz.github.io/tags/%E5%90%8E%E7%AB%AF/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后端"/>
+<meta name="twitter:description" content=""/>
+
 </head>
 
 <body class="list" id="top">
@@ -155,6 +163,22 @@ code.has-jax{
 <header class="page-header">
   <h1>后端</h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Logrus为http请求自动添加trace Id
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>日志Trace-Id 在后端服务中使用logrus作为日志系统，当接受到一条请求时，该请求可能会调用其他层(controller,biz,service)的代码而产生很多日志，这时候就需要一个trace-id来快速定位到与某一条请求相关的日志。
+如果是在每条日志前手动加一个id，那也太蠢了。主要实现方法有两种
+ 使用context在每个函数之前传递id，这样实际上还是多了一个参数，不够优雅 使用webhook为当前作用域添加一个field  使用webhook为日志添加Trace-Id 自定义了一个TraceId的结构体，实现了logrus中的hook接口，该接口需要实现Fire和Levels两个方法
+// 自定义一个TraceIdHook 并实现Fire和Levels方法 type TraceIdHook struct { TraceId string } func NewTraceIdHook(traceId string) logrus.Hook { hook := TraceIdHook{ TraceId: traceId, } return &amp;hook } func (hook *TraceIdHook) Fire(entry *logrus.Entry) error { // 注入trace-ID  entry.Data[&#34;trace-ID&#34;] = hook.TraceId return nil } func (hook *TraceIdHook) Levels() []logrus.Level { return logrus.AllLevels } 模拟不同作用域下的使用,完整的代码可以在go-playground看到
+func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params) } func subJob(params string) { logrus....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-27 16:43:44 +0800 CST'>2022-06-27</span></footer>
+  <a class="entry-link" aria-label="post link to Logrus为http请求自动添加trace Id" href="https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">

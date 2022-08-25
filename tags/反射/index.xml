@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>反射 on 风吹不停</title>
+    <link>https://shiluanzzz.github.io/tags/%E5%8F%8D%E5%B0%84/</link>
+    <description>Recent content in 反射 on 风吹不停</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Thu, 25 Aug 2022 17:08:28 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/%E5%8F%8D%E5%B0%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang通过反射校验结构体中的零值字段</title>
+      <link>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</link>
+      <pubDate>Thu, 25 Aug 2022 17:08:28 +0800</pubDate>
+      
+      <guid>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</guid>
+      <description>问题 问题： 在web服务开发中，http请求需要绑定到一个结构体上，如何处理结构体的零值问题？
+场景： 零值问题指无法确认是默认生成的零值还是用户传的零值，例如结构体A中有一个age字段为int类型，如果用户在请求时不传这个字段会默认反序列化为0，如果传了0也会是零。
+解决方案： 处理这类零值问题通常是将这个字段类型设置为对应的指针类型，通过指针是否为空判断调用方传没传这个值。
+缺陷： 但是validator无法校验指针类型的数据。
+如何灵活校验指针类型的数据？ 在model结构体中不直接进行校验，使用反射根据字符串调用函数进行校验
+ ctx函数中（数据绑定，取非零值参数，通过字段名调用对应的校验函数）  // 数据绑定  if err := ctx.ShouldBindJSON(&amp;amp;data); err != nil { ginBindError(ctx, err, data) return } defer commonControllerDefer(ctx, &amp;amp;code, &amp;amp;msg, &amp;amp;data, &amp;amp;data) // 将结构体中非nil的字段提取到map中  if res, code = tools.StructToMap(data, &amp;#34;structs&amp;#34;); code != errmsg.SUCCESS { return } // 数据校验 将不同的字段绑定到不同的校验函数中，使用反射做校验  validateFunc := map[string]interface{}{ &amp;#34;name&amp;#34;: validator.Name, &amp;#34;phone&amp;#34;: validator.Phone, &amp;#34;work_experience&amp;#34;: validator.WorkExperience, &amp;#34;bio&amp;#34;: validator.Bio, &amp;#34;about&amp;#34;: validator.About, } // 反射数据校验  for key, value := range res { if msg, code = validator.</description>
+    </item>
+    
+  </channel>
+</rss>
