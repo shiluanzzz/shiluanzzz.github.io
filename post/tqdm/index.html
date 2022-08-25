@@ -10,15 +10,15 @@
 <meta name="description" content="tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
 基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&#39;进度条&#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&#34;第{i}轮&#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm.">
 <meta name="author" content="">
-<link rel="canonical" href="https://shiluanzzz.github.io/post/tqdm/" />
+<link rel="canonical" href="http://www.shiluan.space/post/tqdm/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.8291fbae80a381aa8a9592828bb9f9682c551756e0453d50b599e4493b8f9eba.css" integrity="sha256-gpH7roCjgaqKlZKCi7n5aCxVF1bgRT1QtZnkSTuPnro=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://www.shiluan.space/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://www.shiluan.space/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://www.shiluan.space/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://www.shiluan.space/apple-touch-icon.png">
+<link rel="mask-icon" href="http://www.shiluan.space/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.89.4" />
@@ -96,7 +96,7 @@ code.has-jax{
 <meta property="og:description" content="tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
 基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&#39;进度条&#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&#34;第{i}轮&#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/tqdm/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="http://www.shiluan.space/post/tqdm/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-08-05T00:00:00&#43;00:00" />
 <meta property="article:modified_time" content="2020-08-05T00:00:00&#43;00:00" />
 
@@ -115,13 +115,13 @@ code.has-jax{
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
+      "item": "http://www.shiluan.space/post/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Python Tqdm进度条使用",
-      "item": "https://shiluanzzz.github.io/post/tqdm/"
+      "item": "http://www.shiluan.space/post/tqdm/"
     }
   ]
 }
@@ -143,14 +143,14 @@ code.has-jax{
   "dateModified": "2020-08-05T00:00:00Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/tqdm/"
+    "@id": "http://www.shiluan.space/post/tqdm/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "风吹不停",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
+      "url": "http://www.shiluan.space/favicon.ico"
     }
   }
 }
@@ -172,7 +172,7 @@ code.has-jax{
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <a href="http://www.shiluan.space/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -198,17 +198,17 @@ code.has-jax{
         </div>
         <ul id="menu">
             <li>
-                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                <a href="http://www.shiluan.space/tags/" title="🏷️标签">
                     <span>🏷️标签</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                <a href="http://www.shiluan.space/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
                     <span>🔍搜索</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                <a href="http://www.shiluan.space/archives/" title="📚归档">
                     <span>📚归档</span>
                 </a>
             </li>
@@ -333,16 +333,16 @@ code.has-jax{
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://shiluanzzz.github.io/tags/python/">Python</a></li>
-      <li><a href="https://shiluanzzz.github.io/tags/%E7%B1%BB%E5%BA%93/">类库</a></li>
+      <li><a href="http://www.shiluan.space/tags/python/">Python</a></li>
+      <li><a href="http://www.shiluan.space/tags/%E7%B1%BB%E5%BA%93/">类库</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/">
+  <a class="prev" href="http://www.shiluan.space/post/flask%E9%83%A8%E7%BD%B2/">
     <span class="title">« Prev Page</span>
     <br>
     <span>Flask部署</span>
   </a>
-  <a class="next" href="https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/">
+  <a class="next" href="http://www.shiluan.space/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/">
     <span class="title">Next Page »</span>
     <br>
     <span>Pandas学习笔记</span>
@@ -360,7 +360,7 @@ code.has-jax{
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>&copy; 2022 <a href="http://www.shiluan.space/">风吹不停</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

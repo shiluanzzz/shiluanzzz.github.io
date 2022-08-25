@@ -13,15 +13,15 @@
 // 自定义一个TraceIdHook 并实现Fire和Levels方法 type TraceIdHook struct { TraceId string } func NewTraceIdHook(traceId string) logrus.Hook { hook := TraceIdHook{ TraceId: traceId, } return &amp;hook } func (hook *TraceIdHook) Fire(entry *logrus.Entry) error { // 注入trace-ID  entry.Data[&#34;trace-ID&#34;] = hook.TraceId return nil } func (hook *TraceIdHook) Levels() []logrus.Level { return logrus.AllLevels } 模拟不同作用域下的使用,完整的代码可以在go-playground看到
 func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params) } func subJob(params string) { logrus.">
 <meta name="author" content="">
-<link rel="canonical" href="https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/" />
+<link rel="canonical" href="http://www.shiluan.space/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.8291fbae80a381aa8a9592828bb9f9682c551756e0453d50b599e4493b8f9eba.css" integrity="sha256-gpH7roCjgaqKlZKCi7n5aCxVF1bgRT1QtZnkSTuPnro=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://shiluanzzz.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://shiluanzzz.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://shiluanzzz.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://shiluanzzz.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://shiluanzzz.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://www.shiluan.space/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://www.shiluan.space/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://www.shiluan.space/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://www.shiluan.space/apple-touch-icon.png">
+<link rel="mask-icon" href="http://www.shiluan.space/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.89.4" />
@@ -102,7 +102,7 @@ code.has-jax{
 // 自定义一个TraceIdHook 并实现Fire和Levels方法 type TraceIdHook struct { TraceId string } func NewTraceIdHook(traceId string) logrus.Hook { hook := TraceIdHook{ TraceId: traceId, } return &amp;hook } func (hook *TraceIdHook) Fire(entry *logrus.Entry) error { // 注入trace-ID  entry.Data[&#34;trace-ID&#34;] = hook.TraceId return nil } func (hook *TraceIdHook) Levels() []logrus.Level { return logrus.AllLevels } 模拟不同作用域下的使用,完整的代码可以在go-playground看到
 func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params) } func subJob(params string) { logrus." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="http://www.shiluan.space/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-06-27T16:43:44&#43;08:00" />
 <meta property="article:modified_time" content="2022-06-27T16:43:44&#43;08:00" />
 
@@ -124,13 +124,13 @@ func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params)
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://shiluanzzz.github.io/post/"
+      "item": "http://www.shiluan.space/post/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Logrus为http请求自动添加trace Id",
-      "item": "https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/"
+      "item": "http://www.shiluan.space/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/"
     }
   ]
 }
@@ -152,14 +152,14 @@ func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params)
   "dateModified": "2022-06-27T16:43:44+08:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/"
+    "@id": "http://www.shiluan.space/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "风吹不停",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://shiluanzzz.github.io/favicon.ico"
+      "url": "http://www.shiluan.space/favicon.ico"
     }
   }
 }
@@ -181,7 +181,7 @@ func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params)
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://shiluanzzz.github.io/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
+            <a href="http://www.shiluan.space/" accesskey="h" title="风吹不停 (Alt + H)">风吹不停</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -207,17 +207,17 @@ func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params)
         </div>
         <ul id="menu">
             <li>
-                <a href="https://shiluanzzz.github.io/tags/" title="🏷️标签">
+                <a href="http://www.shiluan.space/tags/" title="🏷️标签">
                     <span>🏷️标签</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                <a href="http://www.shiluan.space/search/" title="🔍搜索 (Alt &#43; /)" accesskey=/>
                     <span>🔍搜索</span>
                 </a>
             </li>
             <li>
-                <a href="https://shiluanzzz.github.io/archives/" title="📚归档">
+                <a href="http://www.shiluan.space/archives/" title="📚归档">
                     <span>📚归档</span>
                 </a>
             </li>
@@ -337,17 +337,17 @@ func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params)
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://shiluanzzz.github.io/tags/%E5%90%8E%E7%AB%AF/">后端</a></li>
-      <li><a href="https://shiluanzzz.github.io/tags/%E6%97%A5%E5%BF%97/">日志</a></li>
-      <li><a href="https://shiluanzzz.github.io/tags/logrus/">logrus</a></li>
+      <li><a href="http://www.shiluan.space/tags/%E5%90%8E%E7%AB%AF/">后端</a></li>
+      <li><a href="http://www.shiluan.space/tags/%E6%97%A5%E5%BF%97/">日志</a></li>
+      <li><a href="http://www.shiluan.space/tags/logrus/">logrus</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://shiluanzzz.github.io/post/2208/jwt/">
+  <a class="prev" href="http://www.shiluan.space/post/2208/jwt/">
     <span class="title">« Prev Page</span>
     <br>
     <span>Json Web Token</span>
   </a>
-  <a class="next" href="https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/">
+  <a class="next" href="http://www.shiluan.space/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/">
     <span class="title">Next Page »</span>
     <br>
     <span>线程、进程、协程的区别</span>
@@ -365,7 +365,7 @@ func doSth(params string) { logrus.Info(&#34;do sth&#34;, params) subJob(params)
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://shiluanzzz.github.io/">风吹不停</a></span>
+    <span>&copy; 2022 <a href="http://www.shiluan.space/">风吹不停</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

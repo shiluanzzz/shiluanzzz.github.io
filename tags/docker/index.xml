@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Docker on 风吹不停</title>
-    <link>https://shiluanzzz.github.io/tags/docker/</link>
+    <link>http://www.shiluan.space/tags/docker/</link>
     <description>Recent content in Docker on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Fri, 10 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://www.shiluan.space/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker学习笔记</title>
-      <link>https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://www.shiluan.space/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://www.shiluan.space/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp;amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
 FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&amp;#34;.</description>
     </item>

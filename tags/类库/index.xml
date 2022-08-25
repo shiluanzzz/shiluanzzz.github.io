@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>类库 on 风吹不停</title>
-    <link>https://shiluanzzz.github.io/tags/%E7%B1%BB%E5%BA%93/</link>
+    <link>http://www.shiluan.space/tags/%E7%B1%BB%E5%BA%93/</link>
     <description>Recent content in 类库 on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 05 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/%E7%B1%BB%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://www.shiluan.space/tags/%E7%B1%BB%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python Tqdm进度条使用</title>
-      <link>https://shiluanzzz.github.io/post/tqdm/</link>
+      <link>http://www.shiluan.space/post/tqdm/</link>
       <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/tqdm/</guid>
+      <guid>http://www.shiluan.space/post/tqdm/</guid>
       <description>tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
 基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&amp;#39;进度条&amp;#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&amp;lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&amp;#34;第{i}轮&amp;#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm.</description>
     </item>

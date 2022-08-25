@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>软件安装 on 风吹不停</title>
-    <link>https://shiluanzzz.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</link>
+    <link>http://www.shiluan.space/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</link>
     <description>Recent content in 软件安装 on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Wed, 08 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://www.shiluan.space/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>windows 安装Chocolatey</title>
-      <link>https://shiluanzzz.github.io/post/20211208-2/</link>
+      <link>http://www.shiluan.space/post/20211208-2/</link>
       <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/20211208-2/</guid>
+      <guid>http://www.shiluan.space/post/20211208-2/</guid>
       <description>前言 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
 安装 使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
@@ -23,10 +23,10 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
     
     <item>
       <title>windows下使用choco极速安装docker</title>
-      <link>https://shiluanzzz.github.io/post/20211208-1/</link>
+      <link>http://www.shiluan.space/post/20211208-1/</link>
       <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/20211208-1/</guid>
+      <guid>http://www.shiluan.space/post/20211208-1/</guid>
       <description>前言 之前在做一个计算机实训的时候，装docker环境报各种错误，今天尝试使用choco包管理工具，2行命令安装成功！
 choco安装 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
 使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
@@ -40,10 +40,10 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
     
     <item>
       <title>jupyter notebook 安装、配置、优化</title>
-      <link>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</link>
+      <link>http://www.shiluan.space/post/jupyter%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://www.shiluan.space/post/jupyter%E9%85%8D%E7%BD%AE/</guid>
       <description>安装 安装： pip install jupyter
 启动命令：jupyter notebook
 配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）

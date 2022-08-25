@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>leetcode on 风吹不停</title>
-    <link>https://shiluanzzz.github.io/tags/leetcode/</link>
+    <link>http://www.shiluan.space/tags/leetcode/</link>
     <description>Recent content in leetcode on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 12 Dec 2021 19:22:37 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Dec 2021 19:22:37 +0800</lastBuildDate><atom:link href="http://www.shiluan.space/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python小顶堆总结</title>
-      <link>https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</link>
+      <link>http://www.shiluan.space/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</link>
       <pubDate>Sun, 12 Dec 2021 19:22:37 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://www.shiluan.space/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</guid>
       <description>当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
 使用方法    入堆 heapq.heappush(heap, item)
 将 item 的值加入 heap 中，保持堆的不变性。

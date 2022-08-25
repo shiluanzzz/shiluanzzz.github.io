@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on 风吹不停</title>
-    <link>https://shiluanzzz.github.io/posts/</link>
+    <link>http://www.shiluan.space/posts/</link>
     <description>Recent content in Posts on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 26 Apr 2022 23:09:35 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Apr 2022 23:09:35 +0800</lastBuildDate><atom:link href="http://www.shiluan.space/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>字符串哈希</title>
-      <link>https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</link>
+      <link>http://www.shiluan.space/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</link>
       <pubDate>Tue, 26 Apr 2022 23:09:35 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</guid>
+      <guid>http://www.shiluan.space/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</guid>
       <description>Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
 我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。
  哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为

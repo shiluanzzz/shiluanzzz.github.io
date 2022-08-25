@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>反射 on 风吹不停</title>
-    <link>https://shiluanzzz.github.io/tags/%E5%8F%8D%E5%B0%84/</link>
+    <link>http://www.shiluan.space/tags/%E5%8F%8D%E5%B0%84/</link>
     <description>Recent content in 反射 on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 25 Aug 2022 17:08:28 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/tags/%E5%8F%8D%E5%B0%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Aug 2022 17:08:28 +0800</lastBuildDate><atom:link href="http://www.shiluan.space/tags/%E5%8F%8D%E5%B0%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang通过反射校验结构体中的零值字段</title>
-      <link>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</link>
+      <link>http://www.shiluan.space/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</link>
       <pubDate>Thu, 25 Aug 2022 17:08:28 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</guid>
+      <guid>http://www.shiluan.space/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</guid>
       <description>问题 问题： 在web服务开发中，http请求需要绑定到一个结构体上，如何处理结构体的零值问题？
 场景： 零值问题指无法确认是默认生成的零值还是用户传的零值，例如结构体A中有一个age字段为int类型，如果用户在请求时不传这个字段会默认反序列化为0，如果传了0也会是零。
 解决方案： 处理这类零值问题通常是将这个字段类型设置为对应的指针类型，通过指针是否为空判断调用方传没传这个值。

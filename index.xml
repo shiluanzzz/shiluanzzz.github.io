@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>风吹不停</title>
-    <link>https://shiluanzzz.github.io/</link>
+    <link>http://www.shiluan.space/</link>
     <description>Recent content on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 25 Aug 2022 17:08:28 +0800</lastBuildDate><atom:link href="https://shiluanzzz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Aug 2022 17:08:28 +0800</lastBuildDate><atom:link href="http://www.shiluan.space/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang通过反射校验结构体中的零值字段</title>
-      <link>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</link>
+      <link>http://www.shiluan.space/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</link>
       <pubDate>Thu, 25 Aug 2022 17:08:28 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</guid>
+      <guid>http://www.shiluan.space/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</guid>
       <description>问题 问题： 在web服务开发中，http请求需要绑定到一个结构体上，如何处理结构体的零值问题？
 场景： 零值问题指无法确认是默认生成的零值还是用户传的零值，例如结构体A中有一个age字段为int类型，如果用户在请求时不传这个字段会默认反序列化为0，如果传了0也会是零。
 解决方案： 处理这类零值问题通常是将这个字段类型设置为对应的指针类型，通过指针是否为空判断调用方传没传这个值。
@@ -23,10 +23,10 @@
     
     <item>
       <title>MySQL终端命令总结</title>
-      <link>https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</link>
+      <link>http://www.shiluan.space/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</link>
       <pubDate>Sat, 20 Aug 2022 17:00:24 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://www.shiluan.space/post/2208/mysql%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</guid>
       <description>创建表格 create table userinfo( id int not null AUTO_INCREMENT, name varchar(100) not null, lasttime int , primary key (id) );   创建远程访问的用户
   创建用户  create user test identified by &#39;123456&#39;;
   创建数据表 create table_name;
@@ -38,10 +38,10 @@
     
     <item>
       <title>Json Web Token</title>
-      <link>https://shiluanzzz.github.io/post/2208/jwt/</link>
+      <link>http://www.shiluan.space/post/2208/jwt/</link>
       <pubDate>Tue, 28 Jun 2022 16:55:33 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/2208/jwt/</guid>
+      <guid>http://www.shiluan.space/post/2208/jwt/</guid>
       <description>什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519). 该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。
  传统的session认证 http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。
 但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.
@@ -59,10 +59,10 @@ signature  signature即jwt的签证信息，该部分的生成需要前面提到
     
     <item>
       <title>Logrus为http请求自动添加trace Id</title>
-      <link>https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</link>
+      <link>http://www.shiluan.space/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</link>
       <pubDate>Mon, 27 Jun 2022 16:43:44 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</guid>
+      <guid>http://www.shiluan.space/post/logrus%E4%B8%BAhttp%E8%AF%B7%E6%B1%82%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0trace-id/</guid>
       <description>日志Trace-Id 在后端服务中使用logrus作为日志系统，当接受到一条请求时，该请求可能会调用其他层(controller,biz,service)的代码而产生很多日志，这时候就需要一个trace-id来快速定位到与某一条请求相关的日志。
 如果是在每条日志前手动加一个id，那也太蠢了。主要实现方法有两种
  使用context在每个函数之前传递id，这样实际上还是多了一个参数，不够优雅 使用webhook为当前作用域添加一个field  使用webhook为日志添加Trace-Id 自定义了一个TraceId的结构体，实现了logrus中的hook接口，该接口需要实现Fire和Levels两个方法
@@ -72,10 +72,10 @@ func doSth(params string) { logrus.Info(&amp;#34;do sth&amp;#34;, params) subJob
     
     <item>
       <title>线程、进程、协程的区别</title>
-      <link>https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</link>
+      <link>http://www.shiluan.space/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</link>
       <pubDate>Tue, 26 Apr 2022 23:51:02 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</guid>
+      <guid>http://www.shiluan.space/post/%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B/</guid>
       <description>对操作系统来说，线程是最小的执行单元，进程是最小的资源管理单元。 无论进程还是线程，都是由操作系统所管理的。协程(Coroutines)是一种比线程更加轻量级的存在
 1进程 一个进程好比是一个程序，它是资源分配的最小单位 。也是CPU的最小工作单元，就是说操作系统同一时刻执行的进程数不会超过核心数。
 电脑中有许多进程需要处于「同时」开启的状态，而利用CPU在进程间的快速切换，可以实现「同时」运行多个程序。而进程切换则意味着需要保留进程切换前的状态，以备切换回去的时候能够继续接着工作。 所以进程拥有自己的地址空间，全局变量，文件描述符，各种硬件等等资源。操作系统通过调度CPU去执行进程的记录、回复、切换等等。
@@ -96,10 +96,10 @@ func doSth(params string) { logrus.Info(&amp;#34;do sth&amp;#34;, params) subJob
     
     <item>
       <title>字符串哈希</title>
-      <link>https://shiluanzzz.github.io/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</link>
+      <link>http://www.shiluan.space/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</link>
       <pubDate>Tue, 26 Apr 2022 23:11:19 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</guid>
+      <guid>http://www.shiluan.space/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</guid>
       <description>Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
 我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。
  哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为
@@ -111,10 +111,10 @@ Hash的实现 # Python Version M = int(1e9 + 7) B = 233 def get_hash(s): res = 0
     
     <item>
       <title>字符串哈希</title>
-      <link>https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</link>
+      <link>http://www.shiluan.space/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</link>
       <pubDate>Tue, 26 Apr 2022 23:09:35 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</guid>
+      <guid>http://www.shiluan.space/posts/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</guid>
       <description>Hash的思想 Hash 的核心思想在于，将输入映射到一个值域较小、可以方便比较的范围。
 我们定义一个把字符串映射到整数的函数 ，这个$f$称为是 Hash 函数。这个函数$f$可以方便地帮我们判断两个字符串是否相等。
  哈希值不一样的字符串一定不一样 哈希值一样的字符串不一定一样（可能出现哈希碰撞的情况）  字符串哈希 通常采用多项式hash方法，即对于一个长度为$l$的字符串，定义哈希函数为
@@ -126,10 +126,10 @@ Hash的实现 # Python Version M = int(1e9 + 7) B = 233 def get_hash(s): res = 0
     
     <item>
       <title>控制goroutine的并发数量</title>
-      <link>https://shiluanzzz.github.io/post/goroutiune%E6%95%B0%E9%87%8F%E6%8E%A7%E5%88%B6/</link>
+      <link>http://www.shiluan.space/post/goroutiune%E6%95%B0%E9%87%8F%E6%8E%A7%E5%88%B6/</link>
       <pubDate>Wed, 22 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/goroutiune%E6%95%B0%E9%87%8F%E6%8E%A7%E5%88%B6/</guid>
+      <guid>http://www.shiluan.space/post/goroutiune%E6%95%B0%E9%87%8F%E6%8E%A7%E5%88%B6/</guid>
       <description>控制goroutine的并发数量 chan控制（错误） 在启动go程之前尝试向chan中写入数据.
 func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &amp;lt; userCount; i++ { // 控制  ch &amp;lt;- true go Read(ch, i) } } func Read(ch chan bool, i int) { fmt.Printf(&amp;#34;go func: %d\n&amp;#34;, i) &amp;lt;- ch } 这存在一个问题就是可能go程还没执行完,主协程结束子协程也被终止了. 而单纯使用waitgroup没法控制并发数量.
 方案一 : waitgroup+chan组合控制并发   wg主要是防止子协程还没执行完主协程已经退出的情况发生.
@@ -138,10 +138,10 @@ func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &amp;lt; us
     
     <item>
       <title>Python小顶堆总结</title>
-      <link>https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</link>
+      <link>http://www.shiluan.space/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</link>
       <pubDate>Sun, 12 Dec 2021 19:22:37 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://www.shiluan.space/post/python%E5%B0%8F%E9%A1%B6%E5%A0%86%E6%80%BB%E7%BB%93/</guid>
       <description>当我们要维护一个有序的序列时，可以使用小顶堆。最近在刷算法题的时候频繁使用，总结笔记如下。
 使用方法    入堆 heapq.heappush(heap, item)
 将 item 的值加入 heap 中，保持堆的不变性。
@@ -158,20 +158,20 @@ func main() { userCount := 10 ch := make(chan bool, 2) for i := 0; i &amp;lt; us
     
     <item>
       <title>Docker学习笔记</title>
-      <link>https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://www.shiluan.space/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://www.shiluan.space/post/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>Docker常见命令  查看运行容器 docker ps 查看所有容器 docker ps -a 进入ID为 XXXX 的容器 docker exec -it XXXX /bin/bash 停用运行中的全部容器 docker stop $(docker ps -q) 删除全部容器 docker rm $(docker ps -aq) 停用并删除全部容器 docker stop $(docker ps -q) &amp;amp; docker rm $(docker ps -qa) 使用Dockerfile构建镜像：docker build -t name . 查看所有镜像 docker images docker 删除现存的镜像 docker rmi XXX  Docker应用部署 部署golang项目 Dockerfile参考
 FROM golang:latest WORKDIR $GOPATH/src/github.com/EDDYCJY/go-gin-example COPY . $GOPATH/src/github.com/EDDYCJY/go-gin-example RUN go build . EXPOSE 8000 ENTRYPOINT [&amp;#34;.</description>
     </item>
     
     <item>
       <title>windows 安装Chocolatey</title>
-      <link>https://shiluanzzz.github.io/post/20211208-2/</link>
+      <link>http://www.shiluan.space/post/20211208-2/</link>
       <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/20211208-2/</guid>
+      <guid>http://www.shiluan.space/post/20211208-2/</guid>
       <description>前言 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
 安装 使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&amp;#39;https://chocolatey.org/install.ps1&amp;#39;)) 安装完成后输入choco -v 如何出现版本号即表示安装成功。
@@ -182,10 +182,10 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
     
     <item>
       <title>windows下使用choco极速安装docker</title>
-      <link>https://shiluanzzz.github.io/post/20211208-1/</link>
+      <link>http://www.shiluan.space/post/20211208-1/</link>
       <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/20211208-1/</guid>
+      <guid>http://www.shiluan.space/post/20211208-1/</guid>
       <description>前言 之前在做一个计算机实训的时候，装docker环境报各种错误，今天尝试使用choco包管理工具，2行命令安装成功！
 choco安装 Chocolatey是windows下的软件包管理工具，使用chocolatey可以快速的安装软件。
 使用管理员权限模式打开powershell，粘贴下方安装代码，稍等片刻即可安装成功。
@@ -199,19 +199,19 @@ choco install docker-cli docker-machine docker-compose docker-desktop docker-too
     
     <item>
       <title>Go 传递切片入参的隐藏风险</title>
-      <link>https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</link>
+      <link>http://www.shiluan.space/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</link>
       <pubDate>Thu, 02 Dec 2021 11:16:38 +0800</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</guid>
+      <guid>http://www.shiluan.space/post/go%E5%88%87%E7%89%87%E4%BC%A0%E5%85%A5%E9%A3%8E%E9%99%A9/</guid>
       <description>随机森林调参记录</description>
     </item>
     
     <item>
       <title>后端密码存储方案</title>
-      <link>https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</link>
+      <link>http://www.shiluan.space/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</link>
       <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</guid>
+      <guid>http://www.shiluan.space/post/%E5%90%8E%E7%AB%AF%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/</guid>
       <description>作为一个Web应用开发者，在选择密码存储方案时, 容易掉入哪些陷阱, 以及如何避免这些陷阱?
 普通方案 目前用的最多的密码存储方案是将明文密码做单向哈希后存储，单向哈希算法有一个特征：无法通过哈希后的摘要(digest)恢复原始数据，这也是“单向”二字的来源。常用的单向哈希算法包括SHA-256, SHA-1, MD5等。
 Go语言对这三种加密算法的实现如下所示：
@@ -225,19 +225,19 @@ Go语言对这三种加密算法的实现如下所示：
     
     <item>
       <title>Syncthing 数据网盘部署</title>
-      <link>https://shiluanzzz.github.io/post/syncthing/</link>
+      <link>http://www.shiluan.space/post/syncthing/</link>
       <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/syncthing/</guid>
+      <guid>http://www.shiluan.space/post/syncthing/</guid>
       <description>数据同步盘部署记录</description>
     </item>
     
     <item>
       <title>局域网打印服务</title>
-      <link>https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/</link>
+      <link>http://www.shiluan.space/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>http://www.shiluan.space/post/%E5%B1%80%E5%9F%9F%E7%BD%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1/</guid>
       <description>起因：实验室的打印机抽风了，只有我的电脑连的上其他人的电脑都连不上。可能是我离打印机最近。
 python的win32print包可以将打印任务直接发送到打印机，于是写了个web服务，接受来自本地小伙伴的文件，然后将其打印。
 win32print 通过win32print.EnumPrinters(2)读取到你电脑上连接的所有打印机，然后设置成默认打印机，建议先执行一次，选择固定的。
@@ -248,10 +248,10 @@ slash = &amp;#39;\\&amp;#39; UPLOAD_FOLDER = &amp;#39;upload&amp;#39; ALLOW_EXTE
     
     <item>
       <title>Python处理excel文件</title>
-      <link>https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</link>
+      <link>http://www.shiluan.space/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</link>
       <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</guid>
+      <guid>http://www.shiluan.space/post/python%E5%A4%84%E7%90%86excel%E6%96%87%E4%BB%B6/</guid>
       <description>安装 pip install openpyxl
 **英文文档链接 ： **点击这里
  1，定位excel 新建excel和打开现有的excel
@@ -263,10 +263,10 @@ import openpyxl work=openpyxl.load_workbook(&amp;#34;dat.xlsx&amp;#34;) book=wor
     
     <item>
       <title>jupyter notebook 安装、配置、优化</title>
-      <link>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</link>
+      <link>http://www.shiluan.space/post/jupyter%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Wed, 21 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/jupyter%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://www.shiluan.space/post/jupyter%E9%85%8D%E7%BD%AE/</guid>
       <description>安装 安装： pip install jupyter
 启动命令：jupyter notebook
 配置： 更换默认工作目录  cmd 键入 jupyter notebook --generate-config  打开配置文件，将 c.NotebookApp.notebook_dir 字段后的目录更改为自己的目录即可   参考   Windows下的Jupyter Notebook 安装与自定义启动（图文详解）
@@ -279,10 +279,10 @@ notebook使用virtualenv的虚拟环境   激活/注册 虚拟环境
     
     <item>
       <title>Python异步编程</title>
-      <link>https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</link>
+      <link>http://www.shiluan.space/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</guid>
+      <guid>http://www.shiluan.space/post/python%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</guid>
       <description>1.异步编程介绍： 在并发执行的异步模型中，许多任务被穿插在同一时间线上，所有的任务都由一个控制流执行（单一线程）。任务的执行可能被暂停或恢复，中间的这段时间线程将会去执行其他任务。
 与多线程的区别 ：多线程由操作系统决定在时间线上什么时候挂起某个活动或恢复某个活动，而在异步并发模型中，程序员必须假设线程可能在任何时间被挂起和替换。
 2.使用Python的 concurrent.futures 模块 https://docs.python.org/zh-cn/3/library/concurrent.futures.html
@@ -304,10 +304,10 @@ def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_ite
     
     <item>
       <title>Python自动截图拼接工具</title>
-      <link>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</link>
+      <link>http://www.shiluan.space/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</guid>
+      <guid>http://www.shiluan.space/post/%E8%87%AA%E5%8A%A8%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7/</guid>
       <description>需求： 视频的知识密度太高，一时间难以理解，最好的办法就是保留好这个视频的字幕截图，在自动拼接好。
 实现思路：  鼠标事件获取鼠标按下和释放的位置 注册快捷键，每按一次就对固定区域截图 图片拼接  实现   鼠标事件获取鼠标按下和释放的位置
 本来是被这个join事件困惑住，原来直接在子事件里stop就好了。
@@ -316,19 +316,19 @@ def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_ite
     
     <item>
       <title>随机森林调参</title>
-      <link>https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</link>
+      <link>http://www.shiluan.space/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</link>
       <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</guid>
+      <guid>http://www.shiluan.space/post/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E8%B0%83%E5%8F%82/</guid>
       <description>随机森林调参记录</description>
     </item>
     
     <item>
       <title>Python字符串格式化总结</title>
-      <link>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</link>
+      <link>http://www.shiluan.space/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</link>
       <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://www.shiluan.space/post/python%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
       <description>字符串映射规则 通过位置 str.format() 可以接受不限个参数，位置可以不按顺序:
 &amp;gt;&amp;gt;&amp;gt; &amp;#34;{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{}{}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;hello world&amp;#39; &amp;gt;&amp;gt;&amp;gt; &amp;#34;{1}{0}{1}&amp;#34;.format(&amp;#34;hello&amp;#34;, &amp;#34;world&amp;#34;) &amp;#39;world hello world&amp;#39; 通过关键字参数 使用关键参数时字符串中需要提供参数名：
 &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(name=&amp;#34;huoty&amp;#34;, age=18) &amp;#39;I am huoty, age is 18&amp;#39; &amp;gt;&amp;gt;&amp;gt; user = {&amp;#34;name&amp;#34;: &amp;#34;huoty&amp;#34;, &amp;#34;age&amp;#34;: 18} &amp;gt;&amp;gt;&amp;gt; &amp;#34;I am {name}, age is {age}&amp;#34;.format(**user) &amp;#39;I am huoty, age is 18&amp;#39; 通过对象属性 str.format() 可以直接读取用户属性:
@@ -337,10 +337,10 @@ def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_ite
     
     <item>
       <title>Flask部署</title>
-      <link>https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/</link>
+      <link>http://www.shiluan.space/post/flask%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/flask%E9%83%A8%E7%BD%B2/</guid>
+      <guid>http://www.shiluan.space/post/flask%E9%83%A8%E7%BD%B2/</guid>
       <description>常用命令：   导出win虚拟环境中的第三方库 pip freeze &amp;gt; requirements.txt 
   Linux中指定Python版本 mkvirtualenv venv -p /usr/bin/python3
   后台运行程序 nohup python -u wechat_tixing.py &amp;gt; nohup.out 2&amp;gt;&amp;amp;1 &amp;amp;c
@@ -353,20 +353,20 @@ def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_ite
     
     <item>
       <title>Python Tqdm进度条使用</title>
-      <link>https://shiluanzzz.github.io/post/tqdm/</link>
+      <link>http://www.shiluan.space/post/tqdm/</link>
       <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/tqdm/</guid>
+      <guid>http://www.shiluan.space/post/tqdm/</guid>
       <description>tqdm为python进度条库，分为基于迭代的运行模式和手动更新的运行模式。
 基于迭代的tqdm进度条 from tqdm import tqdm import time 利用tqdm.tqdm，将for循环过程中进行迭代的对象简单包裹 for i in tqdm(range(10),desc=&amp;#39;进度条&amp;#39;): time.sleep(0.2) # 进度条: 100%|█████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.98it/s] 列表推导式 temp=[time.sleep(0.2) for i in tqdm(range(1,10))] # 100%|███████████████████████████████████████████████| 9/9 [00:01&amp;lt;00:00, 4.98it/s] 若只是使用在range中，提供了一个简化的版本 from tqdm import trange for i in trange(1,20,2): time.sleep(0.2) #100%|█████████████████████████████████████████████| 10/10 [00:02&amp;lt;00:00, 4.99it/s] 为每一次遍历都更新描述文字 bar=tqdm(range(10,20)) for i in bar: time.sleep(0.2) bar.set_description(f&amp;#34;第{i}轮&amp;#34;) #第19轮: 100%|█████████████████████████████████████| 10/10 [00:0, 4.98it/s]  针对jupyter的美化版本进度条  tqdm对jupyter notebook和jupyter lab有着特殊的支持，且使用方法非常简单，只需要将原有的from tqdm import XXX的相应功能导入格式修改为from tqdm.notebook import XXX就可以了 pip install ipywidgets  from tqdm.</description>
     </item>
     
     <item>
       <title>Pandas学习笔记</title>
-      <link>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</link>
+      <link>http://www.shiluan.space/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://www.shiluan.space/post/pandas%E6%93%8D%E4%BD%9C%E7%AC%94%E8%AE%B0/</guid>
       <description>Pandas笔记 最佳阅读体验请阅读笔记原文
 什么是Pandas？ 一个开源的 Python类库：用于数据分析、数据处理、数据可视化
   高性能
@@ -384,10 +384,10 @@ def evaluate_item(x): # 计算总和，这里只是为了消耗时间 result_ite
     
     <item>
       <title>Paddle实战手写数字识别</title>
-      <link>https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
+      <link>http://www.shiluan.space/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
       <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shiluanzzz.github.io/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
+      <guid>http://www.shiluan.space/post/paddle%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
       <description>paddle 手写数字识别 参考链接： 1 2
 任务介绍   手写识别属于典型的图像多分类问题
   输入 &amp;amp;&amp;amp; 输出
