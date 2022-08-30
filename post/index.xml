@@ -6,7 +6,23 @@
     <description>Recent content in Posts on 风吹不停</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Thu, 25 Aug 2022 17:08:28 +0800</lastBuildDate><atom:link href="http://www.shiluan.space/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 31 Aug 2022 00:05:02 +0800</lastBuildDate><atom:link href="http://www.shiluan.space/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>解决windows UWP应用无法访问网络</title>
+      <link>http://www.shiluan.space/post/2208/uwp%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</link>
+      <pubDate>Wed, 31 Aug 2022 00:05:02 +0800</pubDate>
+      
+      <guid>http://www.shiluan.space/post/2208/uwp%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</guid>
+      <description>当电脑上使用代理时，windows的uwp应用禁用了本地网络回环。换句话说，网络流量不走本地代理。所以想解决翻墙情况下 UWP 应用无法联网的问题，只需启用本地网络回环即可。
+找到了四种解决方案：（推荐第三种
+  关闭代理
+  如果windows系统是win11，可以直接去官网商店下载网络回环管理器。搜索需要开启网络回环的应用，勾选后保存即可。   安装网络回环管理软件。（可能需要梯子才能打开
+勾选应用，保存即可。
+  使用命令行手动添加环回免除列表。
+比较复杂，而且我没有找到所搜中文包名的方法，就不展示了。有兴趣可以看这个https://zhuanlan.zhihu.com/p/414059637
+  </description>
+    </item>
+    
     <item>
       <title>Golang通过反射校验结构体中的零值字段</title>
       <link>http://www.shiluan.space/post/2208/golang%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E6%A0%A1%E9%AA%8C%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E9%9B%B6%E5%80%BC%E5%AD%97%E6%AE%B5/</link>
